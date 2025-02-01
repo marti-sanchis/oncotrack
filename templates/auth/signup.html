@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Sign Up{% endblock %}
+
+{% block body %}
+<form class="form-signin text-center" action="{{ url_for('signup') }}" method="post">
+    {{ form.hidden_tag() }}
+    <h1 class="h3 mb-3 fw-normal">Please Sign Up</h1>
+    <div class="form-floating mb-1">
+        {{ form.email(class_="form-control") }}
+        <label for="email">Email address</label>
+        {% set emailerror = form.errors.get('email') %}
+        {% if emailerror %}
+           <div class="text-danger h6">{{ emailerror[0] }}</div>
+        {% endif %}
+    </div>
+    <div class="form-floating mb-3">
+        {{ form.password(class_="form-control") }}
+        <label for="password">Password</label>
+    </div>
+    <div class="form-floating mb-1">
+        {{ form.name(class_="form-control") }}
+        <label for="name">Name</label>
+    </div>
+    <div class="form-floating mb-1">
+        {{ form.surname(class_="form-control") }}
+        <label for="surname">Surname</label>
+    </div>
+    {{ form.submit(class_="btn btn-lg btn-success") }}
+    
+</form>
+{% endblock %}

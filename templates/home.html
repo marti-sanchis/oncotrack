@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+
+{% block body %}
+<div class="row mb-5">
+    <div class="text-center">
+        <h1 class="display-4">Welcome to OncoTrack</h1>
+        <p class="lead">A platform for analyzing and tracking oncological data</p>
+    </div>
+</div>
+<div class="row mb-5">
+    <div class="text-center">
+        <a class="btn btn-success btn-lg me-5" href="{{ url_for('login') }}" role="button">Login</a>
+        <a class="btn btn-success btn-lg me-5" href="{{ url_for('signup') }}" role="button">Sign up</a>
+    </div>
+</div>
+{% endblock %}
