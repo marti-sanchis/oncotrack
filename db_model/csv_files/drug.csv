@@ -1,0 +1,338 @@
+name,drug_id
+Gefitinib,CHEMBL939
+Imatinib,CHEMBL941
+Purine,CHEMBL302239
+Vismodegib,CHEMBL473417
+Nilotinib,CHEMBL255863
+Dasatinib,CHEMBL1421
+Vemurafenib,CHEMBL1229517
+Bosutinib,CHEMBL288441
+Afatinib,CHEMBL1173655
+Crizotinib,CHEMBL601719
+Tesevatinib,CHEMBL3544983
+Quizartinib,CHEMBL576982
+Ivosidenib,CHEMBL3989958
+Selumetinib,CHEMBL1614701
+Panitumumab,CHEMBL1201827
+Cetuximab,CHEMBL1201577
+Dabrafenib,CHEMBL2028663
+Enasidenib,CHEMBL3989908
+Ceritinib,CHEMBL2403108
+Everolimus,CHEMBL1908360
+Alectinib,CHEMBL1738797
+Apalutamide,CHEMBL3183409
+Osimertinib,CHEMBL3353410
+Sunitinib,CHEMBL535
+Pembrolizumab,CHEMBL3137343
+Sorafenib,CHEMBL1336
+Enzalutamide,CHEMBL1082407
+TESTOSTERONE,CHEMBL386630
+Abiraterone,CHEMBL254328
+Olmutinib,CHEMBL3786343
+Flutamide,CHEMBL806
+Ketoconazole,CHEMBL157101
+Prodigiosin,CHEMBL275787
+Savolitinib,CHEMBL3334567
+Ibrutinib,CHEMBL1873475
+Capmatinib,CHEMBL3188267
+PF-04217903,CHEMBL2001019
+Infigratinib,CHEMBL1852688
+Binimetinib,CHEMBL3187723
+Fisogatinib,CHEMBL4514636
+Icotinib,CHEMBL2087361
+Crenolanib,CHEMBL2105728
+Lorlatinib,CHEMBL3286830
+Brigatinib,CHEMBL3545311
+Acalabrutinib,CHEMBL3707348
+Alpelisib,CHEMBL2396661
+Oxaliplatin,CHEMBL414804
+Palbociclib,CHEMBL189963
+Futibatinib,CHEMBL3701238
+FGFR INHIBITOR DEBIO 1347,CHEMBL3907479
+Pemigatinib,CHEMBL4297522
+Adagrasib,CHEMBL4594350
+Trastuzumab,CHEMBL1201585
+AZD-4547,CHEMBL3184679
+Mirdametinib,CHEMBL507361
+Sirolimus,CHEMBL413
+Tretinoin,CHEMBL38
+Encorafenib,CHEMBL3301612
+Abemaciclib,CHEMBL3301610
+Aclarubicin,CHEMBL502620
+Afamitresgene Autoleucel,CHEMBL4802254
+Aflibercept,CHEMBL1742982
+Aldesleukin,CHEMBL1201438
+Alemtuzumab,CHEMBL1201587
+Alitretinoin,CHEMBL705
+Altretamine,CHEMBL1455
+Aminolevulinic Acid,CHEMBL601
+Amivantamab,CHEMBL4297774
+Amrubicin,CHEMBL1186894
+Amsacrine,CHEMBL43
+Anastrozole,CHEMBL1399
+Arsenic Trioxide,CHEMBL1200978
+Asciminib,CHEMBL4208229
+Asparaginase,CHEMBL2108989
+Atezolizumab,CHEMBL3707227
+Avapritinib,CHEMBL4204794
+Avelumab,CHEMBL3833373
+Axicabtagene Ciloleucel,CHEMBL3989989
+Axitinib,CHEMBL1289926
+Azacitidine,CHEMBL1489
+BCG Vaccine,CHEMBL2108905
+Belantamab Mafodotin,CHEMBL4298209
+Belinostat,CHEMBL408513
+Belotecan,CHEMBL2111084
+Belzutifan,CHEMBL4585668
+Bendamustine,CHEMBL487253
+Bevacizumab,CHEMBL1201583
+Bexarotene,CHEMBL1023
+Bicalutamide,CHEMBL409
+Bleomycin,CHEMBL403664
+Blinatumomab,CHEMBL1742992
+Bortezomib,CHEMBL325041
+Brentuximab vedotin,CHEMBL1742994
+Brexucabtagene Autoleucel,CHEMBL4594618
+Buserelin,CHEMBL2110824
+Busulfan,CHEMBL820
+Cabazitaxel,CHEMBL1201748
+Cabozantinib,CHEMBL2105717
+Calaspargase Pegol,CHEMBL2108728
+Capecitabine,CHEMBL1773
+Capivasertib,CHEMBL2325741
+Carboplatin,CHEMBL1351
+Carfilzomib,CHEMBL451887
+Carmofur,CHEMBL460499
+Carmustine,CHEMBL513
+Cemiplimab,CHEMBL4297723
+Chlorambucil,CHEMBL515
+Ciltacabtagene Autoleucel,CHEMBL4802263
+Cisplatin,CHEMBL2068237
+Cladribine,CHEMBL1619
+Clofarabine,CHEMBL1750
+Cobimetinib,CHEMBL2146883
+Copanlisib,CHEMBL3218576
+Cyclophosphamide,CHEMBL88
+Cytarabine,CHEMBL803
+Dacarbazine,CHEMBL476
+Dacomitinib,CHEMBL2110732
+Dactinomycin,CHEMBL1554
+Daratumumab,CHEMBL1743007
+"Daratumumab, Hyaluronidase",CHEMBL1743007
+Darolutamide,CHEMBL4297185
+Daunorubicin,CHEMBL178
+"Daunorubicin, Cytarabine Liposome",
+Decitabine,CHEMBL1201129
+"Decitabine , Cedazuridine",
+Degarelix,CHEMBL415606
+Denileukin Diftitox,CHEMBL1201550
+Denosumab,CHEMBL1237023
+Dexamethasone,CHEMBL384467
+Diethylstilbestrol,CHEMBL411
+Dinutuximab,CHEMBL3137342
+Docetaxel,CHEMBL92
+Dostarlimab,CHEMBL4298124
+Doxorubicin,CHEMBL53463
+Doxorubicin Liposome,CHEMBL53463
+Durvalumab,CHEMBL3301587
+Duvelisib,CHEMBL3039502
+Edotreotide,CHEMBL408350
+Eflornithine,CHEMBL830
+Elacestrant,CHEMBL4297509
+Elotuzumab,CHEMBL1743010
+Elranatamab,CHEMBL4297809
+Emapalumab,CHEMBL3989977
+Enfortumab Vedotin,CHEMBL3301589
+Entrectinib,CHEMBL1983268
+Epcoritamab,CHEMBL4650393
+Epirubicin,CHEMBL417
+Erdafitinib,CHEMBL3545376
+Eribulin,CHEMBL1683590
+Erlotinib,CHEMBL553
+Estramustine,CHEMBL1575
+Etoposide,CHEMBL44657
+Exemestane,CHEMBL1200374
+Fedratinib,CHEMBL1287853
+Fludarabine,CHEMBL1568
+Fluorouracil,CHEMBL185
+Fluoxymesterone,CHEMBL1445
+Fotemustine,CHEMBL549386
+Fruquintinib,CHEMBL4303214
+Fulvestrant,CHEMBL1358
+Gemcitabine,CHEMBL888
+Gemtuzumab Ozogamicin,CHEMBL1201506
+Gilteritinib,CHEMBL3301622
+Glasdegib,CHEMBL2043437
+Glofitamab,CHEMBL4298092
+Goserelin,CHEMBL1201247
+Histamine dihydrochloride,CHEMBL90
+Histrelin,CHEMBL1201255
+Hydroxyurea,CHEMBL467
+Ibritumomab Tiuxetan,CHEMBL1201606
+Idarubicin,CHEMBL1117
+Idecabtagene Vicleucel,CHEMBL4298199
+Idelalisib,CHEMBL2216870
+Ifosfamide,CHEMBL1024
+Imiquimod,CHEMBL1282
+Inavolisib,CHEMBL4650215
+Inotuzumab Ozogamicin,CHEMBL2108611
+Interferon Alfa-2b,CHEMBL1201558
+Iobenguane I-131,CHEMBL1615779
+Ipilimumab,CHEMBL1789844
+Irinotecan,CHEMBL481
+Irinotecan Liposome,CHEMBL481
+Isatuximab,CHEMBL3545131
+Ixabepilone,CHEMBL1201752
+Ixazomib,CHEMBL2141296
+Lanreotide,CHEMBL1201185
+Lapatinib,CHEMBL554
+Larotrectinib,CHEMBL3889654
+Lazertinib,CHEMBL4558324
+Lenalidomide,CHEMBL848
+Lenvatinib,CHEMBL1289601
+Letrozole,CHEMBL1444
+Leuprolide,CHEMBL1201199
+Lifileucel,CHEMBL4298200
+Lisocabtagene Maraleucel,CHEMBL4297236
+Lomustine,CHEMBL514
+Loncastuximab Tesirine,CHEMBL4297778
+Lu 177-Dotatate,CHEMBL3989924
+Lurbinectedin,CHEMBL4297516
+Lutetium Lu 177 Vipivotide Tetraxetan,CHEMBL4594406
+Margetuximab,CHEMBL2364649
+Mechlorethamine,CHEMBL427
+Medroxyprogesterone,CHEMBL717
+Megestrol Acetate,CHEMBL1201139
+Melphalan,CHEMBL852
+Melphalan Flufenamide,CHEMBL4303060
+Mercaptopurine,CHEMBL1425
+Methotrexate,CHEMBL34259
+Midostaurin,CHEMBL608533
+Mifamurtide,CHEMBL2107354
+Mirvetuximab Soravtansine,CHEMBL3545132
+Mitomycin,CHEMBL105
+Mitoxantrone,CHEMBL58
+Mobocertinib,CHEMBL4650319
+Mogamulizumab,CHEMBL1743041
+Mosunetuzumab,CHEMBL4297788
+Moxetumomab Pasudotox,CHEMBL1743043
+Nab-Paclitaxel,CHEMBL428647
+Nab-Sirolimus,CHEMBL413
+Nadofaragene Firadenovec,CHEMBL3990041
+Naxitamab,CHEMBL4297984
+Necitumumab,CHEMBL1743047
+Nelarabine,CHEMBL1201112
+Neratinib,CHEMBL180022
+Nilutamide,CHEMBL1274
+Nintedanib,CHEMBL502835
+Niraparib,CHEMBL1094636
+Nirogacestat Hydrobromide,CHEMBL4298153
+Nivolumab,CHEMBL2108738
+Obinutuzumab,CHEMBL1743048
+Odronextamab,CHEMBL4298084
+Ofatumumab,CHEMBL1201836
+Olaparib,CHEMBL521686
+Olaratumab,CHEMBL1743049
+Olutasidenib,CHEMBL4297610
+Omacetaxine Mepesuccinate,CHEMBL46286
+Paclitaxel,CHEMBL428647
+Padeliporfin,CHEMBL4298112
+Panobinostat,CHEMBL483254
+Pazopanib,CHEMBL477772
+Pegaspargase,CHEMBL2108546
+Peginterferon Alfa-2b,CHEMBL1201561
+Pemetrexed,CHEMBL225072
+Pentostatin,CHEMBL1580
+Pertuzumab,CHEMBL2007641
+"Pertuzumab, Trastuzumab, Hyaluronidase",
+Pipobroman,CHEMBL1585
+Pirarubicin,CHEMBL2354444
+Pirtobrutinib,CHEMBL4650485
+Pixantrone,CHEMBL167731
+Polatuzumab Vedotin,CHEMBL3301582
+Polyestradiol Phosphate,CHEMBL1201477
+Pomalidomide,CHEMBL43452
+Ponatinib,CHEMBL1171837
+Porfimer,CHEMBL1201481
+Pralatrexate,CHEMBL1201746
+Pralsetinib,CHEMBL4297597
+Prednisolone,CHEMBL131
+Prednisone,CHEMBL635
+Procarbazine,CHEMBL1321
+Racotumomab,CHEMBL1743059
+Radium 223 Dichloride,CHEMBL2107816
+Raltitrexed,CHEMBL225071
+Ramucirumab,CHEMBL1743062
+Ranimustine,CHEMBL2105348
+Realgar-Indigo Naturalis Formulation,
+Regorafenib,CHEMBL1946170
+"Relatlimab ,  Nivolumab",CHEMBL3990044
+Relugolix,CHEMBL1800159
+Repotrectinib,CHEMBL4298138
+Retifanlimab,CHEMBL4298037
+Ribociclib,CHEMBL3545110
+Ripretinib,CHEMBL4216467
+Rituximab,CHEMBL1201576
+"Rituximab, Hyaluronidase",CHEMBL1201576
+Romidepsin,CHEMBL343448
+Rucaparib,CHEMBL1173055
+Ruxolitinib,CHEMBL1789941
+Sacituzumab Govitecan,CHEMBL3545262
+Selinexor,CHEMBL3545185
+Selpercatinib,CHEMBL4559134
+Sipuleucel-T,CHEMBL1237024
+Sonidegib,CHEMBL2105737
+Sotorasib,CHEMBL4535757
+Streptozocin,CHEMBL1651906
+Sugemalimab,CHEMBL4594535
+Tafasitamab,CHEMBL4298047
+Tagraxofusp,CHEMBL4297573
+Talazoparib,CHEMBL3137320
+Talimogene Laherparepvec,CHEMBL2108727
+Talquetamab,CHEMBL4594503
+Tamoxifen,CHEMBL83
+Tarlatamab,CHEMBL5095292
+Tazemetostat,CHEMBL3414621
+Tebentafusp,CHEMBL4297990
+Teclistamab,CHEMBL4594505
+"Tegafur, Gimeracil, Oteracil",CHEMBL20883
+"Tegafur, Uracil",CHEMBL20883
+Temoporfin,CHEMBL500576
+Temozolomide,CHEMBL810
+Temsirolimus,CHEMBL1201182
+Tepotinib,CHEMBL3402762
+Thalidomide,CHEMBL468
+Thioguanine,CHEMBL727
+Thiotepa,CHEMBL671
+Tisagenlecleucel,CHEMBL3301574
+Tislelizumab,CHEMBL4297840
+Tisotumab Vedotin,CHEMBL4297841
+Tivozanib,CHEMBL1289494
+Topotecan,CHEMBL84
+Toremifene,CHEMBL1655
+Toripalimab,CHEMBL4297843
+Tovorafenib,CHEMBL3348923
+Trabectedin,CHEMBL450449
+Trametinib,CHEMBL2103875
+Trastuzumab Deruxtecan,CHEMBL4297844
+Trastuzumab Emtansine,CHEMBL1743082
+"Trastuzumab, Hyaluronidase",CHEMBL1201585
+Tremelimumab,CHEMBL2108658
+"Trifluridine, Tipiracil",CHEMBL1129
+Triptorelin,CHEMBL1201334
+Trofosfamide,CHEMBL462019
+Tucatinib,CHEMBL3989868
+Umbralisib,CHEMBL3948730
+Valrubicin,CHEMBL1096885
+Vandetanib,CHEMBL24828
+Venetoclax,CHEMBL3137309
+Vinblastine,CHEMBL159
+Vincristine,CHEMBL90555
+Vincristine Liposome,CHEMBL501867
+Vindesine,CHEMBL238071
+Vinflunine,CHEMBL2110725
+Vinorelbine,CHEMBL553025
+Vorasidenib,CHEMBL4279047
+Vorinostat,CHEMBL98
+Zanubrutinib,CHEMBL3936761
+Zolbetuximab,CHEMBL2109427
