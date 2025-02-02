@@ -57,5 +57,37 @@ def userspace():
     else:
         return redirect(url_for('home'))  # Redirige a la página de inicio si no es doctor ni enfermero
 
+
+@app.route('/doctor_space', methods=['GET', 'POST'])
+@login_required
+def doctor_space():
+    if current_user.role != 'doctor':
+        return redirect(url_for('home'))  # Redirige a home si no es doctor
+
+    if request.method == 'POST':
+        patient_name = request.form.get('patient_name')
+        if patient_name:
+            new_patient = Patient(name=patient_name, doctor_id=current_user.id)
+            db.session.add(new_patient)
+            db.session.commit()
+
+    # Obtener los pacientes del doctor
+    doctor_patients = Patient.query.filter_by(doctor_id=current_user.id).all()
+
+    return render_template('doctor_space.html', user=current_user, patients=doctor_patients)
+
+
+@app.route('/nurse_space', methods=['GET'])
+@login_required
+def nurse_space():
+    if current_user.role != 'nurse':
+        return redirect(url_for('home'))  # Redirige a home si no es nurse
+
+    # Obtener los pacientes asignados a la enfermera
+    assigned_patients = Patient.query.filter_by(nurse_id=current_user.id).all()
+
+    # Renderizar la plantilla con la lista de pacientes (solo lectura)
+    return render_template('nurse_space.html', user=current_user, patients=assigned_patients)
+
 if __name__ == "__main__":
     app.run(debug=True)
