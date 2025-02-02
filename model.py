@@ -22,9 +22,10 @@ patient_treated_with_drug = db.Table(
 
 personnel_attend_to_patient = db.Table(
     'personnel_attend_to_patient',
-    db.Column('patient_id', db.Integer, db.ForeignKey('patient.patient_id')),
-    db.Column('personnel_id', db.Integer, db.ForeignKey('healthcare_personnel.personnel_id'))
+    db.Column('patient_id', db.Integer, db.ForeignKey('patient.patient_id'), primary_key=True),
+    db.Column('personnel_id', db.Integer, db.ForeignKey('healthcare_personnel.personnel_id'), primary_key=True)
 )
+
 
 # Models
 class CancerType(db.Model):
@@ -32,6 +33,7 @@ class CancerType(db.Model):
     cancer_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     cancer_type = db.Column(db.String(50), nullable=False)
 
+    
 class Patient(db.Model):
     __tablename__ = 'patient'
     patient_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -42,8 +44,13 @@ class Patient(db.Model):
     phone = db.Column(db.String(15))
     email = db.Column(db.String(100))
     cancer_id = db.Column(db.Integer, db.ForeignKey('cancer_type.cancer_id'))
-    cancer = db.relationship("CancerType")
 
+    cancer = db.relationship("CancerType", backref='patients')
+    
+    healthcare_personnel = db.relationship('HealthcarePersonnel', 
+                                           secondary=personnel_attend_to_patient,
+                                           back_populates='patients')
+    
 class VCFEntry(db.Model):
     __tablename__ = 'vcf_entry'
     vcf_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -94,7 +101,10 @@ class HealthcarePersonnel(db.Model):
     phone = db.Column(db.String(15))
     email = db.Column(db.String(100))
     role_name = db.Column(db.String(50), nullable=False)
-
+    
+     patients = db.relationship('Patient', 
+                               secondary=personnel_attend_to_patient,
+                               back_populates='healthcare_personnel')
 
 
 
