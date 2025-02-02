@@ -1,22 +1,34 @@
-import requests
+import pysam
+import pandas as pd
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine
+from model import db, Patient, Variant, Gene, patient_has_variant
 
-# URL de la API de Ensembl VEP para análisis de archivos
-url = "https://rest.ensembl.org/vep/human/hgvs"
+# Configurar la conexión a la base de datos
+DATABASE_URI = ""  # Cambiar por la URI real de la base de datos
+engine = create_engine(DATABASE_URI)
+Session = sessionmaker(bind=engine)
+session = Session()
 
-# Abrir el archivo VCF y enviarlo a la API
-with open("mi_archivo.vcf", "rb") as file:
-    response = requests.post(
-        url,
-        headers={"Content-Type": "text/plain"},
-        data=file
-    )
+def parse_vcf(vcf_file):
+    """Parsea un archivo VCF y extrae la información relevante."""
+    vcf = pysam.VariantFile(vcf_file)
+    variants = []
+    
+    for record in vcf:
+        chrom = record.chrom
+        pos = record.pos
+        ref = record.ref
+        alt = ','.join(str(a) for a in record.alts)
+        cosmic_ids = [entry.split('=')[1] for entry in record.info if entry.startswith('COSMIC')]  # Extraer ID de Cosmic si está anotado
+        
+        variants.append({
+            "chrom": chrom,
+            "pos": pos,
+            "ref": ref,
+            "alt": alt,
+            "cosmic_ids": cosmic_ids
+        })
+    
+    return variants
 
-# Procesar la respuesta
-if response.status_code == 200:
-    resultado = response.json()
-    for variante in resultado:
-        for colocated in variante.get("colocated_variants", []):
-            if "cosmic" in colocated["id"]:
-                print(f"Variante: {variante['input']}, COSMIC ID: {colocated['id']}")
-else:
-    print(f"Error: {response.status_code}, {response.text}")
