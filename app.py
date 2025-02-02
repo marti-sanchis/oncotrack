@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash
 from forms import LoginForm, SignUpForm
 
 app = Flask(__name__)
@@ -88,6 +88,38 @@ def nurse_space():
 
     # Renderizar la plantilla con la lista de pacientes (solo lectura)
     return render_template('nurse_space.html', user=current_user, patients=assigned_patients)
+
+@app.route('/add_patient', methods=['POST'])
+@login_required
+def add_patient():
+    if current_user.role != 'doctor':
+        return redirect(url_for('home'))  # Redirige a home si no es doctor
+    
+    # Obtener el nombre del paciente del formulario
+    patient_name = request.form.get('patient_name')
+
+    if not patient_name:
+        flash('Patient name is required!', 'error')  # Mostrar mensaje de error si el campo está vacío
+        return redirect(url_for('doctor_space'))
+
+    # Crear una nueva instancia del paciente
+    new_patient = Patient(name=patient_name, doctor_id=current_user.id)
+    
+    # Guardar el paciente en la base de datos
+    db.session.add(new_patient)
+    db.session.commit()
+
+    flash(f'Patient "{patient_name}" added successfully!', 'success')  # Mensaje de éxito
+    
+    # Redirigir al espacio del doctor después de agregar el paciente
+    return redirect(url_for('doctor_space'))
+
+
+
+
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
