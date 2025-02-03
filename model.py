@@ -28,12 +28,12 @@ personnel_attend_to_patient = db.Table(
 
 
 # Models
+
 class CancerType(db.Model):
     __tablename__ = 'cancer_type'
     cancer_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     cancer_type = db.Column(db.String(50), nullable=False)
 
-    
 class Patient(db.Model):
     __tablename__ = 'patient'
     patient_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -80,6 +80,7 @@ class Drug(db.Model):
     __tablename__ = 'drug'
     drug_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(100))
+    
 
 class DrugAssociation(db.Model):
     __tablename__ = 'drug_association'
@@ -93,7 +94,6 @@ class DrugAssociation(db.Model):
     reference = db.Column(db.Text)
 
 
-
 class HealthcarePersonnel(db.Model):
     __tablename__ = 'healthcare_personnel'
     personnel_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -101,8 +101,10 @@ class HealthcarePersonnel(db.Model):
     phone = db.Column(db.String(15))
     email = db.Column(db.String(100))
     role_name = db.Column(db.String(50), nullable=False)
+    password = db.Column(db.String(100), nullable=False)
+
     
-     patients = db.relationship('Patient', 
+    patients = db.relationship('Patient', 
                                secondary=personnel_attend_to_patient,
                                back_populates='healthcare_personnel')
 
