@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, SelectField
 from wtforms.validators import Email, InputRequired, Length, ValidationError
+from models_proba import User
 
 class SignUpForm(FlaskForm):
     name = StringField(validators=[InputRequired(), Length(min=1, max=80)],
@@ -18,6 +19,9 @@ class SignUpForm(FlaskForm):
 
     password = PasswordField(validators=[InputRequired(), Length(min=4, max=80)],
                              render_kw={"placeholder": "Password"})
+
+    role = SelectField("Role", choices=[('doctor', 'Doctor'), ('nurse', 'Nurse')],
+                       validators=[InputRequired()])
 
     submit = SubmitField("Sign Up")
 
