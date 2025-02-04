@@ -1,0 +1,273 @@
+Gene,Variant,Cancer Type,Drug
+ABL1,T315I,B-Lymphoblastic Leukemia/Lymphoma,Ponatinib
+ABL1,T315I,Chronic Myelogenous Leukemia,Asciminib
+ABL1,T315I,Chronic Myelogenous Leukemia,Ponatinib
+AKT1,E17K,Breast Cancer,Capivasertib + Fulvestrant
+BRAF,V600,Erdheim-Chester Disease,Vemurafenib
+BRAF,V600,"Low-Grade Glioma, NOS",Tovorafenib
+BRAF,V600,Melanoma,Vemurafenib + Atezolizumab + Cobimetinib
+BRAF,V600E,All Solid Tumors (excluding Colorectal Cancer),Dabrafenib + Trametinib
+BRAF,V600E,Anaplastic Thyroid Cancer,Dabrafenib + Trametinib
+BRAF,V600E,"Biliary Tract Cancer, NOS",Dabrafenib + Trametinib
+BRAF,V600E,Colorectal Cancer,Encorafenib + Cetuximab
+BRAF,V600E,"Low-Grade Glioma, NOS",Dabrafenib + Trametinib
+BRAF,V600E,Melanoma,Dabrafenib
+BRAF,V600E,Melanoma,Vemurafenib
+BRAF,V600E,Non-Small Cell Lung Cancer,Dabrafenib + Trametinib
+BRAF,V600E,Non-Small Cell Lung Cancer,Encorafenib + Binimetinib
+BRAF,"V600E, V600K",Melanoma,Dabrafenib + Trametinib
+BRAF,"V600E, V600K",Melanoma,Encorafenib + Binimetinib
+BRAF,"V600E, V600K",Melanoma,Trametinib
+BRAF,"V600E, V600K",Melanoma,Vemurafenib + Cobimetinib
+EGFR,"Exon 19 in-frame deletions (729_761del), L858R",Non-Small Cell Lung Cancer,Afatinib
+EGFR,"Exon 19 in-frame deletions (729_761del), L858R",Non-Small Cell Lung Cancer,Amivantamab + Chemotherapy
+EGFR,"Exon 19 in-frame deletions (729_761del), L858R",Non-Small Cell Lung Cancer,Amivantamab + Lazertinib
+EGFR,"Exon 19 in-frame deletions (729_761del), L858R",Non-Small Cell Lung Cancer,Dacomitinib
+EGFR,"Exon 19 in-frame deletions (729_761del), L858R",Non-Small Cell Lung Cancer,Erlotinib
+EGFR,"Exon 19 in-frame deletions (729_761del), L858R",Non-Small Cell Lung Cancer,Erlotinib + Ramucirumab
+EGFR,"Exon 19 in-frame deletions (729_761del), L858R",Non-Small Cell Lung Cancer,Gefitinib
+EGFR,"Exon 19 in-frame deletions (729_761del), L858R",Non-Small Cell Lung Cancer,Osimertinib
+EGFR,"Exon 19 in-frame deletions (729_761del), L858R",Non-Small Cell Lung Cancer,Osimertinib + Chemotherapy
+EGFR,T790M,Non-Small Cell Lung Cancer,Osimertinib
+EGFR,S768I,Non-Small Cell Lung Cancer,Afatinib
+EGFR,L861Q,Non-Small Cell Lung Cancer,Afatinib
+EGFR,G719,Non-Small Cell Lung Cancer,Afatinib
+EGFR,Exon 20 in-frame insertions (762_823ins),Non-Small Cell Lung Cancer,Amivantamab + Chemotherapy
+EGFR,Exon 20 in-frame insertions (762_823ins),Non-Small Cell Lung Cancer,Amivantamab
+FGFR3,"G370C, R248C, S249C, Y373C",Bladder Cancer,Erdafitinib
+ESR1,"D538, E380, L469V, L536, S463P, Y537,
+V422del",Breast Cancer,Elacestrant
+FLT3,"D835, I836, Internal tandem duplication (572_630ins)",Acute Myeloid Leukemia,Gilteritinib
+IDH1,"R132C, R132G, R132H, R132L, R132S",Acute Myeloid Leukemia,Olutasidenib
+IDH1,"R132C, R132G, R132H, R132L, R132S","Intrahepatic Cholangiocarcinoma, Cholangiocarcinoma",Ivosidenib
+IDH1,"R132C, R132G, R132H, R132L, R132S","Oligodendroglioma, Astrocytoma",Vorasidenib
+IDH2,R140G and 8 other alterations,Acute Myeloid Leukemia,Enasidenib
+IDH2,"R172G, R172K, R172M, R172S, R172W","Oligodendroglioma, Astrocytoma",Vorasidenib
+EGFR,Exon 19 in-frame insertions (729_761ins),Non-Small Cell Lung Cancer,Gefitinib
+EGFR,G724S,Non-Small Cell Lung Cancer,Afatinib
+EGFR,G719,Non-Small Cell Lung Cancer,Amivantamab + Lazertinib
+EGFR,Exon 20 in-frame insertions (762_823ins),Non-Small Cell Lung Cancer,Poziotinib
+EGFR,Exon 20 in-frame insertions (762_823ins),Non-Small Cell Lung Cancer,CLN-081
+EGFR,Exon 19 in-frame insertions (729_761ins),Non-Small Cell Lung Cancer,Erlotinib
+EGFR,Exon 19 in-frame deletions (729_761del) and 5 other alterations,Non-Small Cell Lung Cancer,Patritumab Deruxtecan
+EGFR,E709_T710delinsD,Non-Small Cell Lung Cancer,Afatinib
+BRAF,V600,Histiocytosis,Vemurafenib
+BRAF,V600,Histiocytosis,Dabrafenib
+BRAF,L597,Melanoma,Trametinib
+BRAF,K601,Melanoma,Trametinib
+KIT,D816,Mastocytosis,Avapritinib
+IDH1,"R132C, R132G, R132H, R132L, R132S",Myelodysplastic Syndromes,Ivosidenib
+IDH1,"R132C, R132G, R132H, R132L, R132S",Acute Myeloid Leukemia,Ivosidenib
+FLT3,Internal tandem duplication (572_630ins),Acute Myeloid Leukemia,Quizartinib
+FLT3,"D835, I836, Internal tandem duplication (572_630ins)",Acute Myeloid Leukemia,Midostaurin + High Dose Chemotherapy
+EZH2,"A682G,  A692V, Y646C,  Y646F,  Y646H, Y646N, Y646S",Follicular Lymphoma,Tazemetostat
+KRAS,G12C,Colorectal Cancer,Adagrasib + Cetuximab
+KRAS,G12C,Colorectal Cancer,Sotorasib + Panitumumab
+KRAS,G12C,Non-Small Cell Lung Cancer,Adagrasib
+KRAS,G12C,Non-Small Cell Lung Cancer,Sotorasib
+MET,"D1010, Exon 14 Deletion, Exon 14 in-frame deletions (963_1010del), Exon 14 splice mutations (963_1010splice)",Non-Small Cell Lung Cancer,Capmatinib
+MET,"D1010, Exon 14 Deletion, Exon 14 in-frame deletions (963_1010del), Exon 14 splice mutations (963_1010splice)",Non-Small Cell Lung Cancer,Tepotinib
+PDGFRA,"Exon 18 in-frame deletions (814_852del), Exon 18 in-frame insertions (814_852ins), Exon 18 missense mutations (814_852mis)",Gastrointestinal Stromal Tumor,Avapritinib
+PIK3CA,C420R and 10 other alterations,Breast Cancer,Alpelisib + Fulvestrant
+PIK3CA,C420R and 10 other alterations,Breast Cancer,Capivasertib + Fulvestrant
+PIK3CA,E545Q and 7 other alterations,Breast Cancer,Capivasertib + Fulvestrant
+ABL1,E255K and 12 other alterations,B-Lymphoblastic Leukemia/Lymphoma,Imatinib
+ABL1,E255K and 12 other alterations,Chronic Myelogenous Leukemia,Imatinib
+ABL1,E255K and 6 other alterations,B-Lymphoblastic Leukemia/Lymphoma,Nilotinib
+ABL1,E255K and 6 other alterations,Chronic Myelogenous Leukemia,Nilotinib
+ABL1,F317C and 5 other alterations,B-Lymphoblastic Leukemia/Lymphoma,Dasatinib
+ABL1,F317C and 5 other alterations,Chronic Myelogenous Leukemia,Dasatinib
+ABL1,"F317L, G250E, V299L",B-Lymphoblastic Leukemia/Lymphoma,Bosutinib
+ABL1,"F317L, G250E, V299L",Chronic Myelogenous Leukemia,Bosutinib
+ABL1,T315I,B-Lymphoblastic Leukemia/Lymphoma,Bosutinib
+ABL1,T315I,B-Lymphoblastic Leukemia/Lymphoma,Dasatinib
+ABL1,T315I,B-Lymphoblastic Leukemia/Lymphoma,Imatinib
+ABL1,T315I,B-Lymphoblastic Leukemia/Lymphoma,Nilotinib
+ABL1,T315I,Chronic Myelogenous Leukemia,Bosutinib
+ABL1,T315I,Chronic Myelogenous Leukemia,Dasatinib
+ABL1,T315I,Chronic Myelogenous Leukemia,Imatinib
+ABL1,T315I,Chronic Myelogenous Leukemia,Nilotinib
+BTK,C481S,Chronic Lymphocytic Leukemia/Small Lymphocytic Lymphoma,Ibrutinib
+EGFR,Exon 20 in-frame insertions,Non-Small Cell Lung Cancer,Afatinib
+EGFR,Exon 20 in-frame insertions,Non-Small Cell Lung Cancer,Erlotinib
+EGFR,Exon 20 in-frame insertions,Non-Small Cell Lung Cancer,Gefitinib
+EGFR,T790M,Non-Small Cell Lung Cancer,Afatinib
+EGFR,T790M,Non-Small Cell Lung Cancer,Erlotinib
+EGFR,T790M,Non-Small Cell Lung Cancer,Gefitinib
+NTRK1,G595R,All Solid Tumors,Larotrectinib
+NTRK3,F617L,All Solid Tumors,Larotrectinib
+NTRK3,G623R,All Solid Tumors,Larotrectinib
+NTRK3,G696A,All Solid Tumors,Larotrectinib
+PDGFRA,D842V,Gastrointestinal Stromal Tumor,Imatinib
+ABL1,E255K and 9 other alterations,B-Lymphoblastic Leukemia/Lymphoma,Bosutinib
+ABL1,E255K and 9 other alterations,Chronic Myelogenous Leukemia,Bosutinib
+ABL1,E255K and 5 other alterations,B-Lymphoblastic Leukemia/Lymphoma,Dasatinib
+ABL1,E255K and 5 other alterations,Chronic Myelogenous Leukemia,Dasatinib
+ABL1,F317C and 5 other alterations,B-Lymphoblastic Leukemia/Lymphoma,Nilotinib
+ABL1,F317C and 5 other alterations,Chronic Myelogenous Leukemia,Nilotinib
+ALK,G1202R,Non-Small Cell Lung Cancer,Lorlatinib
+ALK,L1196M,Non-Small Cell Lung Cancer,Lorlatinib
+BRAF,V600,Langerhans Cell Histiocytosis,Dabrafenib
+BRAF,V600,Langerhans Cell Histiocytosis,Vemurafenib
+BRAF,V600 (excluding V600E and V600K),Melanoma,Dabrafenib + Trametinib
+BRAF,V600 (excluding V600E and V600K),Melanoma,Encorafenib + Binimetinib
+BRAF,V600 (excluding V600E and V600K),Melanoma,Vemurafenib + Cobimetinib
+BRAF,V600E,Colorectal Cancer,Encorafenib + Panitumumab
+BRAF,V600E,"Diffuse Glioma (excluding Diffuse Intrinsic Pontine Glioma, Diffuse Astrocytoma, Anaplastic Oligodendroglioma, Oligodendroglioma, Oligoastrocytoma, Astrocytoma)",Vemurafenib + Cobimetinib
+BRAF,V600E,Encapsulated Glioma,Vemurafenib + Cobimetinib
+BRAF,V600E,Hairy Cell Leukemia,Vemurafenib
+BRAF,V600E,Pilocytic Astrocytoma,Selumetinib
+BRAF,V600E,"Pleomorphic Xanthoastrocytoma, Pilocytic Astrocytoma, Ganglioglioma",Vemurafenib + Cobimetinib
+EGFR,A763_Y764insFQEA,Non-Small Cell Lung Cancer,Erlotinib
+EGFR,G719,Non-Small Cell Lung Cancer,Amivantamab + Chemotherapy
+EGFR,G719,Non-Small Cell Lung Cancer,Dacomitinib
+EGFR,G719,Non-Small Cell Lung Cancer,Erlotinib
+EGFR,G719,Non-Small Cell Lung Cancer,Gefitinib
+EGFR,G719,Non-Small Cell Lung Cancer,Osimertinib
+EGFR,L861Q,Non-Small Cell Lung Cancer,Amivantamab + Chemotherapy
+EGFR,L861Q,Non-Small Cell Lung Cancer,Dacomitinib
+EGFR,L861Q,Non-Small Cell Lung Cancer,Erlotinib
+EGFR,L861Q,Non-Small Cell Lung Cancer,Gefitinib
+EGFR,L861Q,Non-Small Cell Lung Cancer,Osimertinib
+EGFR,S768I,Non-Small Cell Lung Cancer,Amivantamab + Chemotherapy
+EGFR,S768I,Non-Small Cell Lung Cancer,Dacomitinib
+EGFR,S768I,Non-Small Cell Lung Cancer,Erlotinib
+EGFR,S768I,Non-Small Cell Lung Cancer,Gefitinib
+EGFR,S768I,Non-Small Cell Lung Cancer,Osimertinib
+ESR1,V422del,Breast Cancer,Elacestrant
+KIT,A829P and 5 other alterations,Gastrointestinal Stromal Tumor,Sorafenib
+KIT,D579del and 12 other alterations,Melanoma,Imatinib
+KRAS,G12C,Ampullary Cancer,Adagrasib
+KRAS,G12C,Ampullary Cancer,Sotorasib
+KRAS,G12C,Colorectal Cancer,Adagrasib + Panitumumab
+KRAS,G12C,Colorectal Cancer,Sotorasib + Cetuximab
+KRAS,G12C,Hepatobiliary Cancer,Adagrasib
+KRAS,G12C,Pancreatic Adenocarcinoma,Adagrasib
+KRAS,G12C,Pancreatic Adenocarcinoma,Sotorasib
+KRAS,G12C,Small Bowel Cancer,Adagrasib
+KRAS,G12C,Small Bowel Cancer,Sotorasib
+MET,"D1010, Exon 14 Deletion, Exon 14 in-frame deletions (963_1010del), Exon 14 splice mutations (963_1010splice)",Non-Small Cell Lung Cancer,Crizotinib
+PDGFRA,D842V,Gastrointestinal Stromal Tumor,Dasatinib
+POLD1,"D402N, E318K, L474P, S478N",Colorectal Cancer,Dostarlimab
+POLD1,"D402N, E318K, L474P, S478N",Colorectal Cancer,Ipilimumab + Nivolumab
+POLD1,"D402N, E318K, L474P, S478N",Colorectal Cancer,Nivolumab
+POLD1,"D402N, E318K, L474P, S478N",Colorectal Cancer,Pembrolizumab
+POLD1,"D402N, E318K, L474P, S478N",Small Bowel Cancer,Dostarlimab
+POLD1,"D402N, E318K, L474P, S478N",Small Bowel Cancer,Ipilimumab + Nivolumab
+POLD1,"D402N, E318K, L474P, S478N",Small Bowel Cancer,Nivolumab
+POLD1,"D402N, E318K, L474P, S478N",Small Bowel Cancer,Pembrolizumab
+POLE,A288V and 36 other alterations,Colorectal Cancer,Dostarlimab
+POLE,A288V and 36 other alterations,Colorectal Cancer,Ipilimumab + Nivolumab
+POLE,A288V and 36 other alterations,Colorectal Cancer,Nivolumab
+POLE,A288V and 36 other alterations,Colorectal Cancer,Pembrolizumab
+POLE,A288V and 36 other alterations,Small Bowel Cancer,Dostarlimab
+POLE,A288V and 36 other alterations,Small Bowel Cancer,Ipilimumab + Nivolumab
+POLE,A288V and 36 other alterations,Small Bowel Cancer,Nivolumab
+POLE,A288V and 36 other alterations,Small Bowel Cancer,Pembrolizumab
+AKT1,E17K,"Ovarian Cancer, Endometrial Cancer",Capivasertib
+ALK,F1174C,Neuroblastoma,Lorlatinib
+ALK,F1174L,Neuroblastoma,Lorlatinib
+ALK,F1245V,Neuroblastoma,Lorlatinib
+ALK,F1245Y,Neuroblastoma,Lorlatinib
+ALK,G1202R,Non-Small Cell Lung Cancer,NVL-655
+ALK,R1275L,Neuroblastoma,Lorlatinib
+ALK,R1275Q,Neuroblastoma,Lorlatinib
+EGFR,L861Q,Non-Small Cell Lung Cancer,Amivantamab + Lazertinib
+EGFR,S768I,Non-Small Cell Lung Cancer,Amivantamab + Lazertinib
+FLT3,Internal tandem duplication (572_630ins),Acute Myeloid Leukemia,Crenolanib
+FLT3,Internal tandem duplication (572_630ins),Acute Myeloid Leukemia,Sorafenib
+IDH1,R132,Glioma,Ivosidenib
+KRAS,"G12A, G12D, G12R, G12S, G12V",Non-Small Cell Lung Cancer,RMC-6236
+KRAS,"G12A, G12D, G12R, G12S, G12V",Pancreatic Adenocarcinoma,RMC-6236
+KRAS,G12C,"Tubular Adenoma of the Colon, Esophagogastric Cancer, Anal Cancer, Gastrointestinal Neuroendocrine Tumors of the Esophagus/Stomach",Adagrasib
+KRAS,G12D,Non-Small Cell Lung Cancer,ASP3082
+KRAS,G12D,Pancreatic Adenocarcinoma,ASP3082
+MET,F1200I,Non-Small Cell Lung Cancer,Elzovantinib
+MET,H1094Y,Non-Small Cell Lung Cancer,Elzovantinib
+MET,Y1003,Non-Small Cell Lung Cancer,Capmatinib
+MET,Y1003,Non-Small Cell Lung Cancer,Crizotinib
+MET,Y1003,Non-Small Cell Lung Cancer,Tepotinib
+MTOR,"E2014K, E2419K",Bladder Cancer,Everolimus
+MTOR,"L2209V, L2427Q",Renal Cell Carcinoma,Temsirolimus
+MTOR,Q2223K,Renal Cell Carcinoma,Everolimus
+NTRK1,G595R,All Solid Tumors,Selitrectinib
+NTRK3,G623R,All Solid Tumors,Selitrectinib
+ROS1,G2032R,Non-Small Cell Lung Cancer,Taletrectinib
+ROS1,L2086F,Non-Small Cell Lung Cancer,Cabozantinib
+TP53,Y220C,All Solid Tumors,Rezatapopt
+BRAF,"G464, G469A, G469R, G469V",All Solid Tumors,Plixorafenib
+BRAF,K601,All Solid Tumors,Plixorafenib
+BRAF,L597,All Solid Tumors,Plixorafenib
+EGFR,"A289V, R108K, T263P",Glioma,Lapatinib
+EGFR,A763_Y764insFQEA,Non-Small Cell Lung Cancer,Afatinib
+EGFR,D761Y,Non-Small Cell Lung Cancer,Osimertinib
+EGFR,Exon 19 in-frame insertions (729_761ins),Non-Small Cell Lung Cancer,Afatinib
+EGFR,L747P,Non-Small Cell Lung Cancer,Afatinib
+KIT,A829P and 5 other alterations,Gastrointestinal Stromal Tumor,Nilotinib
+KIT,A829P and 5 other alterations,Gastrointestinal Stromal Tumor,Pazopanib
+KRAS,"G12A, G12D, G12R, G12S, G12V",All Solid Tumors,RMC-6236
+KRAS,G12D,All Solid Tumors,ASP3082
+KRAS,G12D,All Solid Tumors,MRTX-1133
+MET,"H1106D, M1250T, N1100S, R1170Q, V1092I",Non-Small Cell Lung Cancer,Capmatinib
+MET,"H1106D, M1250T, N1100S, R1170Q, V1092I",Non-Small Cell Lung Cancer,Elzovantinib
+MET,"H1106D, M1250T, N1100S, R1170Q, V1092I",Non-Small Cell Lung Cancer,Tepotinib
+NTRK1,G595R,All Solid Tumors,Zurletrectinib
+NTRK3,G623R,All Solid Tumors,Zurletrectinib
+ALK,C1156Y,Non-Small Cell Lung Cancer,Crizotinib
+ALK,G1202R,Non-Small Cell Lung Cancer,Alectinib
+ALK,G1202R,Non-Small Cell Lung Cancer,Brigatinib
+ALK,G1202R,Non-Small Cell Lung Cancer,Ceritinib
+ALK,G1202R,Non-Small Cell Lung Cancer,Crizotinib
+ALK,G1269A,Non-Small Cell Lung Cancer,Crizotinib
+ALK,I1171N,Non-Small Cell Lung Cancer,Alectinib
+ALK,L1196M,Non-Small Cell Lung Cancer,Crizotinib
+BTK,C481F,Chronic Lymphocytic Leukemia/Small Lymphocytic Lymphoma,Ibrutinib
+BTK,C481R,Chronic Lymphocytic Leukemia/Small Lymphocytic Lymphoma,Ibrutinib
+BTK,C481Y,Chronic Lymphocytic Leukemia/Small Lymphocytic Lymphoma,Ibrutinib
+BTK,T316A,Chronic Lymphocytic Leukemia/Small Lymphocytic Lymphoma,Ibrutinib
+BTK,T474I,Chronic Lymphocytic Leukemia/Small Lymphocytic Lymphoma,Ibrutinib
+BTK,T474S,Chronic Lymphocytic Leukemia/Small Lymphocytic Lymphoma,Ibrutinib
+EGFR,C797G,Non-Small Cell Lung Cancer,Osimertinib
+EGFR,C797S,Non-Small Cell Lung Cancer,Osimertinib
+EGFR,D761Y,Non-Small Cell Lung Cancer,Gefitinib
+EGFR,G465E,Colorectal Cancer,Cetuximab
+EGFR,G465E,Colorectal Cancer,Panitumumab
+EGFR,G465R,Colorectal Cancer,Cetuximab
+EGFR,G465R,Colorectal Cancer,Panitumumab
+EGFR,G724S,Non-Small Cell Lung Cancer,Osimertinib
+EGFR,L718Q,Non-Small Cell Lung Cancer,Osimertinib
+EGFR,L718V,Non-Small Cell Lung Cancer,Osimertinib
+EGFR,L792F,Non-Small Cell Lung Cancer,Osimertinib
+EGFR,L792H,Non-Small Cell Lung Cancer,Osimertinib
+EGFR,S464L,Colorectal Cancer,Cetuximab
+EGFR,S464L,Colorectal Cancer,Panitumumab
+EGFR,S492R,Colorectal Cancer,Cetuximab
+EGFR,S492R,Colorectal Cancer,Panitumumab
+EGFR,V441D,Colorectal Cancer,Cetuximab
+EGFR,V441D,Colorectal Cancer,Panitumumab
+EGFR,V441G,Colorectal Cancer,Cetuximab
+EGFR,V441G,Colorectal Cancer,Panitumumab
+KIT,A829P,Gastrointestinal Stromal Tumor,Imatinib
+KIT,A829P,Gastrointestinal Stromal Tumor,Sunitinib
+KIT,C809G,Gastrointestinal Stromal Tumor,Imatinib
+KIT,C809G,Gastrointestinal Stromal Tumor,Sunitinib
+KIT,D816,Gastrointestinal Stromal Tumor,Imatinib
+KIT,D816,Gastrointestinal Stromal Tumor,Sunitinib
+KIT,D820,Gastrointestinal Stromal Tumor,Imatinib
+KIT,D820,Gastrointestinal Stromal Tumor,Sunitinib
+KIT,N822,Gastrointestinal Stromal Tumor,Imatinib
+KIT,N822,Gastrointestinal Stromal Tumor,Sunitinib
+KIT,T670I,Gastrointestinal Stromal Tumor,Imatinib
+KIT,V654A,Gastrointestinal Stromal Tumor,Imatinib
+KIT,Y823D,Gastrointestinal Stromal Tumor,Imatinib
+KIT,Y823D,Gastrointestinal Stromal Tumor,Sunitinib
+MET,D1228N,Non-Small Cell Lung Cancer,Cabozantinib
+MET,D1228N,Non-Small Cell Lung Cancer,Capmatinib
+MET,D1228N,Non-Small Cell Lung Cancer,Crizotinib
+MET,Y1230H,Non-Small Cell Lung Cancer,Capmatinib
+MET,Y1230H,Non-Small Cell Lung Cancer,Crizotinib
+NTRK1,G595R,All Solid Tumors,Entrectinib
+ROS1,G2032R,Non-Small Cell Lung Cancer,Crizotinib
+ROS1,G2032R,Non-Small Cell Lung Cancer,Lorlatinib
+ROS1,L2086F,Non-Small Cell Lung Cancer,Lorlatinib
+ROS1,L2086F,Non-Small Cell Lung Cancer,Repotrectinib
