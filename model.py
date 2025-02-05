@@ -47,6 +47,11 @@ class Patient(db.Model):
     cancer_id = db.Column(db.Integer, db.ForeignKey('cancer_type.cancer_id'))
     cancer = db.relationship("CancerType", backref='patients')
 
+    doctor_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    nurse_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+    
+    doctor = db.relationship('User', foreign_keys=[doctor_id])
+    nurse = db.relationship('User', foreign_keys=[nurse_id])
 
 
 class HealthcarePersonnel(db.Model):
