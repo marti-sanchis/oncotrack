@@ -64,10 +64,13 @@ class Gene(db.Model):
 class Variant(db.Model):
     __tablename__ = 'variant'
     variant_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    pos = db.Column(db.BigInteger)
+    ref = db.Column(db.String(100))
+    alt = db.Column(db.String(100))
     variant_type = db.Column(db.String(50))
-    change_id = db.Column(db.String(100))
     gene_id = db.Column(db.Integer, db.ForeignKey('gene.gene_id'))
-    gene = db.relationship("Gene")
+
+
 
 class Drug(db.Model):
     __tablename__ = 'drug'
