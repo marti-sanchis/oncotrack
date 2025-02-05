@@ -25,6 +25,10 @@
         {{ form.surname(class_="form-control") }}
         <label for="surname">Surname</label>
     </div>
+    <div class="mb-3">
+        <label for="role" class="form-label">Select Role</label>
+        {{ form.role(class_="form-select") }}
+    </div>
     {{ form.submit(class_="btn btn-lg btn-success") }}
     
 </form>

@@ -14,35 +14,70 @@ patient_has_variant = db.Table(
     db.Column('variant_id', db.Integer, db.ForeignKey('variant.variant_id'))
 )
 
-patient_treated_with_drug = db.Table(
-    'patient_treated_with_drug',
-    db.Column('patient_id', db.Integer, db.ForeignKey('patient.patient_id')),
+case_drug = db.Table(
+    'case_drug',
+    db.Column('mrn', db.Integer, db.ForeignKey('case.mrn')),
     db.Column('drug_id', db.Integer, db.ForeignKey('drug.drug_id'))
 )
 
-personnel_attend_to_patient = db.Table(
-    'personnel_attend_to_patient',
-    db.Column('patient_id', db.Integer, db.ForeignKey('patient.patient_id')),
-    db.Column('personnel_id', db.Integer, db.ForeignKey('healthcare_personnel.personnel_id'))
+personnel_attend_to_case = db.Table(
+    'personnel_attend_to_case',
+    db.Column('mrn', db.Integer, db.ForeignKey('case.mrn'), primary_key=True),
+    db.Column('personnel_id', db.Integer, db.ForeignKey('healthcare_personnel.personnel_id'), primary_key=True)
 )
 
+
 # Models
+
+class Person(db.Model):
+    __tablename__ = 'person'
+    id_card = db.Column(db.String(50), primary_key=True)
+    phone  = db.Column(db.String(50))
+    mail = db.Column(db.String(200))
+    name = db.Column(db.String(100))
+
+class Patient(db.Model):
+    __tablename__ = 'patient'
+    mrn = db.Column(db.Integer, primary_key=True, autoincrement=True) #Medical Record Number
+    sex = db.Column(db.Enum('M', 'F', 'Other'))
+    age = db.Column(db.Integer)
+    birth_date = db.Column(db.Date)
+    address = db.Column(db.String(50))
+    
+    cancer_id = db.Column(db.Integer, db.ForeignKey('cancer_type.cancer_id'))
+    cancer = db.relationship("CancerType", backref='patients')
+
+    doctor_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    nurse_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+    
+    doctor = db.relationship('User', foreign_keys=[doctor_id])
+    nurse = db.relationship('User', foreign_keys=[nurse_id])
+
+
+class HealthcarePersonnel(db.Model):
+    personnel_id = db.Column(db.String(50), primary_key=True)
+    __tablename__ = 'healthcare_personnel'
+    role_name = db.Column(db.String(50), nullable=False)
+    password = db.Column(db.String(100), nullable=False)
+    cases = db.relationship('Case', 
+                               secondary=personnel_attend_to_case,
+                               back_populates='healthcare_personnel')
+class Case(db.Model):
+    __tablename__ = 'case'
+    admission = db.Column(db.Date)
+    discharge = db.Column(db.Date)
+    description = db.Column(db.String(1000))
+    vcf_file = db.Column(db.String(200))
+
+    healthcare_personnel = db.relationship('HealthcarePersonnel', 
+                                           secondary=personnel_attend_to_case,
+                                           back_populates='case')
+
 class CancerType(db.Model):
     __tablename__ = 'cancer_type'
     cancer_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     cancer_type = db.Column(db.String(50), nullable=False)
 
-class Patient(db.Model):
-    __tablename__ = 'patient'
-    patient_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(100))
-    DNI = db.Column(db.String(20))
-    gender = db.Column(db.Enum('M', 'F', 'Other'))
-    age = db.Column(db.Integer)
-    phone = db.Column(db.String(15))
-    email = db.Column(db.String(100))
-    cancer_id = db.Column(db.Integer, db.ForeignKey('cancer_type.cancer_id'))
-    cancer = db.relationship("CancerType")
 
 class VCFEntry(db.Model):
     __tablename__ = 'vcf_entry'
@@ -73,6 +108,7 @@ class Drug(db.Model):
     __tablename__ = 'drug'
     drug_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(100))
+    
 
 class DrugAssociation(db.Model):
     __tablename__ = 'drug_association'
@@ -87,14 +123,9 @@ class DrugAssociation(db.Model):
 
 
 
-class HealthcarePersonnel(db.Model):
-    __tablename__ = 'healthcare_personnel'
-    personnel_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(100), nullable=False)
-    phone = db.Column(db.String(15))
-    email = db.Column(db.String(100))
-    role_name = db.Column(db.String(50), nullable=False)
+    
 
+    
 
 
 

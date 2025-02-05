@@ -1,0 +1,21 @@
+<!-- nurse_userspace.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nurse's User Space</title>
+</head>
+<body>
+    <h1>Welcome, Nurse {{ user.name }}!</h1>
+    <p>Your Role: Nurse</p>
+
+    <h3>Patients Assigned to You:</h3>
+    <!-- Aquí se mostrarían los pacientes asignados a la enfermera -->
+    <ul>
+        <!-- Pacientes asignados para ver -->
+    </ul>
+
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>

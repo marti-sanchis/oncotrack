@@ -1,8 +1,32 @@
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, request, flash, redirect, url_for
+from flask_login import login_user, login_required, LoginManager, current_user, logout_user
 from forms import LoginForm, SignUpForm
+from models_proba import db, User, Patient
+from flask_bcrypt import Bcrypt
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key_here'  # Required for CSRF protection
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'  # The database will be created in your project folder
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Optional but recommended to disable overhead
+
+# ✅ 2. Initialize Bcrypt AFTER defining app
+bcrypt = Bcrypt(app)
+
+# ✅ 3. Initialize database and Flask-Login
+db.init_app(app)
+
+with app.app_context():
+    db.create_all()
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = "login"  # Redirect to 'login' if user is not logged in
+
+# ✅ 4. Load user function
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))  # Converts user_id to integer and fetches 
 
 @app.route("/")
 def home():
@@ -18,9 +42,12 @@ def signup():
         password = form.password.data     
         role = form.role.data
 
+         # Hash the password before saving it
+        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+
         # 🚀 Here, you would add logic to save the user to a database.
 
-        new_user = User(email=form.email.data, password=hashed_password, role=role)
+        new_user = User(name=name, surname=surname, email=form.email.data, password=hashed_password, role=role)
         db.session.add(new_user)
         db.session.commit()
         
@@ -36,8 +63,8 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if user:
-            if (form_password := form.password.data):
-                if bcrypt.checkpw(form_password.encode('utf8'), user.password):
+            if form.password.data:
+                if bcrypt.check_password_hash(user.password, form.password.data):
                     login_user(user)
                     # Redirigir dependiendo del rol del usuario
                     if user.role == 'doctor':
@@ -51,9 +78,9 @@ def login():
 @login_required
 def userspace():
     if current_user.role == 'doctor':
-        return render_template('doctor_userspace.html', user=current_user)
+        return render_template('doctor_space.html', user=current_user)
     elif current_user.role == 'nurse':
-        return render_template('nurse_userspace.html', user=current_user)
+        return render_template('nurse_space.html', user=current_user)
     else:
         return redirect(url_for('home'))  # Redirige a la página de inicio si no es doctor ni enfermero
 
@@ -114,12 +141,11 @@ def add_patient():
     # Redirigir al espacio del doctor después de agregar el paciente
     return redirect(url_for('doctor_space'))
 
-
-
-
-
-
-
+@app.route('/logout')
+@login_required  # Optional, depending on whether you want to restrict logout to logged-in users
+def logout():
+    logout_user()
+    return redirect(url_for('home'))  # Redirect to a page after logout (e.g., home page)
 
 if __name__ == "__main__":
     app.run(debug=True)
