@@ -1,13 +1,15 @@
 from flask import Flask, render_template, request, flash, redirect, url_for
 from flask_login import login_user, login_required, LoginManager, current_user, logout_user
+import pandas as pd
 from forms import LoginForm, SignUpForm
-from models_proba import db, User, Patient
+from models_proba import db, User, Patient, Variant
 from flask_bcrypt import Bcrypt
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key_here'  # Required for CSRF protection
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'  # The database will be created in your project folder
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'  # The database will be created in your project folder
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:1234@localhost/variantes_prueba'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Optional but recommended to disable overhead
 
 # ✅ 2. Initialize Bcrypt AFTER defining app
@@ -17,7 +19,26 @@ bcrypt = Bcrypt(app)
 db.init_app(app)
 
 with app.app_context():
-    db.create_all()
+    try:
+        db.create_all()
+
+        df = pd.read_csv('/home/marti/MBHS/DBW/OncoTrack/cosmut_db.tsv', sep='\t')
+        df.rename(columns={
+            'GENOMIC_MUTATION_ID': 'variant_id',
+            'CHROMOSOME': 'chromosome',
+            'GENOME_START': 'position',
+            'GENOMIC_WT_ALLELE': 'reference',
+            'GENOMIC_MUT_ALLELE': 'alternative',
+            'MUTATION_DESCRIPTION': 'variant_type',
+            'GENE_SYMBOL': 'gene'
+        }, inplace=True)
+
+        df.to_sql('variant', con=db.engine, if_exists='append', index=False)
+
+        print("Base de datos creada y datos insertados correctamente")
+    except Exception as e:
+        print(f"Error al crear la base de datos o insertar datos: {e}")
+        db.session.rollback()
 
 login_manager = LoginManager()
 login_manager.init_app(app)
