@@ -1,9 +1,12 @@
 from flask import Flask, render_template, request, flash, redirect, url_for
 from flask_login import login_user, login_required, LoginManager, current_user, logout_user
 import pandas as pd
+from sqlalchemy import inspect
 from forms import LoginForm, SignUpForm
 from models_proba import db, User, Patient, Variant
 from flask_bcrypt import Bcrypt
+from sqlalchemy.orm import sessionmaker
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key_here'  # Required for CSRF protection
@@ -18,27 +21,67 @@ bcrypt = Bcrypt(app)
 # ✅ 3. Initialize database and Flask-Login
 db.init_app(app)
 
+BATCH_SIZE = 100000 
 with app.app_context():
     try:
-        db.create_all()
+        # Verificar si las tablas existen
+        inspector = inspect(db.engine)
+        if not inspector.has_table('variant'):  # Verifica si la tabla 'variant' existe
+            # Si la tabla no existe, entonces creamos las tablas
+            db.create_all()
+            print("Tablas creadas correctamente.")
+            # Cargar y procesar el archivo
+            df = pd.read_csv('/home/marti/MBHS/DBW/OncoTrack/cosmut_db.tsv', sep='\t')
+            df = df.where(pd.notna(df), "")  # Reemplazar valores NaN con cadenas vacías
 
-        df = pd.read_csv('/home/marti/MBHS/DBW/OncoTrack/cosmut_db.tsv', sep='\t')
-        df.rename(columns={
-            'GENOMIC_MUTATION_ID': 'variant_id',
-            'CHROMOSOME': 'chromosome',
-            'GENOME_START': 'position',
-            'GENOMIC_WT_ALLELE': 'reference',
-            'GENOMIC_MUT_ALLELE': 'alternative',
-            'MUTATION_DESCRIPTION': 'variant_type',
-            'GENE_SYMBOL': 'gene'
-        }, inplace=True)
+            # Renombrar columnas
+            df.rename(columns={
+                'GENOMIC_MUTATION_ID': 'variant_id',
+                'CHROMOSOME': 'chromosome',
+                'GENOME_START': 'position',
+                'GENOMIC_WT_ALLELE': 'reference',
+                'GENOMIC_MUT_ALLELE': 'alternative',
+                'MUTATION_DESCRIPTION': 'variant_type',
+                'GENE_SYMBOL': 'gene'
+            }, inplace=True)
 
-        df.to_sql('variant', con=db.engine, if_exists='append', index=False)
+            # Conectar a la base de datos y preparar la sesión
+            engine = db.engine
+            Session = sessionmaker(bind=engine)
+            session = Session()
 
-        print("Base de datos creada y datos insertados correctamente")
+            # Insertar por lotes
+            variants = []
+            for _, row in df.iterrows():
+                variants.append(Variant(
+                    variant_id=row['variant_id'],
+                    chromosome=row['chromosome'],
+                    position=row['position'],
+                    reference=row['reference'],
+                    alternative=row['alternative'],
+                    variant_type=row['variant_type'],
+                    gene=row['gene']
+                ))
+
+                # Hacer commit cada vez que el batch sea completo
+                if len(variants) % BATCH_SIZE == 0:
+                    session.bulk_save_objects(variants)
+                    session.commit()
+                    variants = []
+                    print(f"Batch de {BATCH_SIZE} filas insertado correctamente")
+
+            # Insertar lo que quede en el último lote
+            if variants:
+                session.bulk_save_objects(variants)
+                session.commit()
+            print("Datos insertados correctamente")
+        else:
+            print("Las tablas ya existen. No es necesario crear nuevamente.")
+
     except Exception as e:
-        print(f"Error al crear la base de datos o insertar datos: {e}")
-        db.session.rollback()
+        print(f"Error al insertar datos: {e}")
+        session.rollback()
+
 
 login_manager = LoginManager()
 login_manager.init_app(app)

@@ -49,9 +49,9 @@ class Variant(db.Model):
     variant_id = db.Column(db.String(20), primary_key=True)
     chromosome = db.Column(db.String(10))
     position = db.Column(db.BigInteger)
-    reference = db.Column(db.String(100))
-    alternative = db.Column(db.String(100))
-    variant_type = db.Column(db.Text())
+    reference = db.Column(db.String(400))
+    alternative = db.Column(db.String(400))
+    variant_type = db.Column(db.String(200))
     gene = db.Column(db.String(50))
 
     __table_args__ = (
