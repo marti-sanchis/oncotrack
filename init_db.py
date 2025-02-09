@@ -1,83 +1,109 @@
-import pymysql
-from app import app
-from models_proba import db, Variant
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from models_proba import db, Variant, Gene, Drug, CancerType, DrugAssociation
 from config import Config
 import pandas as pd
-from sqlalchemy import inspect
-from sqlalchemy.orm import sessionmaker
+import numpy as np
 
-
-# Conect to MySQL to create the database if it doesn't exist.
-connection = pymysql.connect(
-    host=Config.MYSQL_HOST,
-    user=Config.MYSQL_USER,
-    password=Config.MYSQL_PASSWORD
-)
-
-with connection.cursor() as cursor:
-    cursor.execute(f"CREATE DATABASE IF NOT EXISTS {Config.MYSQL_DB}")
-    print(f"Database '{Config.MYSQL_DB}' verified or created.")
-
-connection.close()
-
-# Initialise all tables inside the recently created database.
-BATCH_SIZE = 100000 
-with app.app_context():
+def load_data(file_path, model, column_map):
+    """
+    Carga un archivo TSV en una tabla de la base de datos.
+    
+    :param file_path: Ruta al archivo TSV
+    :param model: Modelo de SQLAlchemy al que se insertarán los datos
+    :param column_map: Diccionario que mapea nombres de columnas en el archivo a atributos del modelo
+    """
+    df = pd.read_csv(file_path, sep='\t')
+    df = df.replace({np.nan: None})
+    
     try:
-        # Verificar si las tablas existen
-        inspector = inspect(db.engine)
-        if not inspector.has_table('variant'):  # Verifica si la tabla 'variant' existe
-            # Si la tabla no existe, entonces creamos las tablas
-            db.create_all()
-            print("Tablas creadas correctamente.")
-            # Cargar y procesar el archivo
-            df = pd.read_csv('/home/marti/MBHS/DBW/OncoTrack/cosmut_db.tsv', sep='\t')
-            df = df.where(pd.notna(df), "")  # Reemplazar valores NaN con cadenas vacías
-
-            # Renombrar columnas
-            df.rename(columns={
-                'GENOMIC_MUTATION_ID': 'variant_id',
-                'CHROMOSOME': 'chromosome',
-                'GENOME_START': 'position',
-                'GENOMIC_WT_ALLELE': 'reference',
-                'GENOMIC_MUT_ALLELE': 'alternative',
-                'MUTATION_DESCRIPTION': 'variant_type',
-                'GENE_SYMBOL': 'gene'
-            }, inplace=True)
-
-            # Conectar a la base de datos y preparar la sesión
-            engine = db.engine
-            Session = sessionmaker(bind=engine)
-            session = Session()
-
-            # Insertar por lotes
-            variants = []
-            for _, row in df.iterrows():
-                variants.append(Variant(
-                    variant_id=row['variant_id'],
-                    chromosome=row['chromosome'],
-                    position=row['position'],
-                    reference=row['reference'],
-                    alternative=row['alternative'],
-                    variant_type=row['variant_type'],
-                    gene=row['gene']
-                ))
-
-                # Hacer commit cada vez que el batch sea completo
-                if len(variants) % BATCH_SIZE == 0:
-                    session.bulk_save_objects(variants)
-                    session.commit()
-                    variants = []
-                    print(f"Batch de {BATCH_SIZE} filas insertado correctamente")
-
-            # Insertar lo que quede en el último lote
-            if variants:
-                session.bulk_save_objects(variants)
-                session.commit()
-            print("Datos insertados correctamente")
-        else:
-            print("Las tablas ya existen. No es necesario crear nuevamente.")
-
+        objects = []
+        for _, row in df.iterrows():
+            obj_data = {attr: row[col] for col, attr in column_map.items()}
+            objects.append(model(**obj_data))
+        
+        session.bulk_save_objects(objects)
+        session.commit()
+        print(f'Tabla "{model.__tablename__}" cargada exitosamente con {len(objects)} registros.')
+    
     except Exception as e:
-        print(f"Error al insertar datos: {e}")
         session.rollback()
+        print(f"Error al cargar {model.__tablename__}: {e}")
+
+
+# Overwritte engine with the URI to the database
+engine = create_engine(Config.SQLALCHEMY_DATABASE_URI, echo=False)
+
+# Create session to interact with database
+Session = sessionmaker(bind=engine)
+session = Session()
+# Create all tables
+db.metadata.create_all(engine)  
+print("All tables correctly created.")
+
+# Load cosmic gene table
+load_data("/home/marti/MBHS/DBW/OncoTrack/genes.tsv", Gene, {
+    "gene_id": "gene_id",
+    "gene_symbol": "gene_symbol",
+    "gene_name": "gene_name",
+    "location": "location",
+    "role_in_cancer": "role_in_cancer"
+})
+
+# Load drugs table
+load_data("/home/marti/MBHS/DBW/OncoTrack/drug.tsv", Drug, {
+    "drug_id": "drug_id",
+    "name": "name"
+})
+
+# Load cancer types table
+load_data("/home/marti/MBHS/DBW/OncoTrack/cancer_type.tsv", CancerType, {
+    "cancer_type": "cancer_type"
+})
+
+# Load comsic mutation table
+df = pd.read_csv('/home/marti/MBHS/DBW/OncoTrack/variants.tsv', sep='\t')
+df = df.where(pd.notna(df), "")
+
+try:
+    # Set batch size
+    BATCH_SIZE = 100000
+    variants = []
+    for _, row in df.iterrows():
+        variants.append(Variant(
+            variant_id=row['variant_id'],
+            chromosome=row['chromosome'],
+            position=row['position'],
+            reference=row['reference'],
+            alternative=row['alternative'],
+            aa_mutation=row['aa_mutation'],
+            variant_type=row['variant_type'],
+            gene_id=row['gene_id']
+        ))
+    # Insert by batch
+        if len(variants) >= BATCH_SIZE:
+            session.bulk_save_objects(variants)
+            session.commit()
+            variants = []
+            print(f"Batch of {BATCH_SIZE} rows successfully loaded.")
+
+    # Insert last batch
+    if variants:
+        session.bulk_save_objects(variants)
+        session.commit()
+    print("Table \"variants\" successfully loaded")
+except Exception as e:
+    print(e)
+
+# Load drug association table
+load_data("/home/marti/MBHS/DBW/OncoTrack/drug_association.tsv", DrugAssociation, {
+    "drug_id": "drug_id",
+    "gene_id": "gene_id",
+    "variant_id": "variant_id",
+    "association": "association",
+    "cancer_id": "cancer_id",
+    "subtype":"subtype",
+    "reference": "reference"
+})
+
+session.close()
