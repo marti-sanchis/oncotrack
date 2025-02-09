@@ -6,13 +6,6 @@ import pandas as pd
 import numpy as np
 
 def load_data(file_path, model, column_map):
-    """
-    Carga un archivo TSV en una tabla de la base de datos.
-    
-    :param file_path: Ruta al archivo TSV
-    :param model: Modelo de SQLAlchemy al que se insertarán los datos
-    :param column_map: Diccionario que mapea nombres de columnas en el archivo a atributos del modelo
-    """
     df = pd.read_csv(file_path, sep='\t')
     df = df.replace({np.nan: None})
     
@@ -24,11 +17,11 @@ def load_data(file_path, model, column_map):
         
         session.bulk_save_objects(objects)
         session.commit()
-        print(f'Tabla "{model.__tablename__}" cargada exitosamente con {len(objects)} registros.')
+        print(f'Table "{model.__tablename__}" successfully load with {len(objects)} rows.')
     
     except Exception as e:
         session.rollback()
-        print(f"Error al cargar {model.__tablename__}: {e}")
+        print(f"Error {model.__tablename__}: {e}")
 
 
 # Overwritte engine with the URI to the database
