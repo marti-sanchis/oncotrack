@@ -1,23 +1,22 @@
 import pysam
 import pandas as pd
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy import create_engine
-import mysql.connector
-import pysam
-import pandas as pd
+from sqlalchemy import text
+from app import app
+from models_proba import db
+from config import Config
 
-# Start connection with local DB
-db_connection = mysql.connector.connect(
-    host="localhost",       
-    user="root",
-    password="1234", 
-    database="variantes_prueba"  
-)
-cursor = db_connection.cursor()
+# Use connection defined in Flask
+engine = db.engine  
+Session = sessionmaker(bind=engine)
+session = Session()
+
 
 # Read variant file (Variant Call Format) with pysam function.
-vcf = pysam.VariantFile("/home/marti/MBHS/DBW/OncoTrack/vcf_mutations/GBM_sample_muts.hg38.vcf")
+vcf_file_path = "/home/marti/MBHS/DBW/OncoTrack/vcf_mutations/GBM_sample_muts.hg38.vcf"
+vcf = pysam.VariantFile(vcf_file_path)
 variants = []
+
 # List of dictionaries: chromosome, position, reference and alternative alleles (considering multiple alt alleles). 
 for record in vcf:
     chrom = record.chrom 
@@ -37,36 +36,31 @@ for record in vcf:
 
 # Search for matching variants in local DB.
 matched_variants = []
-for variant in variants:
-    chrom = variant["chrom"]
-    pos = variant["pos"]
-    ref = variant["ref"]
-    alt = variant["alt"]
-        
-    query = """
-        SELECT GENOMIC_MUTATION_ID, MUTATION_DESCRIPTION, GENE_SYMBOL
-        FROM cosmic_mutations
-        WHERE CHROMOSOME = %s
-        AND GENOME_START = %s
-        AND GENOMIC_WT_ALLELE = %s
-        AND GENOMIC_MUT_ALLELE = %s
-    """
-    cursor.execute(query, (chrom, pos, ref, alt))
-    matching_rows = cursor.fetchall()
+query = """
+    SELECT GENOMIC_MUTATION_ID, MUTATION_DESCRIPTION, GENE_SYMBOL
+    FROM cosmic_mutations
+    WHERE CHROMOSOME = %s
+    AND GENOME_START = %s
+    AND GENOMIC_WT_ALLELE = %s
+    AND GENOMIC_MUT_ALLELE = %s
+"""
 
-    for row in matching_rows:
+for variant in variants:
+    result = session.execute(query, variant).fetchall()
+    for row in result:
         matched_variants.append({
-            "gene_sym":row[2],
-            "chrom": chrom,
-            "pos": pos,
-            "ref": ref,
-            "alt": alt,
+            "gene_sym": row[2],
+            "chrom": variant["chrom"],
+            "pos": variant["pos"],
+            "ref": variant["ref"],
+            "alt": variant["alt"],
             "cosmic_id": row[0],
             "mutation_desc": row[1]
         })
 
+# ✅ Mostrar resultados
 for variant in matched_variants:
     print(variant)
 
-cursor.close()
-db_connection.close()
+# ✅ Cerrar sesión
+session.close()
