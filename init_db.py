@@ -1,6 +1,5 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-<<<<<<< HEAD
 from models_proba import db, Variant, Gene, Drug, CancerType, DrugAssociation
 from config import Config
 import pandas as pd
@@ -32,12 +31,6 @@ def load_data(file_path, model, column_map):
         print(f"Error al cargar {model.__tablename__}: {e}")
 
 
-=======
-from models_proba import db, Variant
-from config import Config
-import pandas as pd
-
->>>>>>> 5bfd13362efb700523aa1b097e7b4c55794d90db
 # Overwritte engine with the URI to the database
 engine = create_engine(Config.SQLALCHEMY_DATABASE_URI, echo=False)
 
@@ -48,7 +41,6 @@ session = Session()
 db.metadata.create_all(engine)  
 print("All tables correctly created.")
 
-<<<<<<< HEAD
 # Load cosmic gene table
 load_data("/home/marti/MBHS/DBW/OncoTrack/genes.tsv", Gene, {
     "gene_id": "gene_id",
@@ -69,10 +61,7 @@ load_data("/home/marti/MBHS/DBW/OncoTrack/cancer_type.tsv", CancerType, {
     "cancer_type": "cancer_type"
 })
 
-# Load comsic mutation table
-=======
 # Load comsic mutation file
->>>>>>> 5bfd13362efb700523aa1b097e7b4c55794d90db
 df = pd.read_csv('/home/marti/MBHS/DBW/OncoTrack/variants.tsv', sep='\t')
 df = df.where(pd.notna(df), "")
 
@@ -89,11 +78,8 @@ try:
             alternative=row['alternative'],
             aa_mutation=row['aa_mutation'],
             variant_type=row['variant_type'],
-<<<<<<< HEAD
             gene_id=row['gene_id']
-=======
-            gene=row['gene']
->>>>>>> 5bfd13362efb700523aa1b097e7b4c55794d90db
+
         ))
     # Insert by batch
         if len(variants) >= BATCH_SIZE:
@@ -110,7 +96,6 @@ try:
 except Exception as e:
     print(e)
 
-<<<<<<< HEAD
 # Load drug association table
 load_data("/home/marti/MBHS/DBW/OncoTrack/drug_association.tsv", DrugAssociation, {
     "drug_id": "drug_id",
@@ -123,8 +108,3 @@ load_data("/home/marti/MBHS/DBW/OncoTrack/drug_association.tsv", DrugAssociation
 })
 
 session.close()
-=======
-
-
-session.close()
->>>>>>> 5bfd13362efb700523aa1b097e7b4c55794d90db
