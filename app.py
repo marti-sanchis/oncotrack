@@ -72,12 +72,22 @@ def login():
 @app.route('/userspace', methods=['GET', 'POST'])
 @login_required
 def userspace():
+    # Create a form for patient data
+    form = SignUpForm()  # Or create a new PatientForm if you have one
+
+    # Process form submission
+    if form.validate_on_submit():
+        # Handle form submission (e.g., add patient or handle data)
+        flash("Patient data submitted successfully!", "success")
+        return redirect(url_for('userspace'))  # Redirect after form submission
+
+    # Render the template with the form
     if current_user.role == 'doctor':
-        return render_template('doctor_space.html', user=current_user)
+        return render_template('doctor_space.html', user=current_user, form=form)
     elif current_user.role == 'nurse':
-        return render_template('nurse_space.html', user=current_user)
+        return render_template('nurse_space.html', user=current_user, form=form)
     else:
-        return redirect(url_for('home'))  # Redirige a la página de inicio si no es doctor ni enfermero
+        return redirect(url_for('home'))  # Redirect to home if not doctor or nurse
 
 
 @app.route('/doctor_space', methods=['GET', 'POST'])

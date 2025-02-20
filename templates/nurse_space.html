@@ -1,21 +1,19 @@
-<!-- nurse_userspace.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nurse's User Space</title>
-</head>
-<body>
-    <h1>Welcome, Nurse {{ user.name }}!</h1>
-    <p>Your Role: Nurse</p>
+{% extends 'base.html' %}
+{% block title %}{{ current_user.email }}'s private space{% endblock %}
 
-    <h3>Patients Assigned to You:</h3>
-    <!-- Aquí se mostrarían los pacientes asignados a la enfermera -->
-    <ul>
-        <!-- Pacientes asignados para ver -->
-    </ul>
+{% block body %}
+<div class="container">
+<div class="row col mb-5">Welcome {{ current_user.user_data[0].name }} {{ current_user.user_data[0].surname }}</div>
 
-    <a href="{{ url_for('logout') }}">Logout</a>
-</body>
-</html>
+<form action="{{ url_for('userspace') }}" method="post">
+    {{ form.hidden_tag() }}
+    <div class="row">
+        <div class="col-6">
+            {{ form.patient_data(class_="form-control", placeholder="Enter patient data") }}
+        </div>
+        <div class="col-3 mb-5">
+            {{ form.submit(class_="btn btn-primary",  value="Add patient") }}
+        </div>
+    </div>
+</form>
+{% endblock %}
