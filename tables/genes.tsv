@@ -1,0 +1,710 @@
+gene_id	gene_symbol	gene_name	location	role_in_cancer
+COSG68236	A1CF	APOBEC1 complementation factor	10q11.23	oncogene
+COSG100962	ABI1	abl interactor 1	10p12.1	TSG, fusion
+COSG106650	ABL1	ABL proto-oncogene 1, non-receptor tyrosine kinase	9q34.12	oncogene, fusion
+COSG93778	ABL2	ABL proto-oncogene 2, non-receptor tyrosine kinase	1q25.2	oncogene, fusion
+COSG97311	ACKR3	atypical chemokine receptor 3	2q37.3	oncogene, fusion
+COSG110896	ACSL3	acyl-CoA synthetase long chain family member 3	2q36.1	fusion
+COSG111804	ACSL6	acyl-CoA synthetase long chain family member 6	5q31.1	fusion
+COSG104387	ACVR1	activin A receptor type 1	2q24.1	oncogene
+COSG87372	ACVR1B	activin A receptor type 1B	12q13.13	TSG
+COSG109828	ACVR2A	activin A receptor type 2A	2q23.1	TSG
+COSG74504	AFDN	afadin, adherens junction formation factor	6q27	oncogene, fusion
+COSG69615	AFF1	AF4/FMR2 family member 1	4q22.1	fusion
+COSG86784	AFF3	AF4/FMR2 family member 3	2q11.2	oncogene, fusion
+COSG73994	AFF4	AF4/FMR2 family member 4	5q31.1	oncogene, fusion
+COSG89677	AKAP9	A-kinase anchoring protein 9	7q21.2	fusion
+COSG100756	AKT1	AKT serine/threonine kinase 1	14q32.33	oncogene
+COSG75261	AKT2	AKT serine/threonine kinase 2	19q13.2	oncogene
+COSG82568	AKT3	AKT serine/threonine kinase 3	1q44	oncogene
+COSG78204	ALDH2	aldehyde dehydrogenase 2 family member	12q24.12	fusion
+COSG59677	ALK	ALK receptor tyrosine kinase	2p23.2	oncogene, fusion
+COSG111928	AMER1	APC membrane recruitment protein 1	Xq11.2	TSG
+COSG110999	ANK1	ankyrin 1	8p11.21	
+COSG108961	APC	APC, WNT signaling pathway regulator	5q22.2	TSG
+COSG86691	AR	androgen receptor	Xq12	oncogene
+COSG63174	ARAF	A-Raf proto-oncogene, serine/threonine kinase	Xp11.3	oncogene
+COSG66814	ARHGAP26	Rho GTPase activating protein 26	5q31.3	TSG, fusion
+COSG59943	ARHGAP35	Rho GTPase activating protein 35	19q13.32	TSG
+COSG113539	ARHGAP5	Rho GTPase activating protein 5	14q12	oncogene
+COSG72704	ARHGEF10	Rho guanine nucleotide exchange factor 10	8p23.3	TSG
+COSG64462	ARHGEF10L	Rho guanine nucleotide exchange factor 10 like	1p36.13	TSG
+COSG109622	ARHGEF12	Rho guanine nucleotide exchange factor 12	11q23.3	TSG, fusion
+COSG71518	ARID1A	AT-rich interaction domain 1A	1p36.11	TSG, fusion
+COSG107409	ARID1B	AT-rich interaction domain 1B	6q25.3	TSG
+COSG89256	ARID2	AT-rich interaction domain 2	12q12	TSG
+COSG69731	ARNT	aryl hydrocarbon receptor nuclear translocator	1q21.3	oncogene, TSG, fusion
+COSG93625	ASPM	abnormal spindle microtubule assembly	1q31.3	
+COSG109748	ASPSCR1	ASPSCR1, UBX domain containing tether for SLC2A4	17q25.3	fusion
+COSG63327	ASXL1	ASXL transcriptional regulator 1	20q11.21	TSG
+COSG71126	ASXL2	ASXL transcriptional regulator 2	2p23.3	TSG
+COSG90645	ATF1	activating transcription factor 1	12q13.12	oncogene, fusion
+COSG101434	ATIC	5-aminoimidazole-4-carboxamide ribonucleotide formyltransferase/IMP cyclohydrolase	2q35	fusion
+COSG89944	ATM	ATM serine/threonine kinase	11q22.3	TSG
+COSG58843	ATP1A1	ATPase Na+/K+ transporting subunit alpha 1	1p13.1	oncogene, TSG
+COSG102707	ATP2B3	ATPase plasma membrane Ca2+ transporting 3	Xq28	TSG
+COSG73559	ATR	ATR serine/threonine kinase	3q23	TSG
+COSG106026	ATRX	ATRX, chromatin remodeler	Xq21.1	TSG
+COSG75575	AXIN1	axin 1	16p13.3	TSG
+COSG96143	AXIN2	axin 2	17q24.1	TSG
+COSG79234	B2M	beta-2-microglobulin	15q21.1	TSG
+COSG113385	BAP1	BRCA1 associated protein 1	3p21.1	TSG
+COSG71483	BARD1	BRCA1 associated RING domain 1	2q35	TSG
+COSG106962	BAX	BCL2 associated X, apoptosis regulator	19q13.33	TSG
+COSG114282	BAZ1A	bromodomain adjacent to zinc finger domain 1A	14q13.2	TSG
+COSG86862	BCL10	BCL10, immune signaling adaptor	1p22.3	TSG, fusion
+COSG82877	BCL11A	BCL11A, BAF complex component	2p16.1	oncogene, fusion
+COSG102032	BCL11B	BCL11B, BAF complex component	14q32.2	oncogene, TSG, fusion
+COSG84340	BCL2	BCL2, apoptosis regulator	18q21.33	oncogene, fusion
+COSG58663	BCL2L12	BCL2 like 12	19q13.33	oncogene
+COSG88188	BCL3	BCL3, transcription coactivator	19q13.32	oncogene, fusion
+COSG113725	BCL6	BCL6, transcription repressor	3q27.3	oncogene, fusion
+COSG72854	BCL7A	BCL7A, BAF complex component	12q24.31	fusion
+COSG114870	BCL9	B cell CLL/lymphoma 9	1q21.2	oncogene, fusion
+COSG105158	BCL9L	B cell CLL/lymphoma 9 like	11q23.3	oncogene, TSG
+COSG107886	BCLAF1	BCL2 associated transcription factor 1	6q23.3	
+COSG64323	BCOR	BCL6 corepressor	Xp11.4	TSG, fusion
+COSG92901	BCORL1	BCL6 corepressor like 1	Xq26.1	oncogene, TSG
+COSG70269	BCR	BCR, RhoGEF and GTPase activating protein	22q11.23	fusion
+COSG64326	BIRC3	baculoviral IAP repeat containing 3	11q22.2	oncogene, TSG, fusion
+COSG78096	BIRC6	baculoviral IAP repeat containing 6	2p22.3	oncogene, fusion
+COSG107337	BMP5	bone morphogenetic protein 5	6p12.1	
+COSG99109	BRAF	B-Raf proto-oncogene, serine/threonine kinase	7q34	oncogene, fusion
+COSG75342	BRCA1	BRCA1, DNA repair associated	17q21.31	TSG
+COSG68498	BRCA2	BRCA2, DNA repair associated	13q13.1	TSG
+COSG76553	BRD3	bromodomain containing 3	9q34.2	oncogene, fusion
+COSG97085	BRD4	bromodomain containing 4	19p13.12	oncogene, fusion
+COSG72977	BTG1	BTG anti-proliferation factor 1	12q21.33	TSG, fusion
+COSG94281	BTG2	BTG anti-proliferation factor 2	1q32.1	TSG
+COSG96537	BTK	Bruton tyrosine kinase	Xq22.1	oncogene, TSG
+COSG63238	C15orf65	chromosome 15 open reading frame 65	15q21.3	fusion
+COSG88428	CACNA1D	calcium voltage-gated channel subunit alpha1 D	3p21.1	oncogene
+COSG80775	CALR	calreticulin	19p13.13	oncogene
+COSG61199	CAMTA1	calmodulin binding transcription activator 1	1p36.31	TSG, fusion
+COSG63866	CANT1	calcium activated nucleotidase 1	17q25.3	fusion
+COSG91032	CARD11	caspase recruitment domain family member 11	7p22.2	oncogene
+COSG73613	CARS	cysteinyl-tRNA synthetase	11p15.4	TSG, fusion
+COSG65355	CASP3	caspase 3	4q35.1	TSG
+COSG90904	CASP8	caspase 8	2q33.1	TSG
+COSG102681	CASP9	caspase 9	1p36.21	TSG
+COSG96429	CBFA2T3	CBFA2/RUNX1 translocation partner 3	16q24.3	TSG, fusion
+COSG115535	CBFB	core-binding factor subunit beta	16q22.1	TSG, fusion
+COSG108842	CBL	Cbl proto-oncogene	11q23.3	oncogene, TSG, fusion
+COSG80246	CBLB	Cbl proto-oncogene B	3q13.11	TSG
+COSG97247	CBLC	Cbl proto-oncogene C	19q13.32	
+COSG108617	CCDC6	coiled-coil domain containing 6	10q21.2	TSG, fusion
+COSG89118	CCNB1IP1	cyclin B1 interacting protein 1	14q11.2	TSG, fusion
+COSG78672	CCNC	cyclin C	6q16.2	TSG
+COSG100191	CCND1	cyclin D1	11q13.3	oncogene, fusion
+COSG114253	CCND2	cyclin D2	12p13.32	oncogene, fusion
+COSG73334	CCND3	cyclin D3	6p21.1	oncogene, fusion
+COSG84408	CCNE1	cyclin E1	19q12	oncogene
+COSG64803	CCR4	C-C motif chemokine receptor 4	3p22.3	oncogene
+COSG64716	CCR7	C-C motif chemokine receptor 7	17q21.2	oncogene
+COSG61611	CD209	CD209 molecule	19p13.2	
+COSG87130	CD274	CD274 molecule	9p24.1	TSG, fusion
+COSG113949	CD28	CD28 molecule	2q33.2	oncogene
+COSG107983	CD74	CD74 molecule	5q33.1	oncogene, fusion
+COSG64986	CD79A	CD79a molecule	19q13.2	oncogene
+COSG93491	CD79B	CD79b molecule	17q23.3	oncogene
+COSG72057	CDC73	cell division cycle 73	1q31.2	TSG
+COSG106721	CDH1	cadherin 1	16q22.1	TSG
+COSG68210	CDH10	cadherin 10	5p14.2	TSG
+COSG67114	CDH11	cadherin 11	16q21	TSG, fusion
+COSG84364	CDH17	cadherin 17	8q22.1	oncogene
+COSG101532	CDK12	cyclin dependent kinase 12	17q12	TSG
+COSG96889	CDK6	cyclin dependent kinase 6	7q21.2	oncogene, fusion
+COSG75563	CDKN1A	cyclin dependent kinase inhibitor 1A	6p21.2	oncogene, TSG
+COSG61632	CDKN1B	cyclin dependent kinase inhibitor 1B	12p13.1	TSG
+COSG84244	CDKN2A	cyclin dependent kinase inhibitor 2A	9p21.3	TSG
+COSG85136	CDKN2C	cyclin dependent kinase inhibitor 2C	1p32.3	TSG
+COSG61853	CDX2	caudal type homeobox 2	13q12.2	TSG, fusion
+COSG97270	CEBPA	CCAAT enhancer binding protein alpha	19q13.11	TSG
+COSG106418	CEP89	centrosomal protein 89	19q13.11	fusion
+COSG94968	CHCHD7	coiled-coil-helix-coiled-coil-helix domain containing 7	8q12.1	fusion
+COSG83485	CHD2	chromodomain helicase DNA binding protein 2	15q26.1	TSG
+COSG85372	CHD4	chromodomain helicase DNA binding protein 4	12p13.31	oncogene
+COSG59473	CHIC2	cysteine rich hydrophobic domain 2	4q12	fusion
+COSG107468	CHST11	carbohydrate sulfotransferase 11	12q23.3	oncogene, fusion
+COSG71296	CIC	capicua transcriptional repressor	19q13.2	oncogene, TSG, fusion
+COSG86391	CIITA	class II major histocompatibility complex transactivator	16p13.13	TSG, fusion
+COSG89876	CLIP1	CAP-Gly domain containing linker protein 1	12q24.31	fusion
+COSG71400	CLP1	cleavage and polyadenylation factor I subunit 1	11q12.1	fusion
+COSG66844	CLTC	clathrin heavy chain	17q23.1	TSG, fusion
+COSG84449	CLTCL1	clathrin heavy chain like 1	22q11.21	TSG, fusion
+COSG111140	CNBD1	cyclic nucleotide binding domain containing 1	8q21.3	
+COSG98835	CNBP	CCHC-type zinc finger nucleic acid binding protein	3q21.3	TSG, fusion
+COSG61227	CNOT3	CCR4-NOT transcription complex subunit 3	19q13.42	TSG
+COSG62503	CNTNAP2	contactin associated protein like 2	7q36.1	TSG
+COSG105745	CNTRL	centriolin	9q33.2	fusion
+COSG58498	COL1A1	collagen type I alpha 1 chain	17q21.33	fusion
+COSG77932	COL2A1	collagen type II alpha 1 chain	12q13.11	fusion
+COSG86912	COL3A1	collagen type III alpha 1 chain	2q32.2	fusion
+COSG66350	COX6C	cytochrome c oxidase subunit 6C	8q22.2	fusion
+COSG87217	CPEB3	cytoplasmic polyadenylation element binding protein 3	10q23.32	TSG
+COSG102379	CREB1	cAMP responsive element binding protein 1	2q33.3	oncogene, fusion
+COSG64988	CREB3L1	cAMP responsive element binding protein 3 like 1	11p11.2	TSG, fusion
+COSG70393	CREB3L2	cAMP responsive element binding protein 3 like 2	7q33	oncogene, fusion
+COSG105038	CREBBP	CREB binding protein	16p13.3	oncogene, TSG, fusion
+COSG87150	CRLF2	cytokine receptor like factor 2	Xp22.33	oncogene, fusion
+COSG82052	CRNKL1	crooked neck pre-mRNA splicing factor 1	20p11.23	
+COSG85402	CRTC1	CREB regulated transcription coactivator 1	19p13.11	oncogene, fusion
+COSG71600	CRTC3	CREB regulated transcription coactivator 3	15q26.1	fusion
+COSG99554	CSF1R	colony stimulating factor 1 receptor	5q32	oncogene
+COSG99846	CSF3R	colony stimulating factor 3 receptor	1p34.3	oncogene
+COSG81894	CSMD3	CUB and Sushi multiple domains 3	8q23.3	TSG
+COSG77622	CTCF	CCCTC-binding factor	16q22.1	TSG
+COSG89685	CTNNA1	catenin alpha 1	5q31.2	TSG, fusion
+COSG58363	CTNNA2	catenin alpha 2	2p12	oncogene
+COSG100985	CTNNB1	catenin beta 1	3p22.1	oncogene, fusion
+COSG61803	CTNND1	catenin delta 1	11q12.1	
+COSG98798	CTNND2	catenin delta 2	5p15.2	oncogene
+COSG110820	CUL3	cullin 3	2q36.2	TSG
+COSG83270	CUX1	cut like homeobox 1	7q22.1	oncogene, TSG
+COSG106895	CXCR4	C-X-C motif chemokine receptor 4	2q22.1	oncogene
+COSG70548	CYLD	CYLD lysine 63 deubiquitinase	16q12.1	TSG
+COSG86945	CYP2C8	cytochrome P450 family 2 subfamily C member 8	10q23.33	
+COSG61204	CYSLTR2	cysteinyl leukotriene receptor 2	13q14.2	oncogene
+COSG105937	DAXX	death domain associated protein	6p21.32	oncogene, TSG
+COSG81265	DCAF12L2	DDB1 and CUL4 associated factor 12 like 2	Xq25	
+COSG87705	DCC	DCC netrin 1 receptor	18q21.2	
+COSG63863	DCTN1	dynactin subunit 1	2p13.1	fusion
+COSG112333	DDIT3	DNA damage inducible transcript 3	12q13.3	oncogene, fusion
+COSG97097	DDR2	discoidin domain receptor tyrosine kinase 2	1q23.3	oncogene
+COSG72683	DDX10	DEAD-box helicase 10	11q22.3	TSG, fusion
+COSG92927	DDX3X	DEAD-box helicase 3 X-linked	Xp11.4	TSG
+COSG107505	DDX5	DEAD-box helicase 5	17q23.3	oncogene, fusion
+COSG88326	DDX6	DEAD-box helicase 6	11q23.3	oncogene, fusion
+COSG88864	DEK	DEK proto-oncogene	6p22.3	oncogene, fusion
+COSG115698	DGCR8	DGCR8, microprocessor complex subunit	22q11.21	oncogene
+COSG73310	DICER1	dicer 1, ribonuclease III	14q32.13	TSG
+COSG101410	DNAJB1	DnaJ heat shock protein family (Hsp40) member B1	19p13.12	fusion
+COSG110939	DNM2	dynamin 2	19p13.2	TSG
+COSG110899	DNMT3A	DNA methyltransferase 3 alpha	2p23.3	TSG
+COSG93909	DROSHA	drosha ribonuclease III	5p13.3	TSG
+COSG87583	EBF1	EBF transcription factor 1	5q33.3	TSG, fusion
+COSG112583	ECT2L	epithelial cell transforming 2 like	6q24.1	
+COSG72252	EED	embryonic ectoderm development	11q14.2	TSG
+COSG73399	EGFR	epidermal growth factor receptor	7p11.2	oncogene
+COSG111079	EIF1AX	eukaryotic translation initiation factor 1A X-linked	Xp22.12	
+COSG72882	EIF3E	eukaryotic translation initiation factor 3 subunit E	8q23.1	TSG, fusion
+COSG63203	EIF4A2	eukaryotic translation initiation factor 4A2	3q27.3	fusion
+COSG85943	ELF3	E74 like ETS transcription factor 3	1q32.1	TSG
+COSG89309	ELF4	E74 like ETS transcription factor 4	Xq26.1	oncogene, TSG, fusion
+COSG106299	ELK4	ELK4, ETS transcription factor	1q32.1	oncogene, fusion
+COSG79844	ELL	elongation factor for RNA polymerase II	19p13.11	TSG, fusion
+COSG68285	ELN	elastin	7q11.23	fusion
+COSG113468	EML4	echinoderm microtubule associated protein like 4	2p21	fusion
+COSG106033	EP300	E1A binding protein p300	22q13.2	TSG, fusion
+COSG87984	EPAS1	endothelial PAS domain protein 1	2p21	oncogene, TSG
+COSG75387	EPHA3	EPH receptor A3	3p11.1	
+COSG72926	EPHA7	EPH receptor A7	6q16.1	
+COSG98494	EPS15	epidermal growth factor receptor pathway substrate 15	1p32.3	TSG, fusion
+COSG89395	ERBB2	erb-b2 receptor tyrosine kinase 2	17q12	oncogene, fusion
+COSG83414	ERBB3	erb-b2 receptor tyrosine kinase 3	12q13.2	oncogene
+COSG86121	ERBB4	erb-b2 receptor tyrosine kinase 4	2q34	oncogene, TSG
+COSG81477	ERC1	ELKS/RAB6-interacting/CAST family member 1	12p13.33	fusion
+COSG60964	ERG	ETS transcription factor ERG	21q22.2	oncogene, fusion
+COSG61326	ESR1	estrogen receptor 1	6q25.2	oncogene, TSG, fusion
+COSG90071	ETNK1	ethanolamine kinase 1	12p12.1	TSG
+COSG94966	ETV1	ETS variant 1	7p21.2	oncogene, fusion
+COSG95406	ETV4	ETS variant 4	17q21.31	oncogene, fusion
+COSG94466	ETV5	ETS variant 5	3q27.2	oncogene, fusion
+COSG88065	ETV6	ETS variant 6	12p13.2	TSG, fusion
+COSG80325	EWSR1	EWS RNA binding protein 1	22q12.2	oncogene, fusion
+COSG109206	EZH2	enhancer of zeste 2 polycomb repressive complex 2 subunit	7q36.1	oncogene, TSG
+COSG78273	EZR	ezrin	6q25.3	fusion
+COSG88220	FADD	Fas associated via death domain	11q13.3	
+COSG98719	FAM131B	family with sequence similarity 131 member B	7q34	fusion
+COSG92822	FAM135B	family with sequence similarity 135 member B	8q24.23	
+COSG61751	FAM47C	family with sequence similarity 47 member C	Xp21.1	
+COSG73953	FAS	Fas cell surface death receptor	10q23.31	TSG
+COSG73476	FAT1	FAT atypical cadherin 1	4q35.2	TSG
+COSG114528	FAT3	FAT atypical cadherin 3	11q14.3	
+COSG107228	FAT4	FAT atypical cadherin 4	4q28.1	TSG
+COSG115621	FBLN2	fibulin 2	3p25.1	TSG
+COSG86840	FBXO11	F-box protein 11	2p16.3	TSG
+COSG70576	FBXW7	F-box and WD repeat domain containing 7	4q31.3	TSG
+COSG76068	FCGR2B	Fc fragment of IgG receptor IIb	1q23.3	oncogene, fusion
+COSG68560	FCRL4	Fc receptor like 4	1q23.1	oncogene, fusion
+COSG94613	FES	FES proto-oncogene, tyrosine kinase	15q26.1	oncogene, TSG
+COSG106712	FEV	FEV, ETS transcription factor	2q35	oncogene, fusion
+COSG114519	FGFR1	fibroblast growth factor receptor 1	8p11.23	oncogene, fusion
+COSG60450	FGFR1OP	FGFR1 oncogene partner	6q27	fusion
+COSG61759	FGFR2	fibroblast growth factor receptor 2	10q26.13	oncogene, fusion
+COSG66931	FGFR3	fibroblast growth factor receptor 3	4p16.3	oncogene, fusion
+COSG98910	FGFR4	fibroblast growth factor receptor 4	5q35.2	oncogene
+COSG72343	FHIT	fragile histidine triad	3p14.2	TSG, fusion
+COSG62967	FIP1L1	factor interacting with PAPOLA and CPSF1	4q12	fusion
+COSG81566	FKBP9	FKBP prolyl isomerase 9	7p14.3	
+COSG104312	FLI1	Fli-1 proto-oncogene, ETS transcription factor	11q24.3	oncogene, fusion
+COSG74753	FLNA	filamin A	Xq28	
+COSG64752	FLT3	fms related tyrosine kinase 3	13q12.2	oncogene
+COSG95485	FLT4	fms related tyrosine kinase 4	5q35.3	oncogene
+COSG106586	FNBP1	formin binding protein 1	9q34.11	fusion
+COSG106486	FOXA1	forkhead box A1	14q21.1	oncogene
+COSG66822	FOXL2	forkhead box L2	3q22.3	oncogene, TSG
+COSG102574	FOXO1	forkhead box O1	13q14.11	oncogene, TSG, fusion
+COSG76666	FOXO3	forkhead box O3	6q21	oncogene, TSG, fusion
+COSG58773	FOXO4	forkhead box O4	Xq13.1	oncogene, TSG, fusion
+COSG71217	FOXP1	forkhead box P1	3p13	oncogene, fusion
+COSG107615	FOXR1	forkhead box R1	11q23.3	oncogene, fusion
+COSG114579	FSTL3	follistatin like 3	19p13.3	oncogene, fusion
+COSG70617	FUBP1	far upstream element binding protein 1	1p31.1	oncogene
+COSG115221	FUS	FUS RNA binding protein	16p11.2	TSG, fusion
+COSG96511	GAS7	growth arrest specific 7	17p13.1	fusion
+COSG87468	GATA1	GATA binding protein 1	Xp11.23	oncogene, TSG
+COSG113001	GATA2	GATA binding protein 2	3q21.3	oncogene
+COSG76073	GATA3	GATA binding protein 3	10p14	oncogene, TSG
+COSG60145	GLI1	GLI family zinc finger 1	12q13.3	oncogene, fusion
+COSG90794	GMPS	guanine monophosphate synthase	3q25.31	fusion
+COSG111894	GNA11	G protein subunit alpha 11	19p13.3	oncogene
+COSG98291	GNAQ	G protein subunit alpha q	9q21.2	oncogene
+COSG82860	GNAS	GNAS complex locus	20q13.32	oncogene
+COSG65089	GOLGA5	golgin A5	14q32.12	fusion
+COSG112121	GOLPH3	golgi phosphoprotein 3	5p13.3	
+COSG62335	GOPC	golgi associated PDZ and coiled-coil motif containing	6q22.1	fusion
+COSG92536	GPC5	glypican 5	13q31.3	TSG
+COSG100626	GPHN	gephyrin	14q23.3	fusion
+COSG108203	GRIN2A	glutamate ionotropic receptor NMDA type subunit 2A	16p13.2	TSG
+COSG74476	GRM3	glutamate metabotropic receptor 3	7q21.12	oncogene
+COSG78014	GSK3B	glycogen synthase kinase 3 beta	3q13.33	
+COSG103299	GTF2I	general transcription factor IIi	7q11.23	
+COSG83297	H3F3A	H3 histone family member 3A	1q42.12	oncogene
+COSG91461	H3F3B	H3 histone family member 3B	17q25.1	oncogene
+COSG102009	HERPUD1	homocysteine inducible ER protein with ubiquitin like domain 1	16q13	fusion
+COSG65409	HEY1	hes related family bHLH transcription factor with YRPW motif 1	8q21.13	oncogene, fusion
+COSG65657	HGF	hepatocyte growth factor	7q21.11	oncogene, fusion
+COSG84346	HIF1A	hypoxia inducible factor 1 subunit alpha	14q23.2	oncogene
+COSG87160	HIP1	huntingtin interacting protein 1	7q11.23	oncogene, fusion
+COSG99727	HIST1H3B	histone cluster 1 H3 family member b	6p22.2	oncogene
+COSG99670	HIST1H4I	histone cluster 1 H4 family member i	6p22.1	fusion
+COSG104170	HLA-A	major histocompatibility complex, class I, A	6p22.1	fusion
+COSG74351	HLF	HLF, PAR bZIP transcription factor	17q22	oncogene, fusion
+COSG100629	HMGA1	high mobility group AT-hook 1	6p21.31	oncogene, fusion
+COSG69442	HMGA2	high mobility group AT-hook 2	12q14.3	oncogene, fusion
+COSG91008	HMGN2P46	high mobility group nucleosomal binding domain 2 pseudogene 46	15q21.1	fusion
+COSG70564	HNF1A	HNF1 homeobox A	12q24.31	TSG
+COSG88183	HNRNPA2B1	heterogeneous nuclear ribonucleoprotein A2/B1	7p15.2	oncogene, fusion
+COSG101512	HOOK3	hook microtubule tethering protein 3	8p11.21	fusion
+COSG65276	HOXA11	homeobox A11	7p15.2	oncogene, TSG, fusion
+COSG98272	HOXA13	homeobox A13	7p15.2	oncogene, fusion
+COSG109289	HOXA9	homeobox A9	7p15.2	oncogene, TSG, fusion
+COSG63604	HOXC11	homeobox C11	12q13.13	oncogene, fusion
+COSG58815	HOXC13	homeobox C13	12q13.13	oncogene, fusion
+COSG102737	HOXD11	homeobox D11	2q31.1	oncogene, fusion
+COSG60623	HOXD13	homeobox D13	2q31.1	oncogene, fusion
+COSG113788	HRAS	HRas proto-oncogene, GTPase	11p15.5	oncogene
+COSG94795	HSP90AA1	heat shock protein 90 alpha family class A member 1	14q32.31	fusion
+COSG103171	HSP90AB1	heat shock protein 90 alpha family class B member 1	6p21.1	fusion
+COSG96223	ID3	inhibitor of DNA binding 3, HLH protein	1p36.12	TSG
+COSG108257	IDH1	isocitrate dehydrogenase (NADP(+)) 1, cytosolic	2q34	oncogene
+COSG106830	IDH2	isocitrate dehydrogenase (NADP(+)) 2, mitochondrial	15q26.1	oncogene
+COSG84546	IGF2BP2	insulin like growth factor 2 mRNA binding protein 2	3q27.2	TSG
+COSG116137	IGH	immunoglobulin heavy locus	14q32.33	fusion
+COSG116138	IGK	immunoglobulin kappa locus	2p12	fusion
+COSG116139	IGL	immunoglobulin lambda locus	22q11.2	fusion
+COSG112543	IKBKB	inhibitor of nuclear factor kappa B kinase subunit beta	8p11.21	oncogene
+COSG89430	IKZF1	IKAROS family zinc finger 1	7p12.2	TSG, fusion
+COSG116030	IKZF3	IKAROS family zinc finger 3	17q21.1	oncogene, TSG, fusion
+COSG70981	IL2	interleukin 2	4q27	fusion
+COSG111352	IL21R	interleukin 21 receptor	16p12.1	fusion
+COSG71872	IL6ST	interleukin 6 signal transducer	5q11.2	oncogene
+COSG64472	IL7R	interleukin 7 receptor	5p13.2	oncogene
+COSG105639	IRF4	interferon regulatory factor 4	6p25.3	oncogene, TSG, fusion
+COSG76787	IRS4	insulin receptor substrate 4	Xq22.3	oncogene, TSG
+COSG92515	ISX	intestine specific homeobox	22q12.3	
+COSG89546	ITGAV	integrin subunit alpha V	2q32.1	
+COSG90766	ITK	IL2 inducible T cell kinase	5q33.3	fusion
+COSG63689	JAK1	Janus kinase 1	1p31.3	oncogene, TSG
+COSG58883	JAK2	Janus kinase 2	9p24.1	oncogene, fusion
+COSG84587	JAK3	Janus kinase 3	19p13.11	oncogene
+COSG79452	JAZF1	JAZF zinc finger 1	7p15.2	fusion
+COSG84672	JUN	Jun proto-oncogene, AP-1 transcription factor subunit	1p32.1	oncogene
+COSG110810	KAT6A	lysine acetyltransferase 6A	8p11.21	oncogene, fusion
+COSG100264	KAT6B	lysine acetyltransferase 6B	10q22.2	TSG, fusion
+COSG90061	KAT7	lysine acetyltransferase 7	17q21.33	oncogene
+COSG80472	KCNJ5	potassium voltage-gated channel subfamily J member 5	11q24.3	oncogene
+COSG94857	KDM5A	lysine demethylase 5A	12p13.33	oncogene, fusion
+COSG86736	KDM5C	lysine demethylase 5C	Xp11.22	TSG
+COSG88842	KDM6A	lysine demethylase 6A	Xp11.3	oncogene, TSG
+COSG106784	KDR	kinase insert domain receptor	4q12	oncogene
+COSG71181	KDSR	3-ketodihydrosphingosine reductase	18q21.33	fusion
+COSG96808	KEAP1	kelch like ECH associated protein 1	19p13.2	TSG
+COSG104988	KIAA1549	KIAA1549	7q34	fusion
+COSG69778	KIF5B	kinesin family member 5B	10p11.22	fusion
+COSG63709	KIT	KIT proto-oncogene receptor tyrosine kinase	4q12	oncogene
+COSG110029	KLF4	Kruppel like factor 4	9q31.2	oncogene, TSG
+COSG63910	KLF6	Kruppel like factor 6	10p15.2	TSG
+COSG112026	KLK2	kallikrein related peptidase 2	19q13.33	fusion
+COSG86533	KMT2A	lysine methyltransferase 2A	11q23.3	oncogene, fusion
+COSG85495	KMT2C	lysine methyltransferase 2C	7q36.1	TSG
+COSG107783	KMT2D	lysine methyltransferase 2D	12q13.12	oncogene, TSG
+COSG107147	KNL1	kinetochore scaffold 1	15q15.1	TSG, fusion
+COSG111763	KNSTRN	kinetochore localized astrin (SPAG5) binding protein	15q15.1	oncogene
+COSG86962	KRAS	KRAS proto-oncogene, GTPase	12p12.1	oncogene
+COSG63135	KTN1	kinectin 1	14q22.3	fusion
+COSG101167	LARP4B	La ribonucleoprotein domain family member 4B	10p15.3	TSG
+COSG73683	LASP1	LIM and SH3 protein 1	17q12	fusion
+COSG78588	LATS1	large tumor suppressor kinase 1	6q25.1	TSG
+COSG64660	LATS2	large tumor suppressor kinase 2	13q12.11	TSG
+COSG82227	LCK	LCK proto-oncogene, Src family tyrosine kinase	1p35.2	oncogene, fusion
+COSG88254	LCP1	lymphocyte cytosolic protein 1	13q14.13	fusion
+COSG73617	LEF1	lymphoid enhancer binding factor 1	4q25	oncogene, TSG
+COSG59675	LEPROTL1	leptin receptor overlapping transcript like 1	8p12	TSG
+COSG81838	LHFPL6	LHFPL tetraspan subfamily member 6	13q14.11	fusion
+COSG108001	LIFR	LIF receptor alpha	5p13.1	fusion
+COSG61379	LMNA	lamin A/C	1q22	fusion
+COSG58772	LMO1	LIM domain only 1	11p15.4	oncogene, fusion
+COSG66206	LMO2	LIM domain only 2	11p13	oncogene, fusion
+COSG108197	LPP	LIM domain containing preferred translocation partner in lipoma	3q28	oncogene, fusion
+COSG77544	LRIG3	leucine rich repeats and immunoglobulin like domains 3	12q14.1	TSG, fusion
+COSG104741	LRP1B	LDL receptor related protein 1B	2q22.2	TSG
+COSG71888	LSM14A	LSM14A, mRNA processing body assembly factor	19q13.11	fusion
+COSG61746	LYL1	LYL1, basic helix-loop-helix family member	19p13.13	oncogene, fusion
+COSG98294	LYN	LYN proto-oncogene, Src family tyrosine kinase	8q12.1	oncogene, fusion
+COSG108978	LZTR1	leucine zipper like transcription regulator 1	22q11.21	TSG
+COSG59645	MACC1	MET transcriptional regulator MACC1	7p21.1	oncogene
+COSG112125	MAF	MAF bZIP transcription factor	16q23.2	oncogene, fusion
+COSG61544	MAFB	MAF bZIP transcription factor B	20q12	oncogene, fusion
+COSG99097	MALAT1	metastasis associated lung adenocarcinoma transcript 1	11q13.1	oncogene, TSG, fusion
+COSG103261	MALT1	MALT1 paracaspase	18q21.32	oncogene, fusion
+COSG108970	MAML2	mastermind like transcriptional coactivator 2	11q21	oncogene, fusion
+COSG59287	MAP2K1	mitogen-activated protein kinase kinase 1	15q22.31	oncogene
+COSG59865	MAP2K2	mitogen-activated protein kinase kinase 2	19p13.3	oncogene
+COSG96219	MAP2K4	mitogen-activated protein kinase kinase 4	17p12	oncogene, TSG
+COSG73783	MAP3K1	mitogen-activated protein kinase kinase kinase 1	5q11.2	oncogene, TSG
+COSG59626	MAP3K13	mitogen-activated protein kinase kinase kinase 13	3q27.2	oncogene, TSG
+COSG103824	MAPK1	mitogen-activated protein kinase 1	22q11.22	oncogene
+COSG102148	MAX	MYC associated factor X	14q23.3	TSG
+COSG110450	MB21D2	Mab-21 domain containing 2	3q29	
+COSG71043	MDM2	MDM2 proto-oncogene	12q15	oncogene
+COSG62931	MDM4	MDM4, p53 regulator	1q32.1	oncogene
+COSG80166	MDS2	myelodysplastic syndrome 2 translocation associated	1p36.12	fusion
+COSG112625	MECOM	MDS1 and EVI1 complex locus	3q26.2	oncogene, fusion
+COSG113013	MED12	mediator complex subunit 12	Xq13.1	TSG
+COSG70965	MEN1	menin 1	11q13.1	TSG
+COSG91620	MET	MET proto-oncogene, receptor tyrosine kinase	7q31.2	oncogene
+COSG64570	MGMT	O-6-methylguanine-DNA methyltransferase	10q26.3	TSG
+COSG60330	MITF	melanocyte inducing transcription factor	3p13	oncogene
+COSG93816	MLF1	myeloid leukemia factor 1	3q25.32	TSG, fusion
+COSG61713	MLH1	mutL homolog 1	3p22.2	TSG
+COSG68573	MLLT1	MLLT1, super elongation complex subunit	19p13.3	fusion
+COSG111142	MLLT10	MLLT10, histone lysine methyltransferase DOT1L cofactor	10p12.31	oncogene, fusion
+COSG113048	MLLT11	MLLT11, transcription factor 7 cofactor	1q21.3	fusion
+COSG76560	MLLT3	MLLT3, super elongation complex subunit	9p21.3	fusion
+COSG94026	MLLT6	MLLT6, PHD finger containing	17q12	fusion
+COSG93089	MN1	MN1 proto-oncogene, transcriptional regulator	22q12.1	oncogene, fusion
+COSG97814	MNX1	motor neuron and pancreas homeobox 1	7q36.3	fusion
+COSG91606	MPL	MPL proto-oncogene, thrombopoietin receptor	1p34.2	oncogene
+COSG105252	MRTFA	myocardin related transcription factor A	22q13.2	oncogene, TSG, fusion
+COSG105361	MSH2	mutS homolog 2	2p21	TSG
+COSG85949	MSH6	mutS homolog 6	2p16.3	TSG
+COSG62555	MSI2	musashi RNA binding protein 2	17q22	oncogene, fusion
+COSG88623	MSN	moesin	Xq12	fusion
+COSG88748	MTCP1	mature T cell proliferation 1	Xq28	oncogene, fusion
+COSG77957	MTOR	mechanistic target of rapamycin kinase	1p36.22	oncogene
+COSG69593	MUC1	mucin 1, cell surface associated	1q22	fusion
+COSG72822	MUC16	mucin 16, cell surface associated	19p13.2	oncogene
+COSG97438	MUC4	mucin 4, cell surface associated	3q29	oncogene
+COSG58094	MUC6	mucin 6, oligomeric mucus/gel-forming	11p15.5	
+COSG76382	MYB	MYB proto-oncogene, transcription factor	6q23.3	oncogene, fusion
+COSG111896	MYC	MYC proto-oncogene, bHLH transcription factor	8q24.21	oncogene, fusion
+COSG62582	MYCL	MYCL proto-oncogene, bHLH transcription factor	1p34.2	oncogene
+COSG83025	MYCN	MYCN proto-oncogene, bHLH transcription factor	2p24.3	oncogene
+COSG74574	MYD88	MYD88, innate immune signal transduction adaptor	3p22.2	oncogene
+COSG71408	MYH11	myosin heavy chain 11	16p13.11	fusion
+COSG99603	MYH9	myosin heavy chain 9	22q12.3	TSG, fusion
+COSG82675	MYO5A	myosin VA	15q21.2	fusion
+COSG76774	MYOD1	myogenic differentiation 1	11p15.1	oncogene
+COSG74686	N4BP2	NEDD4 binding protein 2	4p14	TSG
+COSG115963	NAB2	NGFI-A binding protein 2	12q13.3	TSG, fusion
+COSG63264	NACA	nascent polypeptide associated complex subunit alpha	12q13.3	fusion
+COSG78133	NBEA	neurobeachin	13q13.3	
+COSG97371	NCKIPSD	NCK interacting protein with SH3 domain	3p21.31	fusion
+COSG74320	NCOA1	nuclear receptor coactivator 1	2p23.3	fusion
+COSG79853	NCOA2	nuclear receptor coactivator 2	8q13.3	oncogene, fusion
+COSG112601	NCOA4	nuclear receptor coactivator 4	10q11.22	TSG, fusion
+COSG82654	NCOR1	nuclear receptor corepressor 1	17p12	TSG
+COSG59133	NCOR2	nuclear receptor corepressor 2	12q24.31	TSG
+COSG109165	NDRG1	N-myc downstream regulated 1	8q24.22	TSG, fusion
+COSG113820	NF1	neurofibromin 1	17q11.2	TSG, fusion
+COSG66613	NF2	neurofibromin 2	22q12.2	TSG
+COSG102348	NFATC2	nuclear factor of activated T cells 2	20q13.2	oncogene, fusion
+COSG108145	NFE2L2	nuclear factor, erythroid 2 like 2	2q31.2	oncogene, TSG
+COSG89976	NFIB	nuclear factor I B	9p23	fusion
+COSG64880	NFKB2	nuclear factor kappa B subunit 2	10q24.32	oncogene, TSG, fusion
+COSG91546	NFKBIE	NFKB inhibitor epsilon	6p21.1	TSG
+COSG85374	NIN	ninein	14q22.1	fusion
+COSG92746	NKX2-1	NK2 homeobox 1	14q13.3	oncogene, TSG
+COSG106782	NONO	non-POU domain containing octamer binding	Xq13.1	fusion
+COSG79338	NOTCH1	notch 1	9q34.3	oncogene, TSG, fusion
+COSG91716	NOTCH2	notch 2	1p12	oncogene, TSG
+COSG103724	NPM1	nucleophosmin 1	5q35.1	oncogene, fusion
+COSG60087	NR2F2	nuclear receptor subfamily 2 group F member 2	15q26.2	
+COSG89778	NR4A3	nuclear receptor subfamily 4 group A member 3	9q31.1	oncogene, fusion
+COSG95814	NRAS	NRAS proto-oncogene, GTPase	1p13.2	oncogene
+COSG74798	NRG1	neuregulin 1	8p12	TSG, fusion
+COSG113851	NSD1	nuclear receptor binding SET domain protein 1	5q35.3	fusion
+COSG91695	NSD2	nuclear receptor binding SET domain protein 2	4p16.3	oncogene, fusion
+COSG105269	NSD3	nuclear receptor binding SET domain protein 3	8p11.23	oncogene, fusion
+COSG109595	NT5C2	5'-nucleotidase, cytosolic II	10q24.33	oncogene
+COSG99947	NTRK1	neurotrophic receptor tyrosine kinase 1	1q23.1	oncogene, TSG, fusion
+COSG88009	NTRK2	neurotrophic receptor tyrosine kinase 2	9q21.33	oncogene, fusion
+COSG72654	NTRK3	neurotrophic receptor tyrosine kinase 3	15q25.3	oncogene, fusion
+COSG96943	NUMA1	nuclear mitotic apparatus protein 1	11q13.4	fusion
+COSG89278	NUP214	nucleoporin 214	9q34.13	fusion
+COSG101334	NUP98	nucleoporin 98	11p15.4	oncogene, fusion
+COSG103408	NUTM1	NUT midline carcinoma family member 1	15q14	oncogene, fusion
+COSG100150	NUTM2B	NUT family member 2B	10q22.3	fusion
+COSG61484	NUTM2D	NUT family member 2D	10q23.2	fusion
+COSG58216	OLIG2	oligodendrocyte transcription factor 2	21q22.11	oncogene, fusion
+COSG113070	OMD	osteomodulin	9q22.31	fusion
+COSG63457	P2RY8	P2Y receptor family member 8	Xp22.33	oncogene, fusion
+COSG65621	PABPC1	poly(A) binding protein cytoplasmic 1	8q22.3	oncogene, TSG
+COSG80684	PAFAH1B2	platelet activating factor acetylhydrolase 1b catalytic subunit 2	11q23.3	fusion
+COSG93407	PATZ1	POZ/BTB and AT hook containing zinc finger 1	22q12.2	TSG, fusion
+COSG99941	PAX3	paired box 3	2q36.1	oncogene, fusion
+COSG90817	PAX5	paired box 5	9p13.2	oncogene, TSG, fusion
+COSG77467	PAX7	paired box 7	1p36.13	fusion
+COSG64987	PAX8	paired box 8	2q14.1	fusion
+COSG76325	PBRM1	polybromo 1	3p21.1	TSG
+COSG64184	PBX1	PBX homeobox 1	1q23.3	oncogene, fusion
+COSG91935	PCBP1	poly(rC) binding protein 1	2p13.3	
+COSG110669	PCM1	pericentriolar material 1	8p22	fusion
+COSG62946	PDCD1LG2	programmed cell death 1 ligand 2	9p24.1	oncogene, fusion
+COSG70412	PDE4DIP	phosphodiesterase 4D interacting protein	1q21.2	fusion
+COSG86049	PDGFB	platelet derived growth factor subunit B	22q13.1	oncogene, fusion
+COSG95745	PDGFRA	platelet derived growth factor receptor alpha	4q12	oncogene, fusion
+COSG64110	PDGFRB	platelet derived growth factor receptor beta	5q32	oncogene, fusion
+COSG77832	PER1	period circadian regulator 1	17p13.1	TSG, fusion
+COSG104198	PHF6	PHD finger protein 6	Xq26.2	TSG
+COSG85171	PHOX2B	paired like homeobox 2B	4p13	TSG
+COSG93214	PICALM	phosphatidylinositol binding clathrin assembly protein	11q14.2	fusion
+COSG95525	PIK3CA	phosphatidylinositol-4,5-bisphosphate 3-kinase catalytic subunit alpha	3q26.32	oncogene
+COSG82958	PIK3CB	phosphatidylinositol-4,5-bisphosphate 3-kinase catalytic subunit beta	3q22.3	oncogene
+COSG108408	PIK3R1	phosphoinositide-3-kinase regulatory subunit 1	5q13.1	TSG
+COSG111839	PIK3R2	phosphoinositide-3-kinase regulatory subunit 2	19p13.11	oncogene
+COSG112760	PIK3R3	phosphoinositide-3-kinase regulatory subunit 3	1p34.1	
+COSG108733	PIM1	Pim-1 proto-oncogene, serine/threonine kinase	6p21.2	oncogene, fusion
+COSG90949	PLAG1	PLAG1 zinc finger	8q12.1	oncogene, fusion
+COSG115578	PLCG1	phospholipase C gamma 1	20q12	oncogene, fusion
+COSG69599	PLEC	plectin	8q24.3	fusion
+COSG62005	PML	promyelocytic leukemia	15q24.1	TSG, fusion
+COSG73728	POLD1	DNA polymerase delta 1, catalytic subunit	19q13.33	TSG
+COSG102542	POLE	DNA polymerase epsilon, catalytic subunit	12q24.33	TSG
+COSG75256	POLG	DNA polymerase gamma, catalytic subunit	15q26.1	TSG
+COSG60282	POLQ	DNA polymerase theta	3q13.33	oncogene, TSG
+COSG86798	POLR2A	RNA polymerase II subunit A	17p13.1	
+COSG80008	POT1	protection of telomeres 1	7q31.33	TSG
+COSG103372	POU2AF1	POU class 2 associating factor 1	11q23.1	oncogene, fusion
+COSG82677	POU5F1	POU class 5 homeobox 1	6p21.33	oncogene, fusion
+COSG111010	PPARG	peroxisome proliferator activated receptor gamma	3p25.2	TSG, fusion
+COSG71462	PPFIBP1	PPFIA binding protein 1	12p11.23	fusion
+COSG59012	PPM1D	protein phosphatase, Mg2+/Mn2+ dependent 1D	17q23.2	oncogene
+COSG92966	PPP2R1A	protein phosphatase 2 scaffold subunit Aalpha	19q13.41	TSG
+COSG91311	PPP6C	protein phosphatase 6 catalytic subunit	9q33.3	TSG
+COSG63162	PRCC	proline rich mitotic checkpoint control factor	1q23.1	fusion
+COSG106092	PRDM1	PR/SET domain 1	6q21	TSG
+COSG80881	PRDM16	PR/SET domain 16	1p36.32	oncogene, fusion
+COSG82063	PRDM2	PR/SET domain 2	1p36.21	TSG
+COSG89056	PREX2	phosphatidylinositol-3,4,5-trisphosphate dependent Rac exchange factor 2	8q13.2	oncogene
+COSG77801	PRKACA	protein kinase cAMP-activated catalytic subunit alpha	19p13.12	oncogene
+COSG89125	PRKAR1A	protein kinase cAMP-dependent type I regulatory subunit alpha	17q24.2	oncogene, TSG, fusion
+COSG108035	PRKCB	protein kinase C beta	16p12.2	
+COSG100846	PRKD1	protein kinase D1	14q12	fusion
+COSG58505	PRPF40B	pre-mRNA processing factor 40 homolog B	12q13.12	
+COSG107040	PRRX1	paired related homeobox 1	1q24.2	fusion
+COSG99785	PSIP1	PC4 and SFRS1 interacting protein 1	9p22.3	oncogene, fusion
+COSG110583	PTCH1	patched 1	9q22.32	TSG
+COSG93969	PTEN	phosphatase and tensin homolog	10q23.31	TSG
+COSG110739	PTK6	protein tyrosine kinase 6	20q13.33	oncogene, TSG
+COSG69144	PTPN11	protein tyrosine phosphatase, non-receptor type 11	12q24.13	oncogene
+COSG99040	PTPN13	protein tyrosine phosphatase, non-receptor type 13	4q21.3	TSG
+COSG79566	PTPN6	protein tyrosine phosphatase, non-receptor type 6	12p13.31	TSG
+COSG95132	PTPRB	protein tyrosine phosphatase, receptor type B	12q15	TSG
+COSG68417	PTPRC	protein tyrosine phosphatase, receptor type C	1q32.1	TSG
+COSG115052	PTPRD	protein tyrosine phosphatase, receptor type D	9p24.1	TSG
+COSG115981	PTPRK	protein tyrosine phosphatase, receptor type K	6q22.33	TSG, fusion
+COSG59352	PTPRT	protein tyrosine phosphatase, receptor type T	20q13.11	TSG
+COSG109642	PWWP2A	PWWP domain containing 2A	5q33.3	fusion
+COSG84239	QKI	QKI, KH domain containing RNA binding	6q26	oncogene, TSG
+COSG92649	RABEP1	rabaptin, RAB GTPase binding effector protein 1	17p13.2	fusion
+COSG96249	RAC1	Rac family small GTPase 1	7p22.1	oncogene
+COSG91280	RAD17	RAD17 checkpoint clamp loader component	5q13.2	TSG
+COSG63146	RAD21	RAD21 cohesin complex component	8q24.11	oncogene, TSG
+COSG82484	RAD50	RAD50 double strand break repair protein	5q31.1	TSG
+COSG94271	RAD51B	RAD51 paralog B	14q24.1	TSG, fusion
+COSG112523	RAF1	Raf-1 proto-oncogene, serine/threonine kinase	3p25.2	oncogene, fusion
+COSG102669	RALGDS	ral guanine nucleotide dissociation stimulator	9q34.2	fusion
+COSG59445	RANBP2	RAN binding protein 2	2q13	TSG, fusion
+COSG66550	RAP1B	RAP1B, member of RAS oncogene family	12q15	oncogene
+COSG102103	RAP1GDS1	Rap1 GTPase-GDP dissociation stimulator 1	4q23	oncogene, fusion
+COSG68638	RARA	retinoic acid receptor alpha	17q21.2	oncogene, fusion
+COSG77480	RB1	RB transcriptional corepressor 1	13q14.2	TSG
+COSG114440	RBM10	RNA binding motif protein 10	Xp11.3	TSG
+COSG93845	RBM15	RNA binding motif protein 15	1p13.3	fusion
+COSG73340	REL	REL proto-oncogene, NF-kB subunit	2p16.1	oncogene
+COSG68325	RET	ret proto-oncogene	10q11.21	oncogene, fusion
+COSG70379	RFWD3	ring finger and WD repeat domain 3	16q23.1	TSG
+COSG61420	RGPD3	RANBP2-like and GRIP domain containing 3	2q12.2	
+COSG77034	RGS7	regulator of G protein signaling 7	1q43	
+COSG65553	RHOA	ras homolog family member A	3p21.31	oncogene, TSG
+COSG100969	RHOH	ras homolog family member H	4p14	TSG, fusion
+COSG114685	RMI2	RecQ mediated genome instability 2	16p13.13	TSG, fusion
+COSG79337	RNF213	ring finger protein 213	17q25.3	fusion
+COSG77343	RNF43	ring finger protein 43	17q22	TSG
+COSG87597	ROBO2	roundabout guidance receptor 2	3p12.3	TSG
+COSG103633	ROS1	ROS proto-oncogene 1, receptor tyrosine kinase	6q22.1	oncogene, fusion
+COSG112537	RPL10	ribosomal protein L10	Xq28	TSG
+COSG73509	RPL22	ribosomal protein L22	1p36.31	TSG, fusion
+COSG101735	RPL5	ribosomal protein L5	1p22.1	TSG
+COSG77777	RPN1	ribophorin I	3q21.3	fusion
+COSG70136	RRAS2	RAS related 2	11p15.2	oncogene
+COSG86313	RSPO2	R-spondin 2	8q23.1	TSG, fusion
+COSG61346	RSPO3	R-spondin 3	6q22.33	oncogene, fusion
+COSG64498	RUNX1	runt related transcription factor 1	21q22.12	oncogene, TSG, fusion
+COSG111690	RUNX1T1	RUNX1 translocation partner 1	8q21.3	oncogene, TSG, fusion
+COSG75470	RXRA	retinoid X receptor alpha	9q34.2	TSG
+COSG80247	S100A7	S100 calcium binding protein A7	1q21.3	fusion
+COSG110233	SALL4	spalt like transcription factor 4	20q13.2	oncogene
+COSG77983	SDC4	syndecan 4	20q13.12	fusion
+COSG76340	SDHA	succinate dehydrogenase complex flavoprotein subunit A	5p15.33	TSG
+COSG61422	SEPT5	septin 5	22q11.21	fusion
+COSG70569	SEPT6	septin 6	Xq24	fusion
+COSG86979	SEPT9	septin 9	17q25.3	fusion
+COSG104989	SET	SET nuclear proto-oncogene	9q34.11	oncogene, fusion
+COSG82137	SETBP1	SET binding protein 1	18q12.3	oncogene, fusion
+COSG113695	SETD1B	SET domain containing 1B	12q24.31	TSG
+COSG98373	SETD2	SET domain containing 2	3p21.31	TSG
+COSG106164	SETDB1	SET domain bifurcated 1	1q21.3	oncogene
+COSG68035	SF3B1	splicing factor 3b subunit 1	2q33.1	oncogene
+COSG102257	SFPQ	splicing factor proline and glutamine rich	1p34.3	TSG, fusion
+COSG92761	SFRP4	secreted frizzled related protein 4	7p14.1	TSG
+COSG63500	SGK1	serum/glucocorticoid regulated kinase 1	6q23.2	oncogene
+COSG79851	SH2B3	SH2B adaptor protein 3	12q24.12	TSG
+COSG66356	SH3GL1	SH3 domain containing GRB2 like 1, endophilin A2	19p13.3	oncogene, fusion
+COSG92016	SHTN1	shootin 1	10q25.3	fusion
+COSG81390	SIRPA	signal regulatory protein alpha	20p13	TSG
+COSG59671	SIX1	SIX homeobox 1	14q23.1	oncogene
+COSG60891	SIX2	SIX homeobox 2	2p21	oncogene
+COSG101216	SKI	SKI proto-oncogene	1p36.33	oncogene
+COSG66821	SLC34A2	solute carrier family 34 member 2	4p15.2	TSG, fusion
+COSG90757	SLC45A3	solute carrier family 45 member 3	1q32.1	fusion
+COSG72498	SMAD2	SMAD family member 2	18q21.1	TSG
+COSG112721	SMAD3	SMAD family member 3	15q22.33	TSG
+COSG63839	SMAD4	SMAD family member 4	18q21.2	TSG
+COSG94137	SMARCA4	SWI/SNF related, matrix associated, actin dependent regulator of chromatin, subfamily a, member 4	19p13.2	TSG
+COSG106041	SMARCB1	SWI/SNF related, matrix associated, actin dependent regulator of chromatin, subfamily b, member 1	22q11.23	TSG
+COSG71965	SMARCD1	SWI/SNF related, matrix associated, actin dependent regulator of chromatin, subfamily d, member 1	12q13.12	TSG
+COSG73424	SMC1A	structural maintenance of chromosomes 1A	Xp11.22	TSG
+COSG112751	SMO	smoothened, frizzled class receptor	7q32.1	oncogene
+COSG69136	SND1	staphylococcal nuclease and tudor domain containing 1	7q32.1	oncogene, fusion
+COSG71274	SNX29	sorting nexin 29	16p13.13	fusion
+COSG89969	SOCS1	suppressor of cytokine signaling 1	16p13.13	TSG
+COSG84335	SOS1	SOS Ras/Rac guanine nucleotide exchange factor 1	2p22.1	oncogene, fusion
+COSG104377	SOX2	SRY-box 2	3q26.33	oncogene
+COSG94735	SOX21	SRY-box 21	13q32.1	TSG
+COSG97186	SPECC1	sperm antigen with calponin homology and coiled-coil domains 1	17p11.2	fusion
+COSG69096	SPEN	spen family transcriptional repressor	1p36.21	TSG
+COSG63219	SPOP	speckle type BTB/POZ protein	17q21.33	TSG
+COSG62428	SRC	SRC proto-oncogene, non-receptor tyrosine kinase	20q11.23	oncogene
+COSG90916	SRGAP3	SLIT-ROBO Rho GTPase activating protein 3	3p25.3	fusion
+COSG66820	SRSF2	serine and arginine rich splicing factor 2	17q25.1	oncogene
+COSG100307	SRSF3	serine and arginine rich splicing factor 3	6p21.31	oncogene, fusion
+COSG67889	SS18	SS18, nBAF chromatin remodeling complex subunit	18q11.2	fusion
+COSG68150	SS18L1	SS18L1, nBAF chromatin remodeling complex subunit	20q13.33	fusion
+COSG107838	SSX1	SSX family member 1	Xp11.23	oncogene, fusion
+COSG89496	SSX2	SSX family member 2	Xp11.22	oncogene, fusion
+COSG73109	SSX4	SSX family member 4	Xp11.23	oncogene, fusion
+COSG104937	STAG1	stromal antigen 1	3q22.3	TSG
+COSG95834	STAG2	stromal antigen 2	Xq25	TSG
+COSG84383	STAT3	signal transducer and activator of transcription 3	17q21.2	oncogene
+COSG97911	STAT5B	signal transducer and activator of transcription 5B	17q21.2	oncogene, TSG, fusion
+COSG114380	STAT6	signal transducer and activator of transcription 6	12q13.3	oncogene, fusion
+COSG80911	STIL	STIL, centriolar assembly protein	1p33	oncogene, fusion
+COSG67170	STK11	serine/threonine kinase 11	19p13.3	TSG
+COSG109920	STRN	striatin	2p22.2	fusion
+COSG89159	SUB1	SUB1 homolog, transcriptional regulator	5p13.3	
+COSG111528	SUFU	SUFU negative regulator of hedgehog signaling	10q24.32	TSG
+COSG102561	SUZ12	SUZ12, polycomb repressive complex 2 subunit	17q11.2	oncogene, TSG, fusion
+COSG106457	SYK	spleen associated tyrosine kinase	9q22.2	oncogene, fusion
+COSG76204	TAF15	TATA-box binding protein associated factor 15	17q12	oncogene, fusion
+COSG97131	TAL1	TAL bHLH transcription factor 1, erythroid differentiation factor	1p33	oncogene, fusion
+COSG92048	TAL2	TAL bHLH transcription factor 2	9q31.2	oncogene, fusion
+COSG96938	TBL1XR1	transducin beta like 1 X-linked receptor 1	3q26.32	oncogene, TSG, fusion
+COSG61092	TBX3	T-box 3	12q24.21	oncogene, TSG
+COSG66746	TCEA1	transcription elongation factor A1	8q11.23	fusion
+COSG62962	TCF12	transcription factor 12	15q21.3	fusion
+COSG59650	TCF3	transcription factor 3	19p13.3	oncogene, TSG, fusion
+COSG99267	TCF7L2	transcription factor 7 like 2	10q25.3	oncogene, fusion
+COSG80884	TCL1A	T cell leukemia/lymphoma 1A	14q32.13	oncogene, fusion
+COSG72827	TEC	tec protein tyrosine kinase	4p12	oncogene, fusion
+COSG82010	TENT5C	terminal nucleotidyltransferase 5C	1p12	TSG
+COSG76097	TERT	telomerase reverse transcriptase	5p15.33	oncogene, TSG
+COSG68435	TET1	tet methylcytosine dioxygenase 1	10q21.3	oncogene, TSG, fusion
+COSG109769	TET2	tet methylcytosine dioxygenase 2	4q24	TSG
+COSG110599	TFE3	transcription factor binding to IGHM enhancer 3	Xp11.23	oncogene, fusion
+COSG81648	TFEB	transcription factor EB	6p21.1	oncogene, fusion
+COSG60365	TFG	TRK-fused gene	3q12.2	fusion
+COSG94651	TFPT	TCF3 fusion partner	19q13.42	fusion
+COSG93056	TFRC	transferrin receptor	3q29	fusion
+COSG68111	TGFBR2	transforming growth factor beta receptor 2	3p24.1	TSG
+COSG77463	THRAP3	thyroid hormone receptor associated protein 3	1p34.3	fusion
+COSG114529	TLX1	T cell leukemia homeobox 1	10q24.31	oncogene, fusion
+COSG101712	TLX3	T cell leukemia homeobox 3	5q35.1	oncogene, fusion
+COSG82247	TMPRSS2	transmembrane serine protease 2	21q22.3	fusion
+COSG64710	TMSB4X	thymosin beta 4 X-linked	Xp22.2	oncogene
+COSG105617	TNC	tenascin C	9q33.1	oncogene
+COSG107227	TNFAIP3	TNF alpha induced protein 3	6q23.3	TSG
+COSG68245	TNFRSF14	TNF receptor superfamily member 14	1p36.32	TSG
+COSG95322	TNFRSF17	TNF receptor superfamily member 17	16p13.13	oncogene, fusion
+COSG96118	TNRC18	trinucleotide repeat containing 18	7p22.1	fusion
+COSG78149	TOP1	DNA topoisomerase I	20q12	fusion
+COSG115384	TP53	tumor protein p53	17p13.1	oncogene, TSG, fusion
+COSG61770	TP63	tumor protein p63	3q28	oncogene, TSG
+COSG101931	TPM3	tropomyosin 3	1q21.3	TSG, fusion
+COSG98099	TPM4	tropomyosin 4	19p13.12	fusion
+COSG113909	TPR	translocated promoter region, nuclear basket protein	1q31.1	fusion
+COSG116140	TRA	T cell receptor alpha locus	14q11.2	fusion
+COSG74104	TRAF7	TNF receptor associated factor 7	16p13.3	TSG
+COSG116141	TRB	T cell receptor beta locus	7q34	fusion
+COSG116142	TRD	T cell receptor delta locus	14q11.2	fusion
+COSG114610	TRIM24	tripartite motif containing 24	7q34	oncogene, TSG, fusion
+COSG92877	TRIM27	tripartite motif containing 27	6p22.1	oncogene, fusion
+COSG58637	TRIM33	tripartite motif containing 33	1p13.2	TSG, fusion
+COSG101385	TRIP11	thyroid hormone receptor interactor 11	14q32.12	fusion
+COSG67046	TRRAP	transformation/transcription domain associated protein	7q22.1	oncogene
+COSG74466	TSC1	TSC complex subunit 1	9q34.13	TSG
+COSG57978	TSC2	TSC complex subunit 2	16p13.3	TSG
+COSG90928	TSHR	thyroid stimulating hormone receptor	14q31.1	
+COSG64514	U2AF1	U2 small nuclear RNA auxiliary factor 1	21q22.3	oncogene
+COSG65755	UBR5	ubiquitin protein ligase E3 component n-recognin 5	8q22.3	oncogene
+COSG92286	USP44	ubiquitin specific peptidase 44	12q22	TSG
+COSG107118	USP6	ubiquitin specific peptidase 6	17p13.2	oncogene, fusion
+COSG87291	USP8	ubiquitin specific peptidase 8	15q21.2	oncogene
+COSG86650	USP9X	ubiquitin specific peptidase 9 X-linked	Xp11.4	fusion
+COSG96287	VAV1	vav guanine nucleotide exchange factor 1	19p13.3	fusion
+COSG111666	VHL	von Hippel-Lindau tumor suppressor	3p25.3	TSG
+COSG86674	VTI1A	vesicle transport through interaction with t-SNAREs 1A	10q25.2	fusion
+COSG91148	WDCP	WD repeat and coiled coil containing	2p23.3	fusion
+COSG112650	WIF1	WNT inhibitory factor 1	12q14.3	TSG, fusion
+COSG97812	WNK2	WNK lysine deficient protein kinase 2	9q22.31	TSG
+COSG61501	WT1	Wilms tumor 1	11p13	oncogene, TSG, fusion
+COSG84133	WWTR1	WW domain containing transcription regulator 1	3q25.1	oncogene, fusion
+COSG68225	XPO1	exportin 1	2p15	oncogene
+COSG79741	YAP1	Yes associated protein 1	11q22.1	fusion, oncogene
+COSG73314	YWHAE	tyrosine 3-monooxygenase/tryptophan 5-monooxygenase activation protein epsilon	17p13.3	TSG, fusion
+COSG68438	ZBTB16	zinc finger and BTB domain containing 16	11q23.2	TSG, fusion
+COSG91510	ZCCHC8	zinc finger CCHC-type containing 8	12q24.31	fusion
+COSG60276	ZEB1	zinc finger E-box binding homeobox 1	10p11.22	oncogene
+COSG106670	ZFHX3	zinc finger homeobox 3	16q22.3	TSG
+COSG84691	ZMYM2	zinc finger MYM-type containing 2	13q12.11	fusion
+COSG81053	ZMYM3	zinc finger MYM-type containing 3	Xq13.1	TSG
+COSG73607	ZNF331	zinc finger protein 331	19q13.42	TSG, fusion
+COSG68568	ZNF384	zinc finger protein 384	12p13.31	fusion
+COSG92428	ZNF429	zinc finger protein 429	19p12	
+COSG111702	ZNF479	zinc finger protein 479	7p11.2	
+COSG65491	ZNF521	zinc finger protein 521	18q11.2	oncogene, fusion
+COSG102839	ZNRF3	zinc and ring finger 3	22q12.1	TSG
+COSG85804	ZRSR2	zinc finger CCCH-type, RNA binding motif and serine/arginine rich 2	Xp22.2	TSG
