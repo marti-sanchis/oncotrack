@@ -35,7 +35,7 @@ db.metadata.create_all(engine)
 print("All tables correctly created.")
 
 # Load cosmic gene table
-load_data("/home/marti/MBHS/DBW/OncoTrack/genes.tsv", Gene, {
+load_data("tables/genes.tsv", Gene, {
     "gene_id": "gene_id",
     "gene_symbol": "gene_symbol",
     "gene_name": "gene_name",
@@ -44,18 +44,18 @@ load_data("/home/marti/MBHS/DBW/OncoTrack/genes.tsv", Gene, {
 })
 
 # Load drugs table
-load_data("/home/marti/MBHS/DBW/OncoTrack/drug.tsv", Drug, {
+load_data("tables/drug.tsv", Drug, {
     "drug_id": "drug_id",
     "name": "name"
 })
 
 # Load cancer types table
-load_data("/home/marti/MBHS/DBW/OncoTrack/cancer_type.tsv", CancerType, {
+load_data("tables/cancer_type.tsv", CancerType, {
     "cancer_type": "cancer_type"
 })
 
 # Load comsic mutation file
-df = pd.read_csv('/home/marti/MBHS/DBW/OncoTrack/variants.tsv', sep='\t')
+df = pd.read_csv('tables/variants.tsv', sep='\t')
 df = df.where(pd.notna(df), "")
 
 try:
@@ -90,7 +90,7 @@ except Exception as e:
     print(e)
 
 # Load drug association table
-load_data("/home/marti/MBHS/DBW/OncoTrack/drug_association.tsv", DrugAssociation, {
+load_data("tables/drug_association.tsv", DrugAssociation, {
     "drug_id": "drug_id",
     "gene_id": "gene_id",
     "variant_id": "variant_id",
