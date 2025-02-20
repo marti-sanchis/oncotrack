@@ -1,23 +1,18 @@
 from flask import Flask, render_template, request, flash, redirect, url_for
 from flask_login import login_user, login_required, LoginManager, current_user, logout_user
 from forms import LoginForm, SignUpForm
-from models_proba import db, User, Patient
+from models_proba import db, User, Patient, Variant
 from flask_bcrypt import Bcrypt
+from sqlalchemy.orm import sessionmaker
+from config import Config
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your_secret_key_here'  # Required for CSRF protection
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'  # The database will be created in your project folder
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Optional but recommended to disable overhead
+app.config.from_object(Config)
+db.init_app(app)
 
 # ✅ 2. Initialize Bcrypt AFTER defining app
 bcrypt = Bcrypt(app)
 
-# ✅ 3. Initialize database and Flask-Login
-db.init_app(app)
-
-with app.app_context():
-    db.create_all()
 
 login_manager = LoginManager()
 login_manager.init_app(app)
