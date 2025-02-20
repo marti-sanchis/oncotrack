@@ -1,21 +1,14 @@
 {% extends 'base.html' %}
-{% block title %}{{ current_user.email }}'s private space{% endblock %}
+{% block title %}{{ current_user.surname }}'s private space{% endblock %}
 
 {% block body %}
 <div class="container">
     <div class="row col mb-5">Welcome {{ current_user.name }} {{ current_user.surname }}</div>
 
-    <form action="{{ url_for('userspace') }}" method="post">
-        {{ form.hidden_tag() }}
-        <div class="row">
-            <div class="col-6">
-                {{ form.patient_data(class_="form-control", placeholder="Enter patient data") }}
-            </div>
-            <div class="col-3 mb-5">
-                {{ form.submit(class_="btn btn-primary", value="Add patient") }}
-            </div>
-        </div>
-    </div>
-</form>
+    <form action="{{ url_for('doctor_space') }}" method="post">
+        <label for="patient_name">Patient name:</label>
+        <input type="text" id="patient_name" name="patient_name" required>
+        <button type="submit">Add Patient</button>
+    </form>
 {% endblock %}
 

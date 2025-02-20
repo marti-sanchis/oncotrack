@@ -53,21 +53,21 @@ def signup():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    loginerror = None
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
-        if user:
-            if form.password.data:
-                if bcrypt.check_password_hash(user.password, form.password.data):
-                    login_user(user)
-                    # Redirigir dependiendo del rol del usuario
-                    if user.role == 'doctor':
-                        return redirect(url_for('doctor_space'))
-                    elif user.role == 'nurse':
-                        return redirect(url_for('nurse_space'))
-        loginerror = "Invalid email or password."
-    return render_template('auth/login.html', form=form, loginerror=loginerror)
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            login_user(user)
+            flash('Login successful!', 'success')
+            if user.role == 'Doctor':
+                return redirect(url_for('doctor_space'))
+            elif user.role == 'Nurse':
+                return redirect(url_for('nurse_space'))
+            else:
+                return redirect(url_for('userspace'))
+        else:
+            flash('Invalid email or password', 'danger')
+    return render_template('auth/login.html', form=form)
 
 @app.route('/userspace', methods=['GET', 'POST'])
 @login_required
