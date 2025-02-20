@@ -30,6 +30,12 @@ class User(db.Model, UserMixin):
 class Patient(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(100), nullable=False)
+    DNI = db.Column(db.String(10), nullable=False)
+    gender = db.Column(db.Enum('M', 'F', 'Other'))
+    age = db.Column(db.Integer, nullable=False)
+    phone = db.Column(db.String(15), nullable=True)
+    email = db.Column(db.String(100), nullable=True)
+    cancer_id = db.Column(db.Integer, db.ForeignKey('cancer_type'), nullable=False)
     doctor_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False) 
     nurse_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     
