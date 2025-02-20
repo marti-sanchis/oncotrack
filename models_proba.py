@@ -85,5 +85,5 @@ class DrugAssociation(db.Model):
     drug_id = db.Column(db.String(20), db.ForeignKey('drug.drug_id'))
     cancer_id = db.Column(db.Integer, db.ForeignKey('cancer_type.cancer_id'))
     subtype=db.Column(db.String(200))
-    association = db.Column(db.Enum('resistance', 'treatment','generic'))
+    association = db.Column(db.Enum('resistance', 'specific','generic'))
     reference = db.Column(db.String(20))
