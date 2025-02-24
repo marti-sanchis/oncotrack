@@ -5,10 +5,133 @@
 <div class="container">
     <div class="row col mb-5">Welcome {{ current_user.name }} {{ current_user.surname }}</div>
 
-    <form action="{{ url_for('doctor_space') }}" method="post">
-        <label for="patient_name">Patient name:</label>
-        <input type="text" id="patient_name" name="patient_name" required>
-        <button type="submit">Add Patient</button>
-    </form>
-{% endblock %}
 
+    <!-- Lista de pacientes -->
+    <h2>My Patients</h2>
+    <ul class="list-group">
+        {% for patient in patients %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+                <strong>ID:</strong> {{ patient.id }} | 
+                <strong>Name:</strong> {{ patient.name }} | 
+                <strong>Cancer Type:</strong> 
+                    {% for cancer in cancer_types %}
+                        {% if cancer.cancer_id == patient.cancer_id %}
+                            {{ cancer.cancer_type }}
+                        {% endif %}
+                    {% endfor %}
+            </div>
+            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#patientModal{{ patient.id }}">
+                View Details
+            </button>
+        </li>
+
+        <!-- Modal para cada paciente -->
+        <div class="modal fade" id="patientModal{{ patient.id }}" tabindex="-1" aria-labelledby="patientModalLabel{{ patient.id }}" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="patientModalLabel{{ patient.id }}">Patient Details</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>Name:</strong> {{ patient.name }}</p>
+                        <p><strong>DNI:</strong> {{ patient.DNI }}</p>
+                        <p><strong>Age:</strong> {{ patient.age }}</p>
+                        <p><strong>Gender:</strong> {{ patient.gender }}</p>
+                        <p><strong>Cancer Type:</strong> 
+                            {% for cancer in cancer_types %}
+                                {% if cancer.cancer_id == patient.cancer_id %}
+                                    {{ cancer.cancer_type }}
+                                {% endif %}
+                            {% endfor %}
+                        </p>
+                        <p><strong>Phone:</strong> {{ patient.phone if patient.phone else 'Not provided' }}</p>
+                        <p><strong>Email:</strong> {{ patient.email if patient.email else 'Not provided' }}</p>
+                        <p><strong>Nurse:</strong> 
+                            {% if patient.nurse %}
+                                {{ patient.nurse.name }} {{ patient.nurse.surname }}
+                            {% else %}
+                                -- No nurse assigned --
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <li class="list-group-item">No patients assigned to you yet.</li>
+        {% endfor %}
+    </ul>
+    
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPatientModal">
+        Add Patient
+    </button>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="addPatientModal" tabindex="-1" aria-labelledby="addPatientModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addPatientModalLabel">Add New Patient</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ url_for('add_patient') }}" method="POST">
+                        <div class="mb-3">
+                            <label for="patient_name" class="form-label">Patient Name:</label>
+                            <input type="text" id="patient_name" name="patient_name" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="dni" class="form-label">DNI:</label>
+                            <input type="text" id="dni" name="dni" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="age" class="form-label">Age:</label>
+                            <input type="text" id="age" name="age" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone:</label>
+                            <input type="text" id="phone" name="phone" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email:</label>
+                            <input type="email" id="email" name="email" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="gender" class="form-label">Gender:</label>
+                            <select id="gender" name="gender" class="form-select" required>
+                                <option value="M">Male</option>
+                                <option value="F">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="cancer_type" class="form-label">Cancer Type:</label>
+                            <select id="cancer_type" name="cancer_type" class="form-select" required>
+                                {% for cancer in cancer_types %}
+                                    <option value="{{ cancer.cancer_id }}">{{ cancer.cancer_type }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="nurse_id">Assign Nurse:</label>
+                            <select id="nurse_id" name="nurse_id" class="form-select">
+                                <option value="">-- No nurse assigned --</option>
+                                {% for nurse in nurses %}
+                                    <option value="{{ nurse.id }}">{{ nurse.name }} {{ nurse.surname }}</option>
+                                {% endfor %}
+                            </select>  
+                        </div>
+                        <button type="submit" class="btn btn-success">Save Patient</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+{% endblock %}

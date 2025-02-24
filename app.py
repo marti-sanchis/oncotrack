@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, flash, redirect, url_for
 from flask_login import login_user, login_required, LoginManager, current_user, logout_user
 from forms import LoginForm, SignUpForm
-from models_proba import db, User, Patient, Variant
+from models_proba import db, User, Patient, Variant, CancerType
 from flask_bcrypt import Bcrypt
 from sqlalchemy.orm import sessionmaker
 from config import Config
@@ -59,7 +59,7 @@ def login():
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user)
             flash('Login successful!', 'success')
-            if user.role == 'Doctor':
+            if user.role == 'doctor':
                 return redirect(url_for('doctor_space'))
             elif user.role == 'Nurse':
                 return redirect(url_for('nurse_space'))
@@ -81,33 +81,37 @@ def userspace():
         flash("Patient data submitted successfully!", "success")
         return redirect(url_for('userspace'))  # Redirect after form submission
 
+    cancer_types = CancerType.query.all()
+
     # Render the template with the form
     if current_user.role == 'doctor':
-        return render_template('doctor_space.html', user=current_user, form=form)
+        return render_template('doctor_space.html', user=current_user, form=form, cancer_types=cancer_types)
     elif current_user.role == 'nurse':
         return render_template('nurse_space.html', user=current_user, form=form)
     else:
         return redirect(url_for('home'))  # Redirect to home if not doctor or nurse
 
 
-@app.route('/doctor_space', methods=['GET', 'POST'])
+@app.route('/doctor_space')
 @login_required
 def doctor_space():
     if current_user.role != 'doctor':
-        return redirect(url_for('home'))  # Redirige a home si no es doctor
+        return redirect(url_for('home'))
 
-    if request.method == 'POST':
-        patient_name = request.form.get('patient_name')
-        if patient_name:
-            new_patient = Patient(name=patient_name, doctor_id=current_user.id)
-            db.session.add(new_patient)
-            db.session.commit()
-
-    # Obtener los pacientes del doctor
+    # Obtener todos los pacientes asignados al doctor actual
     doctor_patients = Patient.query.filter_by(doctor_id=current_user.id).all()
+    cancer_types = CancerType.query.all()
 
-    return render_template('doctor_space.html', user=current_user, patients=doctor_patients)
+    # Obtener todos los usuarios con rol "Nurse"
+    nurses = User.query.filter_by(role="nurse").all()
 
+    return render_template(
+        'doctor_space.html', 
+        user=current_user, 
+        patients=doctor_patients, 
+        cancer_types=cancer_types,
+        nurses=nurses
+    )
 
 @app.route('/nurse_space', methods=['GET'])
 @login_required
@@ -121,30 +125,78 @@ def nurse_space():
     # Renderizar la plantilla con la lista de pacientes (solo lectura)
     return render_template('nurse_space.html', user=current_user, patients=assigned_patients)
 
-@app.route('/add_patient', methods=['POST'])
+
+@app.route('/add_patient', methods=['GET', 'POST'])
 @login_required
 def add_patient():
     if current_user.role != 'doctor':
-        return redirect(url_for('home'))  # Redirige a home si no es doctor
-    
-    # Obtener el nombre del paciente del formulario
-    patient_name = request.form.get('patient_name')
+        return redirect(url_for('home'))
 
-    if not patient_name:
-        flash('Patient name is required!', 'error')  # Mostrar mensaje de error si el campo está vacío
+    cancer_types = CancerType.query.all()
+    nurses = User.query.filter_by(role='nurse').all()
+    print(f"🩺 Enfermeros encontrados: {[(n.id, n.name, n.role) for n in nurses]}")
+
+    # Obtener datos del formulario
+    if request.method == 'POST':
+        patient_name = request.form.get('patient_name', '').strip()
+        DNI = request.form.get('dni', '').strip()
+        gender = request.form.get('gender', '').strip()
+        age = request.form.get('age', '').strip()
+        phone = request.form.get('phone', None)
+        email = request.form.get('email', None)
+        cancer_type_id = request.form.get('cancer_type', None)
+        nurse_id = request.form.get('nurse_id', None)
+
+    # Validación para evitar datos vacíos
+    if not patient_name or not DNI or not gender or not age or not cancer_type_id:
+        flash("All required fields must be filled", "danger")
         return redirect(url_for('doctor_space'))
 
-    # Crear una nueva instancia del paciente
-    new_patient = Patient(name=patient_name, doctor_id=current_user.id)
-    
-    # Guardar el paciente en la base de datos
-    db.session.add(new_patient)
-    db.session.commit()
+    # Convertir age a entero y verificar que sea un número válido
+    try:
+        age = int(age)
+    except ValueError:
+        flash("Age must be a number", "danger")
+        return redirect(url_for('doctor_space'))
 
-    flash(f'Patient "{patient_name}" added successfully!', 'success')  # Mensaje de éxito
-    
-    # Redirigir al espacio del doctor después de agregar el paciente
-    return redirect(url_for('doctor_space'))
+    # Verificar si el tipo de cáncer existe
+    cancer_type = CancerType.query.get(cancer_type_id)
+    if not cancer_type:
+        flash("Invalid cancer type selected", "danger")
+        return redirect(url_for('doctor_space'))
+
+    # Verificar si el nurse_id es válido
+    if nurse_id:
+        nurse = User.query.get(nurse_id)
+        if not nurse or nurse.role != 'nurse':
+            flash("Invalid nurse selected", "danger")
+            return redirect(url_for('doctor_space'))
+    else:
+        nurse_id = None  # Permitir que no haya enfermero asignado
+
+    # Crear y agregar nuevo paciente
+    new_patient = Patient(
+        name=patient_name,
+        DNI=DNI,
+        gender=gender,
+        age=age,
+        phone=phone,
+        email=email,
+        cancer_id=cancer_type.cancer_id,
+        doctor_id=current_user.id,  # Asegurarse de que el paciente tenga un doctor asignado
+        nurse_id=nurse_id
+    )
+
+    # Agregar paciente a la base de datos y hacer commit
+    try:
+        db.session.add(new_patient)
+        db.session.commit()
+        flash("Patient added successfully!", "success")
+    except Exception as e:
+        db.session.rollback()  # En caso de error, hacer rollback
+        flash(f"Error adding patient: {e}", "danger")
+
+    return redirect(url_for('doctor_space', cancer_types=cancer_types, nurses=nurses))
 
 @app.route('/logout')
 @login_required  # Optional, depending on whether you want to restrict logout to logged-in users
