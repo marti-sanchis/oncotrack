@@ -77,7 +77,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ url_for('add_patient') }}" method="POST">
+                    <form action="{{ url_for('add_patient') }}" method="POST" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="patient_name" class="form-label">Patient Name:</label>
                             <input type="text" id="patient_name" name="patient_name" class="form-control" required>
@@ -122,6 +122,10 @@
                                     <option value="{{ nurse.id }}">{{ nurse.name }} {{ nurse.surname }}</option>
                                 {% endfor %}
                             </select>  
+                        </div>
+                        <div class="mb-3">
+                            <label for="vcf_file" class="form-label">Upload VCF File:</label>
+                            <input type="file" id="vcf_file" name="vcf_file" class="form-control" accept=".vcf">
                         </div>
                         <button type="submit" class="btn btn-success">Save Patient</button>
                     </form>

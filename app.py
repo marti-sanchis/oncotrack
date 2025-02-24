@@ -5,6 +5,8 @@ from models_proba import db, User, Patient, Variant, CancerType
 from flask_bcrypt import Bcrypt
 from sqlalchemy.orm import sessionmaker
 from config import Config
+from werkzeug.utils import secure_filename
+import os
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -18,6 +20,16 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "login"  # Redirect to 'login' if user is not logged in
 
+UPLOAD_FOLDER = 'uploads'  # Carpeta donde guardar temporalmente el archivo
+ALLOWED_EXTENSIONS = {'vcf'}
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+# Función para verificar extensión del archivo
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
 # ✅ 4. Load user function
 @login_manager.user_loader
 def load_user(user_id):
@@ -26,6 +38,7 @@ def load_user(user_id):
 @app.route("/")
 def home():
     return render_template("home.html")
+
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -51,6 +64,7 @@ def signup():
 
     return render_template('auth/signup.html', form=form)
 
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -68,6 +82,7 @@ def login():
         else:
             flash('Invalid email or password', 'danger')
     return render_template('auth/login.html', form=form)
+
 
 @app.route('/userspace', methods=['GET', 'POST'])
 @login_required
@@ -113,6 +128,7 @@ def doctor_space():
         nurses=nurses
     )
 
+
 @app.route('/nurse_space', methods=['GET'])
 @login_required
 def nurse_space():
@@ -134,7 +150,6 @@ def add_patient():
 
     cancer_types = CancerType.query.all()
     nurses = User.query.filter_by(role='nurse').all()
-    print(f"🩺 Enfermeros encontrados: {[(n.id, n.name, n.role) for n in nurses]}")
 
     # Obtener datos del formulario
     if request.method == 'POST':
@@ -146,9 +161,10 @@ def add_patient():
         email = request.form.get('email', None)
         cancer_type_id = request.form.get('cancer_type', None)
         nurse_id = request.form.get('nurse_id', None)
+        vcf_file = request.files.get('vcf_file')
 
     # Validación para evitar datos vacíos
-    if not patient_name or not DNI or not gender or not age or not cancer_type_id:
+    if not patient_name or not DNI or not gender or not age or not cancer_type_id or not vcf_file:
         flash("All required fields must be filled", "danger")
         return redirect(url_for('doctor_space'))
 
@@ -174,6 +190,11 @@ def add_patient():
     else:
         nurse_id = None  # Permitir que no haya enfermero asignado
 
+    if vcf_file and allowed_file(vcf_file.filename):
+        filename = secure_filename(vcf_file.filename)
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        vcf_file.save(file_path)
+
     # Crear y agregar nuevo paciente
     new_patient = Patient(
         name=patient_name,
@@ -197,6 +218,7 @@ def add_patient():
         flash(f"Error adding patient: {e}", "danger")
 
     return redirect(url_for('doctor_space', cancer_types=cancer_types, nurses=nurses))
+
 
 @app.route('/logout')
 @login_required  # Optional, depending on whether you want to restrict logout to logged-in users
