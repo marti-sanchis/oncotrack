@@ -75,7 +75,7 @@ def login():
             flash('Login successful!', 'success')
             if user.role == 'doctor':
                 return redirect(url_for('doctor_space'))
-            elif user.role == 'Nurse':
+            elif user.role == 'nurse':
                 return redirect(url_for('nurse_space'))
             else:
                 return redirect(url_for('userspace'))
@@ -102,7 +102,7 @@ def userspace():
     if current_user.role == 'doctor':
         return render_template('doctor_space.html', user=current_user, form=form, cancer_types=cancer_types)
     elif current_user.role == 'nurse':
-        return render_template('nurse_space.html', user=current_user, form=form)
+        return render_template('nurse_space.html', user=current_user, form=form, cancer_types=cancer_types)
     else:
         return redirect(url_for('home'))  # Redirect to home if not doctor or nurse
 
@@ -127,20 +127,6 @@ def doctor_space():
         cancer_types=cancer_types,
         nurses=nurses
     )
-
-
-@app.route('/nurse_space', methods=['GET'])
-@login_required
-def nurse_space():
-    if current_user.role != 'nurse':
-        return redirect(url_for('home'))  # Redirige a home si no es nurse
-
-    # Obtener los pacientes asignados a la enfermera
-    assigned_patients = Patient.query.filter_by(nurse_id=current_user.id).all()
-
-    # Renderizar la plantilla con la lista de pacientes (solo lectura)
-    return render_template('nurse_space.html', user=current_user, patients=assigned_patients)
-
 
 @app.route('/add_patient', methods=['GET', 'POST'])
 @login_required
@@ -226,6 +212,29 @@ def add_patient():
         print("Error al añadir paciente:", str(e))
 
     return redirect(url_for('doctor_space', cancer_types=cancer_types, nurses=nurses))
+
+@app.route('/nurse_space')
+@login_required
+def nurse_space():
+    if current_user.role != 'nurse':
+        return redirect(url_for('home'))  # Redirige a home si no es nurse
+
+    nurse = User.query.filter_by(id=current_user.id).first()
+    if nurse:
+        # Obtener los pacientes asignados a la enfermera
+        nurse_patients = Patient.query.filter_by(nurse_id=current_user.id).all()
+    else:
+        nurse_patients = []
+
+    cancer_types = CancerType.query.all()
+
+    # Renderizar la plantilla con la lista de pacientes (solo lectura)
+    return render_template(
+        'nurse_space.html', 
+        user=current_user, 
+        patients=nurse_patients,
+        cancer_types=cancer_types
+        )
 
 
 @app.route('/logout')
