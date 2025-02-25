@@ -2,9 +2,11 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
-<div class="row mb-5">
-    <div class="text-center">
-        <h1 class="display-4">Welcome to OncoTrack</h1>
+<div class="row mb-5 mt-5">
+    <div class="text-center mt-5">
+        <h1 class="display-4 logo-container">Welcome to 
+            <img src="{{ url_for('static', filename='img/logo.png') }}" class="logo-img"> 
+        </h1>
         <p class="lead">A platform for analyzing and tracking oncological data</p>
     </div>
 </div>

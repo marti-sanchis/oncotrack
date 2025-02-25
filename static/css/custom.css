@@ -1,20 +1,79 @@
-html,
+/* --- Global Styles --- */
 body {
-  height: 100%;
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f4f8fb;
+    color: #333;
+    margin: 0;
+    padding: 0;
 }
 
-body {
-  display: flex;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  background-color: #98d09bef;
+.left-align {
+    text-align: left;
+    margin-left: 0;
 }
 
-.form-signin {
-  width: 100%;
-  max-width: 330px;
-  padding: 15px;
-  margin: auto;
+
+/* --- Navbar --- */
+.navbar {
+    background-color: #D0E4D9;
+    padding: 0px 20px;
+    height: 65px; /* Ajusta el tamaño total de la navbar */
+    min-height: 50px; /* Evita que sea demasiado alta */
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* --- Botones --- */
+.btn-success {
+    background-color: #009444; /* Color verde musgo de la paleta */
+    border: none; /* Color verde oscuro */
+}
+
+.btn-success:hover {
+    background-color: #007336; /* Color más oscuro al pasar el cursor */
+}
+
+
+/* --- Tarjetas de Pacientes --- */
+.patient-card {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+}
+
+.patient-card:hover {
+    transform: scale(1.02);
+    transition: 0.3s;
+}
+
+/* --- Modal --- */
+.modal-content {
+    border-radius: 10px;
+}
+
+/* --- Formularios --- */
+input, select {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 100%;
+}
+
+/* --- Footer --- */
+.footer {
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 .form-signin input[type="text"] {
@@ -28,3 +87,73 @@ body {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
   }
+
+/* -- Images -- */
+.logo-img {
+    height: 260px;
+    position: relative; 
+    top: -10px;
+    margin-top: -10px; /* Ajusta según necesites */
+    margin-left: -30px;
+    padding-left: 0;
+}
+
+.navbar_img {
+    height: 85px; /* Ajusta la altura según lo que necesites */
+    max-height: 100px; /* Evita que sea demasiado grande */
+    width: auto; /* Mantiene la proporción */
+}
+
+
+
+/* -- Sing up -- */
+.form-signin {
+    max-width: 500px; /* Ajusta el ancho máximo del formulario */
+    margin: auto; /* Centra el formulario horizontalmente */
+    display: flex; 
+    flex-direction: column;
+    justify-content: center; /* Centra verticalmente */
+    height: 80vh; /* Hace que ocupe el 100% de la altura de la ventana */
+}
+
+.form-control {
+    width: 100%; /* Asegura que se adapte al contenedor */
+}
+
+
+/* -- Doctor space --*/
+/* Ajuste de la tabla */
+.table {
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Estilo de la cabecera */
+.table thead {
+    background-color: #A8D5BA; /* Color suave de la paleta verde */
+    color: #2C6E49;
+    font-weight: bold;
+}
+
+/* Bordes redondeados para las celdas */
+.table td, .table th {
+    padding: 15px;
+    text-align: left;
+}
+
+/* Espaciado entre botones */
+.btn-sm {
+    padding: 5px 10px;
+}
+
+/* Efecto hover en las filas */
+.table-hover tbody tr:hover {
+    background-color: #D0E4D9;
+    transition: background-color 0.3s ease;
+}
+
+
+
+
