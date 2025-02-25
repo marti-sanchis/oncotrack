@@ -145,6 +145,7 @@ def nurse_space():
 @app.route('/add_patient', methods=['GET', 'POST'])
 @login_required
 def add_patient():
+    print(request.form)
     if current_user.role != 'doctor':
         return redirect(url_for('home'))
 
@@ -164,7 +165,7 @@ def add_patient():
         vcf_file = request.files.get('vcf_file')
 
     # Validación para evitar datos vacíos
-    if not patient_name or not DNI or not gender or not age or not cancer_type_id or not vcf_file:
+    if not patient_name or not DNI or not age or not cancer_type_id or not vcf_file:
         flash("All required fields must be filled", "danger")
         return redirect(url_for('doctor_space'))
 
@@ -174,6 +175,11 @@ def add_patient():
     except ValueError:
         flash("Age must be a number", "danger")
         return redirect(url_for('doctor_space'))
+
+    # Convertir "female" -> "F", "male" -> "M", "other" -> "Other"
+    gender_map = {"female": "F", "male": "M", "other": "Other"} 
+    gender = gender_map.get(request.form.get("gender").lower(), "Other")
+    print(f"Valor de 'gender' antes de la inserción: {gender}")
 
     # Verificar si el tipo de cáncer existe
     cancer_type = CancerType.query.get(cancer_type_id)
@@ -213,9 +219,11 @@ def add_patient():
         db.session.add(new_patient)
         db.session.commit()
         flash("Patient added successfully!", "success")
+        print("Paciente añadido correctamente")
     except Exception as e:
         db.session.rollback()  # En caso de error, hacer rollback
         flash(f"Error adding patient: {e}", "danger")
+        print("Error al añadir paciente:", str(e))
 
     return redirect(url_for('doctor_space', cancer_types=cancer_types, nurses=nurses))
 
