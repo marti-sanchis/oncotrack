@@ -9,7 +9,7 @@
     <p>{{ patients|length }} patients assigned to you.</p>
 
     <!-- Input para buscar pacientes -->
-    <input type="text" id="searchInput" class="form-control w-25" placeholder="Search patient by name">
+    <input type="text" id="searchInput" class="form-control w-25" placeholder="Search patient by name" onkeyup="filterPatients()">
 
     <!-- Lista de pacientes -->
     <table id="patientTable" class="table table-striped table-hover mt-3">
@@ -87,10 +87,9 @@
         for (let i = 1; i < rows.length; i++) {  // Start at 1 to skip the header row
             let cells = rows[i].getElementsByTagName("td");
             let name = cells[1].textContent.toLowerCase();  // Name is in the second column (index 1)
-            let cancerType = cells[2].textContent.toLowerCase();  // Cancer Type is in the third column (index 2)
 
             // Show row if name or cancer type matches the search input
-            if (name.includes(input) || cancerType.includes(input)) {
+            if (name.includes(input)) {
                 rows[i].style.display = "";
             } else {
                 rows[i].style.display = "none";
