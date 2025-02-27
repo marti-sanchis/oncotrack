@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Choose Treatment{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Choose Treatment for {{ patient.name }}</h1>
+
+    <p><strong>DNI:</strong> {{ patient.DNI }}</p>
+    <p><strong>Age:</strong> {{ patient.age }}</p>
+    <p><strong>Gender:</strong> {{ patient.gender }}</p>
+    <p><strong>Cancer Type:</strong> {{ patient.cancer_type }}</p>
+
+    <h3>Available Treatments</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Treatment</th>
+                <th>Resistances</th>
+                <th>Mutations</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for treatment in treatments %}
+            <tr>
+                <td>{{ treatment.name }}</td>
+                <td>{{ treatment.resistances }}</td>
+                <td>{{ treatment.mutations }}</td>
+                <td>
+                    <form method="POST" action="{{ url_for('assign_treatment', patient_id=patient.id) }}">
+                        <input type="hidden" name="treatment_id" value="{{ treatment.id }}">
+                        <button type="submit" class="btn btn-secondary">Select</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
