@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, flash, redirect, url_for
 from flask_login import login_user, login_required, LoginManager, current_user, logout_user
 from forms import LoginForm, SignUpForm
-from models_proba import db, User, Patient, Variant, CancerType
+from models_proba import db, User, Patient, Variant, CancerType, Drug
 from flask_bcrypt import Bcrypt
 from sqlalchemy.orm import sessionmaker
 from config import Config
@@ -212,6 +212,29 @@ def add_patient():
         print("Error al añadir paciente:", str(e))
 
     return redirect(url_for('doctor_space', cancer_types=cancer_types, nurses=nurses))
+
+@app.route('/choose_treatment/<int:patient_id>')
+@login_required
+def choose_treatment(patient_id):
+    patient = Patient.query.get_or_404(patient_id)
+    possible_treatments = Drug.query.all()  # Assuming you have a table of treatments
+    return render_template('choose_treatment.html', patient=patient, treatments=possible_treatments)
+
+@app.route('/assign_treatment/<int:patient_id>', methods=['POST'])
+@login_required
+def assign_treatment(patient_id):
+    patient = Patient.query.get_or_404(patient_id)
+    drug_id = request.form.get('drug_id')
+    
+    if drug_id:
+        treatment = Drug.query.get(drug_id)
+        if treatment:
+            patient.treatment = treatment.name  # Assuming 'treatment' is a column in Patient
+            db.session.commit()
+            flash(f'Treatment {treatment.name} assigned to {patient.name}', 'success')
+
+    return redirect(url_for('doctor_space'))  # Redirect back to the doctor page
+
 
 @app.route('/nurse_space')
 @login_required

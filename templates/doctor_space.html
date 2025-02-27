@@ -132,7 +132,16 @@
                     {% endif %}
                 {% endfor %}
             </td>
-            <td></td>
+            <td>
+                {% if patient.treatment %}
+                    {{ patient.treatment }}
+                {% else %}
+                    <a href="{{ url_for('choose_treatment', patient_id=patient.id) }}" class="btn btn-secondary btn-sm">
+                        Choose Treatment
+                    </a>
+                {% endif %}
+            </td>
+            
         </tr>
 
         <!-- Modal para cada paciente -->
