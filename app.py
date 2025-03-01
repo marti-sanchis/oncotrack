@@ -7,6 +7,7 @@ from sqlalchemy.orm import sessionmaker
 from config import Config
 from werkzeug.utils import secure_filename
 import os
+from vcf_reader import process_vcf
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -204,6 +205,10 @@ def add_patient():
     try:
         db.session.add(new_patient)
         db.session.commit()
+
+        # Process VCF
+        process_vcf(new_patient.patient_id, file_path)
+        
         flash("Patient added successfully!", "success")
         print("Paciente añadido correctamente")
     except Exception as e:
