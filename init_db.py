@@ -24,12 +24,12 @@ def load_data(file_path, model, column_map):
         print(f"Error {model.__tablename__}: {e}")
 
 
-# Overwritte engine with the URI to the database
+# Engine with the URI to the database
 engine = create_engine(Config.SQLALCHEMY_DATABASE_URI, echo=False)
-
 # Create session to interact with database
 Session = sessionmaker(bind=engine)
 session = Session()
+
 # Create all tables
 db.metadata.create_all(engine)  
 print("All tables correctly created.")

@@ -1,19 +1,20 @@
 import pysam
 import pandas as pd
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import text
 from app import app
 from models_proba import db
 from config import Config
 
-# Use connection defined in Flask
-engine = db.engine  
+# Engine with the URI to the database
+engine = create_engine(Config.SQLALCHEMY_DATABASE_URI, echo=False)
+# Create session to interact with database
 Session = sessionmaker(bind=engine)
 session = Session()
 
-
 # Read variant file (Variant Call Format) with pysam function.
-vcf_file_path = "/home/marti/MBHS/DBW/OncoTrack/vcf_mutations/GBM_sample_muts.hg38.vcf"
+vcf_file_path = "files/AML_sample_muts.hg38.vcf"
 vcf = pysam.VariantFile(vcf_file_path)
 variants = []
 
@@ -35,32 +36,55 @@ for record in vcf:
         })
 
 # Search for matching variants in local DB.
-matched_variants = []
-query = """
-    SELECT GENOMIC_MUTATION_ID, MUTATION_DESCRIPTION, GENE_SYMBOL
-    FROM cosmic_mutations
-    WHERE CHROMOSOME = %s
-    AND GENOME_START = %s
-    AND GENOMIC_WT_ALLELE = %s
-    AND GENOMIC_MUT_ALLELE = %s
-"""
+query = text("""
+    SELECT v.variant_id, v.variant_type, v.gene_id, g.gene_name
+    FROM variant v
+    LEFT JOIN gene g ON v.gene_id = g.gene_id
+    WHERE v.chromosome = :chrom
+    AND v.position = :pos
+    AND v.reference = :ref
+    AND v.alternative = :alt
+""")
 
+matched_variants = []
 for variant in variants:
     result = session.execute(query, variant).fetchall()
     for row in result:
         matched_variants.append({
-            "gene_sym": row[2],
-            "chrom": variant["chrom"],
-            "pos": variant["pos"],
-            "ref": variant["ref"],
-            "alt": variant["alt"],
-            "cosmic_id": row[0],
-            "mutation_desc": row[1]
+            "variant_id": row[0],
+            "variant_type": row[1],
+            "gene_id": row[2] if len(row) > 2 else None,
+            "chromosome": variant["chrom"],
+            "position": variant["pos"],
+            "reference": variant["ref"],
+            "alternative": variant["alt"]
         })
 
-# ✅ Mostrar resultados
-for variant in matched_variants:
-    print(variant)
+# Print results
+# for variant in matched_variants:
+#     print(variant)
 
-# ✅ Cerrar sesión
+for variant in matched_variants:
+    gene_query = text("""
+        SELECT gene_name, gene_symbol FROM gene WHERE gene_id = :gene_id
+    """)
+    gene_result = session.execute(gene_query, {"gene_id": variant["gene_id"]}).fetchone()
+    
+    if gene_result:
+        variant["gene_name"] = gene_result[0] if gene_result[0] else "Unknown"
+        variant["gene_symbol"] = gene_result[1] if gene_result[1] else "Unknown"
+    else:
+        variant["gene_name"] = "Unknown"
+        variant["gene_symbol"] = "Unknown"
+
+# Print results mostrando variant_id, variant_type, gene_symbol y gene_name
+for variant in matched_variants:
+    print({
+        "variant_id": variant["variant_id"],
+        "variant_type": variant["variant_type"],
+        "gene_symbol": variant["gene_symbol"],
+        "gene_name": variant["gene_name"]
+    })
+
+# Close session
 session.close()
