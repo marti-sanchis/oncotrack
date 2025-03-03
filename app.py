@@ -233,7 +233,7 @@ def choose_treatment(patient_id):
 def patient_details(patient_id):
     # Consulta para obtener las variantes relacionadas con el paciente
     patient = db.session.query(Patient).filter_by(patient_id=patient_id).first()
-
+    treatments = Drug.query.all()
     # Obtener las variantes del paciente uniendo patient_has_variant y variant
     variants = db.session.query(Variant).join(patient_has_variant, patient_has_variant.c.variant_id == Variant.variant_id).filter(patient_has_variant.c.patient_id == patient_id).all()
 
