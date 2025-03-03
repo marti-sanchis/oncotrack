@@ -8,7 +8,7 @@ db = SQLAlchemy()
 
 patient_has_variant = db.Table(
     'patient_has_variant',
-    db.Column('patient_id', db.Integer, db.ForeignKey('patient.id')),
+    db.Column('patient_id', db.Integer, db.ForeignKey('patient.patient_id')),
     db.Column('variant_id', db.String(20), db.ForeignKey('variant.variant_id'))
 )
 
@@ -28,7 +28,7 @@ class User(db.Model, UserMixin):
         return check_password_hash(self.password, password)
 
 class Patient(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    patient_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(100), nullable=False)
     DNI = db.Column(db.String(10), nullable=False)
     gender = db.Column(db.Enum('M', 'F', 'Other'))
