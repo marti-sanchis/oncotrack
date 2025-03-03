@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, flash, redirect, url_for
 from flask_login import login_user, login_required, LoginManager, current_user, logout_user
 from forms import LoginForm, SignUpForm
-from models_proba import db, User, Patient, Variant, CancerType, Drug
+from models_proba import db, User, Patient, Variant, CancerType, Drug, patient_has_variant
 from flask_bcrypt import Bcrypt
 from sqlalchemy.orm import sessionmaker
 from config import Config
@@ -241,13 +241,13 @@ def assign_treatment(patient_id):
 
 @app.route('/patient/<int:patient_id>')
 def patient_details(patient_id):
-    # Aquí obtienes la información del paciente desde la base de datos
-    patient = Patient.query.get_or_404(patient_id)
-    if patient is None:
+    patient = db.session.query(Patient).filter_by(patient_id=patient_id).first()
+
+    if not patient:
         return "Patient not found", 404
 
-    return render_template('patient_details.html', patient=patient,)
-
+    variants = db.session.query(Variant).join(patient_has_variant, Variant.variant_id == patient_has_variant.c.variant_id).filter(patient_has_variant.c.patient_id == patient_id).all()
+    return render_template("patient_details.html", patient=patient, variants=variants)
 
 @app.route('/nurse_space')
 @login_required
