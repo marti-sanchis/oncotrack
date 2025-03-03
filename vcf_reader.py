@@ -53,8 +53,9 @@ def process_vcf(vcf_file_path, patient_id):
         result = session.execute(query, variant).fetchone()
         if result:
             matched_variants.append(result[0])
-
+        
     if matched_variants:
+        print(f"Ejecutando inserción en patient_has_variant")
         insert_query = text("""
             INSERT INTO patient_has_variant (patient_id, variant_id)
             SELECT :patient_id, :variant_id
@@ -67,5 +68,4 @@ def process_vcf(vcf_file_path, patient_id):
             session.execute(insert_query, {"patient_id": patient_id, "variant_id": variant_id})
 
         session.commit()
-    
     session.close()
