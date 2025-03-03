@@ -118,6 +118,7 @@
             <th>Name</th>
             <th>Cancer Type</th>
             <th>Treatment</th>
+            <th>More Info</th>
         </tr>
     </thead>
     <tbody>
@@ -141,7 +142,11 @@
                     </a>
                 {% endif %}
             </td>
-            
+            <td>
+                <a href="{{ url_for('patient_details', patient_id=patient.patient_id) }}" class="btn btn-secondary btn-sm">
+                    More Info
+                </a>
+            </td> 
         </tr>
 
         <!-- Modal para cada paciente -->

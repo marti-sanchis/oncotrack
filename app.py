@@ -240,6 +240,15 @@ def assign_treatment(patient_id):
 
     return redirect(url_for('doctor_space'))  # Redirect back to the doctor page
 
+@app.route('/patient/<int:patient_id>')
+def patient_details(patient_id):
+    # Aquí obtienes la información del paciente desde la base de datos
+    patient = Patient.query.get_or_404(patient_id)
+    if patient is None:
+        return "Patient not found", 404
+
+    return render_template('patient_details.html', patient=patient,)
+
 
 @app.route('/nurse_space')
 @login_required
