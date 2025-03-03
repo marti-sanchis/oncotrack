@@ -8,10 +8,14 @@ db = SQLAlchemy()
 
 patient_has_variant = db.Table(
     'patient_has_variant',
-    db.Column('patient_id', db.Integer, db.ForeignKey('patient.patient_id')),
+    db.Column('patient_id', db.Integer, db.ForeignKey('patient.patient_id', ondelete="CASCADE")),
     db.Column('variant_id', db.String(20), db.ForeignKey('variant.variant_id'))
 )
-
+patient_has_drug = db.Table(
+    'patient_has_drug',
+    db.Column('patient_id', db.Integer, db.ForeignKey('patient.patient_id', ondelete="CASCADE")),
+    db.Column('drug_id', db.String(20), db.ForeignKey('drug.drug_id'))
+)
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
@@ -41,8 +45,8 @@ class Patient(db.Model):
     
     doctor = db.relationship('User', foreign_keys=[doctor_id])
     nurse = db.relationship('User', foreign_keys=[nurse_id])
-    variants = db.relationship('Variant', secondary=patient_has_variant, backref=db.backref('patients', lazy=True))
-    
+    variants = db.relationship('Variant', secondary=patient_has_variant, backref=db.backref('patients', lazy=True), cascade="all, delete")
+    drugs = db.relationship('Drug', secondary=patient_has_drug, backref=db.backref('patients', lazy=True), cascade="all, delete")
     def __repr__(self):
         return f"Patient('{self.name}', '{self.doctor_id}')"
 
