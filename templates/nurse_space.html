@@ -23,8 +23,8 @@
     </thead>
     <tbody>
         {% for patient in patients %}
-        <tr data-bs-toggle="modal" data-bs-target="#patientModal{{ patient.id }}">
-            <td>{{ patient.id }}</td>
+        <tr data-bs-toggle="modal" data-bs-target="#patientModal{{ patient.patient_id }}">
+            <td>{{ patient.patient_id }}</td>
             <td>{{ patient.name }}</td>
             <td>
                 {% for cancer in cancer_types %}
@@ -37,11 +37,11 @@
         </tr>
 
         <!-- Modal para cada paciente -->
-        <div class="modal fade" id="patientModal{{ patient.id }}" tabindex="-1" aria-labelledby="patientModalLabel{{ patient.id }}" aria-hidden="true">
+        <div class="modal fade" id="patientModal{{ patient.patient_id }}" tabindex="-1" aria-labelledby="patientModalLabel{{ patient.patient_id }}" aria-hidden="true">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="patientModalLabel{{ patient.id }}">Patient Details</h5>
+                        <h5 class="modal-title" id="patientModalLabel{{ patient.patient_id }}">Patient Details</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
