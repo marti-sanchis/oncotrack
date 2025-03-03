@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+
+{% block title %}More Info - {{ patient.name }}{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="text-center">More Info</h1>
+
+    <div class="row">
+        <!-- Contenido principal -->
+        <div class="col-md-9">
+            <!-- Summary -->
+            <section id="summary" class="mb-5">
+                <h2>Summary</h2>
+                <div class="card p-3">
+                    <p><strong>ID:</strong> {{ patient.patient_id }}</p>
+                    <p><strong>Name:</strong> {{ patient.name }}</p>
+                    <p><strong>Age:</strong> {{ patient.age }}</p>
+                    <p><strong>Gender:</strong> {{ patient.gender }}</p>
+                    <p><strong>Cancer Type:</strong> 
+                            {% for cancer in cancer_types %}
+                                {% if cancer.cancer_id == patient.cancer_id %}
+                                    {{ cancer.cancer_type }}
+                                {% endif %}
+                            {% endfor %}
+                        </p>
+                    <p><strong>Treatment:</strong> {{ patient.treatment if patient.treatment else 'No treatment assigned' }}</p>
+                </div>
+            </section>
+
+            <!-- Variants -->
+            <section id="variants" class="mb-5">
+                <h2>Variants</h2>
+                <table class="table table-striped">
+                    <thead class="table-success">
+                        <tr>
+                            <th>Variant ID</th>
+                            <th>Chromosome</th>
+                            <th>Position</th>
+                            <th>Variant Type</th>
+                            <th>Gene</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for variant in variants %}
+                        <tr>
+                            <td>{{ variant.variant_id }}</td>
+                            <td>{{ variant.gene_id }}</td>
+                            <td>{{ variant.chromosome }}</td>
+                            <td>{{ variant.position }}</td>
+                            <td>{{ variant.variant_type|replace('_', ' ')|replace(',', ', ')|capitalize }}</td>
+                        </tr>
+                        {% else %}
+                        <tr><td colspan="5" class="text-center">No variants found</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Treatments -->
+            <section id="treatments" class="mb-5">
+                <h2>Treatments</h2>
+                <table class="table table-striped">
+                    <thead class="table-success">
+                        <tr>
+                            <th>Drug</th>
+                            <th>Effect</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for treatment in patient.treatments %}
+                        <tr>
+                            <td>{{ treatment.drug_name }}</td>
+                            <td>{{ treatment.effect }}</td>
+                        </tr>
+                        {% else %}
+                        <tr><td colspan="2" class="text-center">No treatments found</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Resistances -->
+            <section id="resistances" class="mb-5">
+                <h2>Resistances</h2>
+                <table class="table table-striped">
+                    <thead class="table-danger">
+                        <tr>
+                            <th>Drug</th>
+                            <th>Resistance Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for resistance in patient.resistances %}
+                        <tr>
+                            <td>{{ resistance.drug_name }}</td>
+                            <td>{{ resistance.resistance_type }}</td>
+                        </tr>
+                        {% else %}
+                        <tr><td colspan="2" class="text-center">No resistances found</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+        </div>
+
+        <!-- Índice de navegación -->
+        <div class="col-md-3">
+            <div class="card p-3 position-sticky" style="top: 20px;">
+                <h5>Navigation</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item"><a class="nav-link" href="#summary">Summary</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#variants">Variants</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#treatments">Treatments</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#resistances">Resistances</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class = "col-md-3">
+            <button class="btn btn-success left-align mb-2" onclick="">Go Back</button>
+        </div>
+    </div>
+</div>
+
+<!-- Smooth Scrolling -->
+<script>
+document.querySelectorAll('.nav-link').forEach(anchor => {
+    anchor.addEventListener('click', function(event) {
+        event.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+    });
+});
+</script>
+
+{% endblock %}
