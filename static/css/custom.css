@@ -132,7 +132,7 @@ input, select {
 
 /* Estilo de la cabecera */
 .table thead {
-    background-color: #A8D5BA; /* Color suave de la paleta verde */
+    background-color: #ddd; /* Color suave de la paleta verde */
     color: #2C6E49;
     font-weight: bold;
 }
@@ -154,6 +154,43 @@ input, select {
     transition: background-color 0.3s ease;
 }
 
+.collapsible {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f4f8fb;
+    color: #333;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+}
+
+.active,
+.collapsible:hover {
+    background-color: #f4f8fb;
+    color: #2C6E49
+}
 
 
 
+.collapsible+.content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+.collapsible:after {
+    content: '\02795';
+    /* Unicode character for "plus" sign (+) */
+    font-size: 13px;
+    color: white;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+    content: "\2796";
+    /* Unicode character for "minus" sign (-) */
+}

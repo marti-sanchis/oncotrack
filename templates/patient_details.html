@@ -30,7 +30,10 @@
 
             <!-- Variants -->
             <section id="variants" class="mb-5">
+            <button class="collapsible">
                 <h2>Variants</h2>
+            </button>
+            <div class="content">
                 <table class="table table-striped">
                     <thead class="table-success">
                         <tr>
@@ -55,11 +58,14 @@
                         {% endfor %}
                     </tbody>
                 </table>
+                </div>
             </section>
 
             <!-- Treatments -->
             <section id="treatments" class="mb-5">
-                <h2>Treatments</h2>
+                
+              <button class="collapsible"><h2>Treatments</h2></button>
+                <div class="content">
                 <table class="table table-striped">
                     <thead class="table-success">
                         <tr>
@@ -78,11 +84,14 @@
                         {% endfor %}
                     </tbody>
                 </table>
+                </div>
             </section>
 
             <!-- Resistances -->
             <section id="resistances" class="mb-5">
-                <h2>Resistances</h2>
+                
+                <button class="collapsible"><h2>Resistances</h2></button>
+                <div class="content">
                 <table class="table table-striped">
                     <thead class="table-danger">
                         <tr>
@@ -101,6 +110,7 @@
                         {% endfor %}
                     </tbody>
                 </table>
+                </div>
             </section>
         </div>
 
@@ -123,13 +133,33 @@
 </div>
 
 <!-- Smooth Scrolling -->
+<!-- Smooth Scrolling -->
 <script>
-document.querySelectorAll('.nav-link').forEach(anchor => {
-    anchor.addEventListener('click', function(event) {
-        event.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('.nav-link').forEach(anchor => {
+        anchor.addEventListener('click', function (event) {
+            event.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+        });
     });
-});
+
+    // Collapsible section toggle
+    var coll = document.getElementsByClassName("collapsible");
+
+    for (let i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        });
+    }
 </script>
+
+
 
 {% endblock %}
