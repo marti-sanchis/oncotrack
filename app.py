@@ -242,16 +242,17 @@ def assign_treatment(patient_id):
 
     return redirect(url_for('doctor_space'))
 
-
-@app.route('/patient/<int:patient_id>')
+@app.route('/patient_details/<int:patient_id>')
+@login_required
 def patient_details(patient_id):
+    # Consulta para obtener las variantes relacionadas con el paciente
     patient = db.session.query(Patient).filter_by(patient_id=patient_id).first()
 
-    if not patient:
-        return "Patient not found", 404
+    # Obtener las variantes del paciente uniendo patient_has_variant y variant
+    variants = db.session.query(Variant).join(patient_has_variant, patient_has_variant.c.variant_id == Variant.variant_id).filter(patient_has_variant.c.patient_id == patient_id).all()
 
-    variants = db.session.query(Variant).join(patient_has_variant, Variant.variant_id == patient_has_variant.c.variant_id).filter(patient_has_variant.c.patient_id == patient_id).all()
-    return render_template("patient_details.html", patient=patient, variants=variants)
+    return render_template('patient_details.html', patient=patient, variants=variants)
+
 
 @app.route('/nurse_space')
 @login_required
