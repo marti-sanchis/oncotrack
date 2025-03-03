@@ -207,7 +207,7 @@ def add_patient():
         db.session.commit()
 
         # Process VCF
-        process_vcf(new_patient.patient_id, file_path)
+        process_vcf(file_path, new_patient.patient_id)
         
         flash("Patient added successfully!", "success")
         print("Paciente añadido correctamente")
