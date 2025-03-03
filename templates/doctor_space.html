@@ -137,11 +137,14 @@
                 {% if patient.treatment %}
                     {{ patient.treatment }}
                 {% else %}
-                    <a href="{{ url_for('choose_treatment', patient_id=patient.patient_id) }}" class="btn btn-secondary btn-sm">
+                    <button class="btn btn-secondary btn-sm choose-treatment-btn" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#chooseTreatmentModal"
+                            data-patient-id="{{ patient.patient_id }}">
                         Choose Treatment
-                    </a>
+                    </button>
                 {% endif %}
-            </td>
+            </td>            
             <td>
                 <a href="{{ url_for('patient_details', patient_id=patient.patient_id) }}" class="btn btn-secondary btn-sm">
                     More Info
@@ -182,6 +185,32 @@
                 </div>
             </div>
         </div>
+        <!-- Modal for Choosing Treatment -->
+        <div class="modal fade" id="chooseTreatmentModal" tabindex="-1" aria-labelledby="chooseTreatmentModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="chooseTreatmentModalLabel">Choose a Treatment</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="selectedPatientId">
+                        <ul class="list-group">
+                            {% for treatment in treatments %}
+                                <li class="list-group-item treatment-option" data-treatment="{{ treatment.name }}">
+                                    {{ treatment.name }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-success" id="confirmTreatment">Confirm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         {% else %}
         <tr>
             <td colspan="4" class="text-center">No patients assigned to you yet.</td>
@@ -199,6 +228,42 @@
 
 <!-- JavaScript for Search -->
 <script src="static/js/scripts.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".open-treatment-modal").forEach(button => {
+            button.addEventListener("click", function () {
+                let patientId = this.dataset.patientId;
+    
+                fetch(`/choose_treatment/${patientId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById("patientName").textContent = "Assign Treatment to " + data.patient_name;
+                        document.getElementById("patientId").value = data.patient_id;
+    
+                        let treatmentSelect = document.getElementById("treatmentSelect");
+                        treatmentSelect.innerHTML = "";
+    
+                        data.treatments.forEach(treatment => {
+                            let option = document.createElement("option");
+                            option.value = treatment.id;
+                            option.textContent = treatment.name;
+                            treatmentSelect.appendChild(option);
+                        });
+    
+                        let treatmentModal = new bootstrap.Modal(document.getElementById("treatmentModal"));
+                        treatmentModal.show();
+                    });
+            });
+        });
+    
+        document.getElementById("assignTreatmentBtn").addEventListener("click", function () {
+            document.getElementById("assignTreatmentForm").submit();
+        });
+    });
+    </script>
+    
+    
 
 <!-- Bootstrap JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

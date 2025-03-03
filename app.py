@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, redirect, url_for
+from flask import Flask, render_template, request, flash, redirect, url_for, jsonify
 from flask_login import login_user, login_required, LoginManager, current_user, logout_user
 from forms import LoginForm, SignUpForm
 from models_proba import db, User, Patient, Variant, CancerType, Drug, patient_has_variant
@@ -221,8 +221,11 @@ def add_patient():
 @login_required
 def choose_treatment(patient_id):
     patient = Patient.query.get_or_404(patient_id)
-    possible_treatments = Drug.query.all()  # Assuming you have a table of treatments
-    return render_template('choose_treatment.html', patient=patient, treatments=possible_treatments)
+    treatments = Drug.query.all()  # Fetch all treatments
+
+    treatments_data = [{"id": t.id, "name": t.name} for t in treatments]
+    
+    return jsonify({"patient_id": patient.id, "patient_name": patient.name, "treatments": treatments_data})
 
 @app.route('/assign_treatment/<int:patient_id>', methods=['POST'])
 @login_required
@@ -237,7 +240,8 @@ def assign_treatment(patient_id):
             db.session.commit()
             flash(f'Treatment {treatment.name} assigned to {patient.name}', 'success')
 
-    return redirect(url_for('doctor_space'))  # Redirect back to the doctor page
+    return redirect(url_for('doctor_space'))
+
 
 @app.route('/patient/<int:patient_id>')
 def patient_details(patient_id):
