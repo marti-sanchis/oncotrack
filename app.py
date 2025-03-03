@@ -164,8 +164,7 @@ def add_patient():
         return redirect(url_for('doctor_space'))
 
     # Convertir "female" -> "F", "male" -> "M", "other" -> "Other"
-    gender_map = {"female": "F", "male": "M", "other": "Other"} 
-    gender = gender_map.get(request.form.get("gender").lower(), "Other")
+    gender = request.form.get("gender", "Other").strip()
     print(f"Valor de 'gender' antes de la inserción: {gender}")
 
     # Verificar si el tipo de cáncer existe
