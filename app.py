@@ -217,30 +217,16 @@ def add_patient():
 
     return redirect(url_for('doctor_space', cancer_types=cancer_types, nurses=nurses))
 
+
 @app.route('/choose_treatment/<int:patient_id>')
 @login_required
 def choose_treatment(patient_id):
     patient = Patient.query.get_or_404(patient_id)
-    treatments = Drug.query.all()  # Fetch all treatments
-
-    treatments_data = [{"id": t.id, "name": t.name} for t in treatments]
+    treatments = Drug.query.all()  # Fetch all drugs/treatments
     
-    return jsonify({"patient_id": patient.id, "patient_name": patient.name, "treatments": treatments_data})
+    # Return the patient details and drug names in JSON format
+    return render_template('choose_treatment.html', patient=patient, treatments=treatments)
 
-@app.route('/assign_treatment/<int:patient_id>', methods=['POST'])
-@login_required
-def assign_treatment(patient_id):
-    patient = Patient.query.get_or_404(patient_id)
-    drug_id = request.form.get('drug_id')
-    
-    if drug_id:
-        treatment = Drug.query.get(drug_id)
-        if treatment:
-            patient.treatment = treatment.name  # Assuming 'treatment' is a column in Patient
-            db.session.commit()
-            flash(f'Treatment {treatment.name} assigned to {patient.name}', 'success')
-
-    return redirect(url_for('doctor_space'))
 
 @app.route('/patient_details/<int:patient_id>')
 @login_required

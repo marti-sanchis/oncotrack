@@ -1,5 +1,6 @@
 import pysam
 import os
+import gseapy as gp
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
 from config import Config
@@ -66,6 +67,27 @@ def process_vcf(vcf_file_path, patient_id):
         """)
         for variant_id in matched_variants:
             session.execute(insert_query, {"patient_id": patient_id, "variant_id": variant_id})
-
         session.commit()
+
+    gene_query = text("""
+        SELECT DISTINCT g.gene_symbol 
+        FROM gene g
+        JOIN variant v ON g.gene_id = v.gene_id
+        WHERE v.variant_id = :variant_id
+    """)
+    
+    print("starting gene name query")
+    gene_set = set()
+    for variant_id in matched_variants:
+        gene_result = session.execute(gene_query, {"variant_id": variant_id}).fetchall()
+        for row in gene_result:
+            gene_set.add(row[0])
+    print(gene_set)
+    
     session.close()
+
+    # Enrichment analysis
+    if gene_set:
+        outdir = f"enrichr_results/Patient_{patient_id}"
+        gene_list=list(gene_set)
+        gp.enrichr(gene_list=gene_list, gene_sets="KEGG_2021_Human", organism="human", outdir=outdir)
