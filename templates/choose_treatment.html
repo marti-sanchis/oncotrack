@@ -27,7 +27,7 @@
                 <td>{{ treatment.resistances }}</td>
                 <td>{{ treatment.mutations }}</td>
                 <td>
-                    <form method="POST" action="{{ url_for('assign_treatment', patient_id=patient.id) }}">
+                    <form method="POST" action="{{ url_for('assign_treatment', patient_id=patient.patient_id) }}">
                         <input type="hidden" name="treatment_id" value="{{ treatment.id }}">
                         <button type="submit" class="btn btn-secondary">Select</button>
                     </form>
