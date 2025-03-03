@@ -1,7 +1,7 @@
-from flask import Flask, render_template, request, flash, redirect, url_for
+from flask import Flask, render_template, request, flash, redirect, url_for, jsonify
 from flask_login import login_user, login_required, LoginManager, current_user, logout_user
 from forms import LoginForm, SignUpForm
-from models_proba import db, User, Patient, Variant, CancerType, Drug
+from models_proba import db, User, Patient, Variant, CancerType, Drug, patient_has_variant
 from flask_bcrypt import Bcrypt
 from sqlalchemy.orm import sessionmaker
 from config import Config
@@ -221,8 +221,11 @@ def add_patient():
 @login_required
 def choose_treatment(patient_id):
     patient = Patient.query.get_or_404(patient_id)
-    possible_treatments = Drug.query.all()  # Assuming you have a table of treatments
-    return render_template('choose_treatment.html', patient=patient, treatments=possible_treatments)
+    treatments = Drug.query.all()  # Fetch all treatments
+
+    treatments_data = [{"id": t.id, "name": t.name} for t in treatments]
+    
+    return jsonify({"patient_id": patient.id, "patient_name": patient.name, "treatments": treatments_data})
 
 @app.route('/assign_treatment/<int:patient_id>', methods=['POST'])
 @login_required
@@ -237,16 +240,18 @@ def assign_treatment(patient_id):
             db.session.commit()
             flash(f'Treatment {treatment.name} assigned to {patient.name}', 'success')
 
-    return redirect(url_for('doctor_space'))  # Redirect back to the doctor page
+    return redirect(url_for('doctor_space'))
 
-@app.route('/patient/<int:patient_id>')
+@app.route('/patient_details/<int:patient_id>')
+@login_required
 def patient_details(patient_id):
-    # Aquí obtienes la información del paciente desde la base de datos
-    patient = Patient.query.get_or_404(patient_id)
-    if patient is None:
-        return "Patient not found", 404
+    # Consulta para obtener las variantes relacionadas con el paciente
+    patient = db.session.query(Patient).filter_by(patient_id=patient_id).first()
 
-    return render_template('patient_details.html', patient=patient,)
+    # Obtener las variantes del paciente uniendo patient_has_variant y variant
+    variants = db.session.query(Variant).join(patient_has_variant, patient_has_variant.c.variant_id == Variant.variant_id).filter(patient_has_variant.c.patient_id == patient_id).all()
+
+    return render_template('patient_details.html', patient=patient, variants=variants)
 
 
 @app.route('/nurse_space')
