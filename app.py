@@ -237,7 +237,7 @@ def patient_details(patient_id):
     # Obtener las variantes del paciente uniendo patient_has_variant y variant
     variants = db.session.query(Variant).join(patient_has_variant, patient_has_variant.c.variant_id == Variant.variant_id).filter(patient_has_variant.c.patient_id == patient_id).all()
 
-    return render_template('patient_details.html', patient=patient, variants=variants, treatments=treatments)
+    return render_template('patient_details.html', patient=patient, variants=variants, treatments=treatments, user_id=current_user.id)
 
 
 @app.route('/nurse_space')
