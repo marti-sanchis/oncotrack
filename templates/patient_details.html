@@ -18,12 +18,12 @@
                     <p><strong>Age:</strong> {{ patient.age }}</p>
                     <p><strong>Gender:</strong> {{ patient.gender }}</p>
                     <p><strong>Cancer Type:</strong> 
-                            {% for cancer in cancer_types %}
-                                {% if cancer.cancer_id == patient.cancer_id %}
-                                    {{ cancer.cancer_type }}
-                                {% endif %}
-                            {% endfor %}
-                        </p>
+                        {% for cancer in cancer_types %}
+                            {% if cancer.cancer_id == patient.cancer_id %}
+                                {{ cancer.cancer_type }}
+                            {% endif %}
+                        {% endfor %}
+                    </p>
                     <p><strong>Treatment:</strong> {{ patient.treatment if patient.treatment else 'No treatment assigned' }}</p>
                 </div>
             </section>
@@ -38,10 +38,10 @@
                     <thead class="table-success">
                         <tr>
                             <th>Variant ID</th>
+                            <th>Gene</th>
                             <th>Chromosome</th>
                             <th>Position</th>
                             <th>Variant Type</th>
-                            <th>Gene</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -63,27 +63,30 @@
 
             <!-- Treatments -->
             <section id="treatments" class="mb-5">
-                
-              <button class="collapsible"><h2>Treatments</h2></button>
+                <button class="collapsible"><h2>Treatments</h2></button>
                 <div class="content">
-                <table class="table table-striped">
-                    <thead class="table-success">
-                        <tr>
-                            <th>Drug</th>
-                            <th>Effect</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for treatment in patient.treatments %}
-                        <tr>
-                            <td>{{ treatment.drug_name }}</td>
-                            <td>{{ treatment.effect }}</td>
-                        </tr>
-                        {% else %}
-                        <tr><td colspan="2" class="text-center">No treatments found</td></tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                    <table class="table table-striped">
+                        <thead class="table-success">
+                            <tr>
+                                <th>Drug</th>
+                                <th>Effect</th>
+                                <th>Subtype</th>
+                                <th>Match Reason</th> <!-- Nueva columna -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for treatment in treatments %}
+                            <tr>
+                                <td>{{ treatment[0] }}</td> <!-- Nombre del fármaco -->
+                                <td>{{ treatment[1] }}</td> <!-- Asociación (efecto) -->
+                                <td>{{ treatment[2] if treatment[2] else 'N/A' }}</td> <!-- Subtipo o 'N/A' si es nulo -->
+                                <td>{{ treatment[3] }}</td> <!-- Razón por la que se incluyó el tratamiento -->
+                            </tr>
+                            {% else %}
+                            <tr><td colspan="4" class="text-center">No treatments found</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
             </section>
 
