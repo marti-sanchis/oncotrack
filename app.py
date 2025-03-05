@@ -52,19 +52,24 @@ def signup():
         password = form.password.data     
         role = form.role.data
 
-         # Hash the password before saving it
+        # Hash the password before saving it
         hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
 
-        # 🚀 Here, you would add logic to save the user to a database.
-
-        new_user = User(name=name, surname=surname, email=form.email.data, password=hashed_password, role=role)
+        # Guardamos el usuario en la base de datos
+        new_user = User(name=name, surname=surname, email=email, password=hashed_password, role=role)
         db.session.add(new_user)
         db.session.commit()
-        
-        print(f"New user: {name} {surname}, Role: {role}, Email: {email}")  # Debugging
-        return redirect(url_for('userspace'))  # Redirect after successful signup
+
+        # Redirigir según el rol del usuario
+        if role == 'doctor':
+            return redirect(url_for('doctor_space'))
+        elif role == 'nurse':
+            return redirect(url_for('nurse_space'))
+        else:
+            return redirect(url_for('index'))  # O cualquier otra página por defecto
 
     return render_template('auth/signup.html', form=form)
+
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -339,7 +344,7 @@ def patient_details(patient_id):
         match_reason = None
         if variant_id in variant_ids:
             match_reason = "Variant"
-            name = {variant_id}
+            name = variant_id
         elif gene_id in gene_ids:
             match_reason = "Gene"
             gene_symbol = db.session.query(Gene.gene_symbol).filter(Gene.gene_id == gene_id).first()
