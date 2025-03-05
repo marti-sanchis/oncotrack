@@ -45,10 +45,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for variant in variants %}
+                        {% for variant in variant_details %}
                         <tr>
                             <td>{{ variant.variant_id }}</td>
-                            <td>{{ variant.gene_id }}</td>
+                            <td>{{ variant.gene_symbol }}</td>  <!-- Aquí mostramos el gene_symbol -->
                             <td>{{ variant.chromosome }}</td>
                             <td>{{ variant.position }}</td>
                             <td>{{ variant.variant_type|replace('_', ' ')|replace(',', ', ')|capitalize }}</td>
@@ -71,16 +71,24 @@
                                 <th>Drug</th>
                                 <th>Effect</th>
                                 <th>Subtype</th>
-                                <th>Match Reason</th> <!-- Nueva columna -->
+                                <th>Match Reason</th>
+                                <th>Medication Details</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for treatment in treatments %}
                             <tr>
                                 <td>{{ treatment[0] }}</td> <!-- Nombre del fármaco -->
-                                <td>{{ treatment[1] }}</td> <!-- Asociación (efecto) -->
+                                <td>{{ treatment[1] | capitalize }}</td> <!-- Asociación (efecto) -->
                                 <td>{{ treatment[2] if treatment[2] else 'N/A' }}</td> <!-- Subtipo o 'N/A' si es nulo -->
-                                <td>{{ treatment[3] }}</td> <!-- Razón por la que se incluyó el tratamiento -->
+                                <td>{{ treatment[3] }} {{ treatment[4] }}</td> <!-- Variant ID o Gene ID o '-' -->
+                                <td>
+                                    <a href="https://www.drugs.com/mtm/{{ treatment[0] | replace(' ', '-')}}.html" 
+                                       target="_blank" 
+                                       class="btn btn-success btn-sm">
+                                        View Details
+                                    </a>
+                                </td>
                             </tr>
                             {% else %}
                             <tr><td colspan="4" class="text-center">No treatments found</td></tr>
@@ -92,27 +100,28 @@
 
             <!-- Resistances -->
             <section id="resistances" class="mb-5">
-                
                 <button class="collapsible"><h2>Resistances</h2></button>
                 <div class="content">
-                <table class="table table-striped">
-                    <thead class="table-danger">
-                        <tr>
-                            <th>Drug</th>
-                            <th>Resistance Type</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for resistance in patient.resistances %}
-                        <tr>
-                            <td>{{ resistance.drug_name }}</td>
-                            <td>{{ resistance.resistance_type }}</td>
-                        </tr>
-                        {% else %}
-                        <tr><td colspan="2" class="text-center">No resistances found</td></tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                    <table class="table table-striped">
+                        <thead class="table-danger">
+                            <tr>
+                                <th>Drug</th>
+                                <th>Resistance Type</th>
+                                <th>Match Reason</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for resistance in resistances %}
+                            <tr>
+                                <td>{{ resistance.drug_name }}</td>
+                                <td>{{ resistance.resistance_type }}</td>
+                                <td>{{ resistance.match_reason if resistance.match_reason else '-' }}</td>
+                            </tr>
+                            {% else %}
+                            <tr><td colspan="3" class="text-center">No resistances found</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
             </section>
         </div>

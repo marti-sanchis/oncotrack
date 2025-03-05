@@ -1,14 +1,14 @@
 from flask import Flask, render_template, request, flash, redirect, url_for, jsonify
 from flask_login import login_user, login_required, LoginManager, current_user, logout_user
 from forms import LoginForm, SignUpForm
-from models_proba import db, User, Patient, Variant, CancerType, Drug, DrugAssociation, patient_has_variant
+from models_proba import db, User, Patient, Variant, Gene, CancerType, Drug, DrugAssociation, patient_has_variant
 from flask_bcrypt import Bcrypt
+from sqlalchemy import or_, and_
 from sqlalchemy.orm import sessionmaker
 from config import Config
 from werkzeug.utils import secure_filename
 import os
 from vcf_reader import process_vcf
-from sqlalchemy import or_, and_
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -240,10 +240,25 @@ def patient_details(patient_id):
     cancer_id = patient.cancer_id 
 
     variants = db.session.query(Variant).join(patient_has_variant).filter(patient_has_variant.c.patient_id == patient_id).all()
-    variant_ids = [variant.variant_id for variant in variants]
+    variant_details = []
+    for variant in variants:
+        gene_symbol = db.session.query(Gene.gene_symbol).filter(Gene.gene_id == variant.gene_id).first()
+        gene_symbol = gene_symbol[0] if gene_symbol else "Unknown Gene"
+        variant_details.append({
+            'variant_id': variant.variant_id,
+            'gene_symbol': gene_symbol,
+            'chromosome': variant.chromosome,
+            'position': variant.position,
+            'variant_type': variant.variant_type
+        })
 
+    variant_ids = [variant.variant_id for variant in variants]
     gene_ids = [variant.gene_id for variant in variants]
 
+    print(f"Patient Variants: {variant_ids}")  # Lista de variant_id del paciente
+    print(f"Patient Genes: {gene_ids}")  # Lista de gene_id del paciente
+
+    ### TREATMENTS
     treatment_results = db.session.query(
         Drug.name, 
         DrugAssociation.association, 
@@ -253,7 +268,64 @@ def patient_details(patient_id):
         DrugAssociation.gene_id
     ).join(DrugAssociation).filter(
         or_(
-            DrugAssociation.cancer_id == cancer_id,
+            and_(
+                DrugAssociation.cancer_id == cancer_id,
+                DrugAssociation.association == "generic"
+            ),
+            and_(
+                DrugAssociation.cancer_id == cancer_id,
+                DrugAssociation.variant_id.in_(variant_ids),
+                DrugAssociation.association == "specific"
+            ),
+            and_(
+                DrugAssociation.cancer_id == cancer_id,
+                DrugAssociation.gene_id.in_(gene_ids),
+                DrugAssociation.association == "specific"
+            )
+        )
+    ).filter(DrugAssociation.association != "resistance").all()
+
+    # Diccionario para evitar duplicados y priorizar el mejor match_reason
+    treatments_dict = {}
+
+    for treatment in treatment_results:
+        drug_name, association, subtype, t_cancer_id, t_variant_id, t_gene_id = treatment
+
+        if association == "generic":
+            match_reason = "Cancer type"  # Por defecto, solo coincide por cáncer
+            name = ""
+
+        elif association == "specific":
+            if t_variant_id in variant_ids:
+                match_reason = "Variant"  # Mostramos el variant_id
+                name = t_variant_id
+            elif t_gene_id in gene_ids:
+                match_reason = "Gene"  # Mostramos el gene_id
+                gene_symbol = db.session.query(Gene.gene_symbol).filter(Gene.gene_id == t_gene_id).first()
+                name = gene_symbol[0]
+
+        # Evitar duplicados y dar prioridad a la mejor coincidencia
+        if drug_name in treatments_dict:
+            existing_reason = treatments_dict[drug_name][3]
+            priority_order = {"Cancer type": 1, "Gene": 2, "Variant": 3}
+            
+            if priority_order.get(existing_reason, 0) < priority_order.get(match_reason, 0):
+                treatments_dict[drug_name] = (drug_name, association, subtype, match_reason, name)
+        else:
+            treatments_dict[drug_name] = (drug_name, association, subtype, match_reason, name)
+
+    # Convertimos el diccionario en una lista de tratamientos únicos
+    treatments = list(treatments_dict.values())
+
+    ### RESISTANCES
+    resistances = db.session.query(
+        Drug.name, 
+        DrugAssociation.association, 
+        DrugAssociation.cancer_id,
+        DrugAssociation.variant_id,
+        DrugAssociation.gene_id
+    ).join(DrugAssociation).filter(DrugAssociation.association == 'resistance').filter(
+        or_(
             and_(
                 DrugAssociation.cancer_id == cancer_id,
                 DrugAssociation.variant_id.in_(variant_ids)
@@ -262,41 +334,31 @@ def patient_details(patient_id):
                 DrugAssociation.cancer_id == cancer_id,
                 DrugAssociation.gene_id.in_(gene_ids)
             )
-        )
-    ).filter(DrugAssociation.association != "resistance").all()
+        ))
 
-    # Usamos un diccionario para evitar duplicados y dar prioridad a match_reason
-    treatments_dict = {}
-
-    for treatment in treatment_results:
-        drug_name, association, subtype, t_cancer_id, t_variant_id, t_gene_id = treatment
-
-        if t_variant_id in variant_ids:
-            match_reason = "Variant Match"
-        elif t_gene_id in gene_ids:
-            match_reason = "Gene Match"
-        else:
-            match_reason = "-"
-
-        # Si el tratamiento ya existe en el diccionario, verificamos prioridad
-        if drug_name in treatments_dict:
-            existing_reason = treatments_dict[drug_name][3]
-
-            # Si la nueva razón tiene mayor prioridad, la reemplazamos
-            priority_order = {"Variant Match": 3, "Gene Match": 2, "-": 1}
-            if priority_order[match_reason] > priority_order[existing_reason]:
-                treatments_dict[drug_name] = (drug_name, association, subtype, match_reason)
-        else:
-            treatments_dict[drug_name] = (drug_name, association, subtype, match_reason)
-
-    # Convertimos el diccionario en una lista de tratamientos únicos
-    treatments = list(treatments_dict.values())
+    # Agregar información adicional
+    resistance_data = []
+    for resistance, variant_id, gene_id in resistances:
+        # Aquí determinamos la razón del match
+        match_reason = None
+        if variant_id in variant_ids:
+            match_reason = f"Variant {variant_id}"
+        elif gene_id in gene_ids:
+            gene_symbol = db.session.query(Gene.gene_symbol).filter(Gene.gene_id == t_gene_id).first()
+            name = gene_symbol[0]
+            match_reason = f"Gene {name}"
+        
+        resistance_data.append({
+            "drug_name": resistance.drug.name,
+            "resistance_type": resistance.association,
+            "match_reason": match_reason
+        })
 
 
     return render_template(
         'patient_details.html', 
         patient=patient, 
-        variants=variants, 
+        variant_details=variant_details, 
         treatments=treatments, 
         user_id=current_user.id, 
         cancer_types=cancer_types
