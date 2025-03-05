@@ -320,40 +320,43 @@ def patient_details(patient_id):
     ### RESISTANCES
     resistances = db.session.query(
         Drug.name, 
-        DrugAssociation.association, 
-        DrugAssociation.cancer_id,
+        DrugAssociation.association,
         DrugAssociation.variant_id,
         DrugAssociation.gene_id
     ).join(DrugAssociation).filter(DrugAssociation.association == 'resistance').filter(
         or_(
-            and_(
-                DrugAssociation.cancer_id == cancer_id,
-                DrugAssociation.variant_id.in_(variant_ids)
-            ),
-            and_(
-                DrugAssociation.cancer_id == cancer_id,
-                DrugAssociation.gene_id.in_(gene_ids)
+            DrugAssociation.variant_id.in_(variant_ids),
+            DrugAssociation.gene_id.in_(gene_ids)
             )
-        ))
+        )
 
     # Agregar información adicional
-    resistance_data = []
-    for resistance, variant_id, gene_id in resistances:
+    resistance_data = {}
+    priority_order = {"Gene": 1, "Variant": 2}
+    for resistance in resistances:
+        drug_name, association, variant_id, gene_id = resistance
         # Aquí determinamos la razón del match
         match_reason = None
         if variant_id in variant_ids:
-            match_reason = f"Variant {variant_id}"
+            match_reason = "Variant"
+            name = {variant_id}
         elif gene_id in gene_ids:
-            gene_symbol = db.session.query(Gene.gene_symbol).filter(Gene.gene_id == t_gene_id).first()
+            match_reason = "Gene"
+            gene_symbol = db.session.query(Gene.gene_symbol).filter(Gene.gene_id == gene_id).first()
             name = gene_symbol[0]
-            match_reason = f"Gene {name}"
-        
-        resistance_data.append({
-            "drug_name": resistance.drug.name,
-            "resistance_type": resistance.association,
-            "match_reason": match_reason
-        })
 
+        if drug_name in resistance_data:
+            existing_reason = resistance_data[drug_name][1]
+            if priority_order.get(existing_reason, 0) < priority_order.get(match_reason, 0):
+                resistance_data[drug_name] = (drug_name, match_reason, name)
+            elif resistance_data[drug_name][1] == match_reason:
+                if resistance_data[drug_name][2] != name:
+                    resistance_data[drug_name] = (drug_name, match_reason, f"{resistance_data[drug_name][2]}, {name}")
+        else:
+            resistance_data[drug_name] = (drug_name, match_reason, name)
+            print(f"===> {resistance_data[drug_name]}")
+
+        resistances = list(resistance_data.values())
 
     return render_template(
         'patient_details.html', 
@@ -361,7 +364,8 @@ def patient_details(patient_id):
         variant_details=variant_details, 
         treatments=treatments, 
         user_id=current_user.id, 
-        cancer_types=cancer_types
+        cancer_types=cancer_types, 
+        resistances=resistances
     )
 
 

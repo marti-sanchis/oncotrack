@@ -106,16 +106,14 @@
                         <thead class="table-danger">
                             <tr>
                                 <th>Drug</th>
-                                <th>Resistance Type</th>
                                 <th>Match Reason</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for resistance in resistances %}
                             <tr>
-                                <td>{{ resistance.drug_name }}</td>
-                                <td>{{ resistance.resistance_type }}</td>
-                                <td>{{ resistance.match_reason if resistance.match_reason else '-' }}</td>
+                                <td>{{ resistance[0] }}</td>
+                                <td>{{ resistance[1] }} {{ resistance[2] }}</td>
                             </tr>
                             {% else %}
                             <tr><td colspan="3" class="text-center">No resistances found</td></tr>
