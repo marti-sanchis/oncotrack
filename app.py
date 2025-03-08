@@ -253,7 +253,7 @@ def patient_details(patient_id):
             'variant_id': variant.variant_id,
             'gene_symbol': gene_symbol,
             'chromosome': variant.chromosome,
-            'position': variant.position,
+            'aa_mutation': variant.aa_mutation,
             'variant_type': variant.variant_type
         })
 
@@ -363,6 +363,21 @@ def patient_details(patient_id):
 
         resistances = list(resistance_data.values())
 
+    txt_filename = f"KEGG_2021_Human.human.enrichr.reports.txt"
+    txt_file_path = os.path.join(f"enrichr_results/Patient_{patient.patient_id}", txt_filename)
+
+    table_data = []
+    if os.path.exists(txt_file_path):
+        with open(txt_file_path, 'r') as file:
+            lines = file.readlines()[1:11]
+            for line in lines:
+                columns = line.strip().split("\t")
+                if len(columns) > 1: 
+                    selected_columns = [columns[1], columns[2], columns[4], columns[9].replace(";", " ")] 
+                    table_data.append(selected_columns)
+    else:
+        print(f"File {txt_filename} not found.")
+
     return render_template(
         'patient_details.html', 
         patient=patient, 
@@ -370,7 +385,8 @@ def patient_details(patient_id):
         treatments=treatments, 
         user_id=current_user.id, 
         cancer_types=cancer_types, 
-        resistances=resistances
+        resistances=resistances,
+        table_data=table_data 
     )
 
 

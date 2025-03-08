@@ -40,7 +40,7 @@
                             <th>Variant ID</th>
                             <th>Gene</th>
                             <th>Chromosome</th>
-                            <th>Position</th>
+                            <th>Amino acid change</th>
                             <th>Variant Type</th>
                         </tr>
                     </thead>
@@ -50,7 +50,7 @@
                             <td>{{ variant.variant_id }}</td>
                             <td>{{ variant.gene_symbol }}</td>  <!-- Aquí mostramos el gene_symbol -->
                             <td>{{ variant.chromosome }}</td>
-                            <td>{{ variant.position }}</td>
+                            <td>{{ variant.aa_mutation }}</td>
                             <td>{{ variant.variant_type|replace('_', ' ')|replace(',', ', ')|capitalize }}</td>
                         </tr>
                         {% else %}
@@ -60,6 +60,37 @@
                 </table>
                 </div>
             </section>
+
+            <!-- KEGG Enrichment Report -->
+            <section id="kegg-report" class="mb-5">
+                <button class="collapsible"><h2>KEGG Enrichment Report</h2></button>
+                <div class="content">
+                    <table class="table table-striped">
+                        <thead class="table-success">
+                            <tr>
+                                <th>Term</th>
+                                <th>Overlap</th>
+                                <th>Adj. p-value</th>
+                                <th>Genes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in table_data %}
+                            <tr>
+                                <td>{{ row[0] }}</td> <!-- Term -->
+                                <td>{{ row[1] }}</td> <!-- Overlap -->
+                                <td>{{ row[2] }}</td> <!-- Adj. p-value -->
+                                <td>{{ row[3] | replace(';', ' ') }}</td> <!-- Genes (separados por espacio) -->
+                            </tr>
+                            {% else %}
+                            <tr><td colspan="4" class="text-center">No KEGG Enrichment data found</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+            
 
             <!-- Treatments -->
             <section id="treatments" class="mb-5">

@@ -4,6 +4,8 @@ import gseapy as gp
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
 from config import Config
+from SigProfilerAssignment import Analyzer as Analyze
+
 
 def process_vcf(vcf_file_path, patient_id):
 
@@ -91,3 +93,11 @@ def process_vcf(vcf_file_path, patient_id):
         outdir = f"enrichr_results/Patient_{patient_id}"
         gene_list=list(gene_set)
         gp.enrichr(gene_list=gene_list, gene_sets="KEGG_2021_Human", organism="human", outdir=outdir)
+
+    # Mutational signatures
+    # Analyze.cosmic_fit("/home/marti/MBHS/DBW/OncoTrack/oncotrack/files/prova", 
+    #                    "/home/marti/MBHS/DBW/OncoTrack/oncotrack/files/results_assignment", 
+    #                    input_type="vcf", 
+    #                    cosmic_version=3.4, 
+    #                    genome_build="GRCh38", 
+    #                    export_probabilities_per_mutation=False)
