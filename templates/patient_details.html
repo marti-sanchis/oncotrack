@@ -90,7 +90,24 @@
                 </div>
             </section>
             
+            <!-- Mutational Signature Analysis -->
+            <section id="mutational-signature" class="mb-5">
+                <button class="collapsible"><h2>Mutational Signature Analysis</h2></button>
+                <div class="content">
+                    <!-- Row para organizar los plots en columnas -->
+                        <!-- SBS96 Plot -->
+                        <div class="col-md-12">
+                            <h3>SBS96 Signature Plot</h3>
+                            <img src="{{ url_for('serve_analysis_file', patient_id=patient.patient_id, filename='SBS96_plot.png') }}" class="img-fluid" alt="SBS96 Plot">
+                        </div>
             
+                        <!-- Signature Pie Chart -->
+                        <div class="col-md-4">
+                            <h3>Signature Decomposition</h3>
+                            <img src="{{ url_for('serve_analysis_file', patient_id=patient.patient_id, filename='signature_pie_chart.png') }}" class="img-fluid" alt="Signature Pie Chart">
+                        </div>
+                </div>
+            </section>
 
             <!-- Treatments -->
             <section id="treatments" class="mb-5">

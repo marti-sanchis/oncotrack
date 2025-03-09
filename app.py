@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, redirect, url_for, jsonify
+from flask import Flask, render_template, request, flash, redirect, url_for, send_file, jsonify
 from flask_login import login_user, login_required, LoginManager, current_user, logout_user
 from forms import LoginForm, SignUpForm
 from models_proba import db, User, Patient, Variant, Gene, CancerType, Drug, DrugAssociation, patient_has_variant
@@ -234,8 +234,16 @@ def choose_treatment(patient_id):
     return render_template('choose_treatment.html', patient=patient, treatments=treatments)
 
 
+@app.route('/analysis_results/<int:patient_id>/sigProfiler/<path:filename>')
+@login_required
+
+def serve_analysis_file(patient_id, filename):
+    file_path = f"analysis_results/Patient_{patient_id}/sigProfiler/{filename}"
+    return send_file(file_path)
+
 @app.route('/patient_details/<int:patient_id>')
 @login_required
+
 def patient_details(patient_id):
     patient = Patient.query.get(patient_id)
     if not patient:
@@ -363,12 +371,11 @@ def patient_details(patient_id):
 
         resistances = list(resistance_data.values())
 
-    txt_filename = f"KEGG_2021_Human.human.enrichr.reports.txt"
-    txt_file_path = os.path.join(f"enrichr_results/Patient_{patient.patient_id}", txt_filename)
+    enrichr_txt_path = f"analysis_results/Patient_{patient.patient_id}/enrichment/KEGG_2021_Human.human.enrichr.reports.txt"
 
     table_data = []
-    if os.path.exists(txt_file_path):
-        with open(txt_file_path, 'r') as file:
+    if os.path.exists(enrichr_txt_path):
+        with open(enrichr_txt_path, 'r') as file:
             lines = file.readlines()[1:11]
             for line in lines:
                 columns = line.strip().split("\t")
@@ -376,7 +383,9 @@ def patient_details(patient_id):
                     selected_columns = [columns[1], columns[2], columns[4], columns[9].replace(";", " ")] 
                     table_data.append(selected_columns)
     else:
-        print(f"File {txt_filename} not found.")
+        print(f"Enrichr txt output not found.")
+
+
 
     return render_template(
         'patient_details.html', 
@@ -386,7 +395,7 @@ def patient_details(patient_id):
         user_id=current_user.id, 
         cancer_types=cancer_types, 
         resistances=resistances,
-        table_data=table_data 
+        table_data=table_data
     )
 
 
