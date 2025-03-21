@@ -9,6 +9,7 @@ from config import Config
 from werkzeug.utils import secure_filename
 import os
 from vcf_reader import process_vcf
+from threading import Thread
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -31,8 +32,17 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+# Function to process vcf file in a subprocess
+def process_vcf_async(app, file_path, patient_id):
+    with app.app_context(): 
+        process_vcf(file_path, patient_id)
+        patient = Patient.query.get(patient_id)
+        if patient:
+            patient.status = "completed"
+            db.session.commit()
 
-# ✅ 4. Load user function
+
+# Load user function
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))  # Converts user_id to integer and fetches 
@@ -203,16 +213,22 @@ def add_patient():
         email=email,
         cancer_id=cancer_type.cancer_id,
         doctor_id=current_user.id,  # Asegurarse de que el paciente tenga un doctor asignado
-        nurse_id=nurse_id
+        nurse_id=nurse_id,
+        status="processing"
     )
 
     # Agregar paciente a la base de datos y hacer commit
     try:
         db.session.add(new_patient)
         db.session.commit()
+        print(f"App en add_patient: {app}")
+        print(f"File path: {file_path}")
+        print(f"Patient ID: {new_patient.patient_id}")  # Verifica que existe
 
         # Process VCF
-        process_vcf(file_path, new_patient.patient_id)
+        print("App en add_patient:", app)
+        thread = Thread(target=process_vcf_async, args=(app, file_path, new_patient.patient_id))
+        thread.start()
         
         flash("Patient added successfully!", "success")
         print("Paciente añadido correctamente")
@@ -223,6 +239,12 @@ def add_patient():
 
     return redirect(url_for('doctor_space', cancer_types=cancer_types, nurses=nurses))
 
+@app.route('/check_patient_status/<int:patient_id>')
+def check_patient_status(patient_id):
+    patient = Patient.query.get(patient_id)
+    if patient:
+        return jsonify({"status": patient.status})
+    return jsonify({"status": "not_found"}), 404
 
 @app.route('/choose_treatment/<int:patient_id>')
 @login_required

@@ -16,6 +16,10 @@ patient_has_drug = db.Table(
     db.Column('patient_id', db.Integer, db.ForeignKey('patient.patient_id', ondelete="CASCADE")),
     db.Column('drug_id', db.String(20), db.ForeignKey('drug.drug_id'))
 )
+patient_has_signature = db.Table('patient_has_signature',
+    db.Column('patient_id', db.Integer, db.ForeignKey('patient.patient_id'), primary_key=True),
+    db.Column('signature_id', db.String(50), db.ForeignKey('mutational_signature.signature_id'), primary_key=True))
+
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
@@ -42,14 +46,27 @@ class Patient(db.Model):
     cancer_id = db.Column(db.Integer, db.ForeignKey('cancer_type'), nullable=False)
     doctor_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False) 
     nurse_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+    status = db.Column(db.String(20), default="queued")
     
     doctor = db.relationship('User', foreign_keys=[doctor_id])
     nurse = db.relationship('User', foreign_keys=[nurse_id])
     variants = db.relationship('Variant', secondary=patient_has_variant, backref=db.backref('patients', lazy=True), cascade="all, delete")
     drugs = db.relationship('Drug', secondary=patient_has_drug, backref=db.backref('patients', lazy=True), cascade="all, delete")
+    signatures = db.relationship('MutationalSignature', secondary=patient_has_signature, backref=db.backref('patients', lazy=True), cascade="all, delete")    
+    
     def __repr__(self):
         return f"Patient('{self.name}', '{self.doctor_id}')"
-
+    
+class MutationalSignature(db.Model):
+    signature_id = db.Column(db.String(50), primary_key=True, unique=True, nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    aetiology = db.Column(db.Text, nullable=True)
+    comments = db.Column(db.Text, nullable=True)
+    link = db.Column(db.String(255), nullable=True)
+    
+    def __repr__(self):
+        return f"MutationalSignature('{self.name}')"
+    
 class Drug(db.Model):
     __tablename__ = 'drug'
     drug_id = db.Column(db.String(20), primary_key=True)

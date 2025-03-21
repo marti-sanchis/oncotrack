@@ -123,7 +123,7 @@
     </thead>
     <tbody>
         {% for patient in patients %}
-        <tr data-bs-toggle="modal" data-bs-target="#patientModal{{ patient.patient_id }}">
+        <tr data-bs-toggle="modal" data-bs-target="#patientModal{{ patient.patient_id }}" data-patient-id="{{ patient.patient_id }}">
             <td>{{ patient.patient_id }}</td>
             <td>{{ patient.name }}</td>
             <td>
@@ -147,10 +147,17 @@
                 {% endif %}
             </td>            
             <td>
-                <a href="{{ url_for('patient_details', patient_id=patient.patient_id) }}" class="btn btn-secondary btn-sm">
-                    More Info
-                </a>
-            </td> 
+                {% if patient.status == "processing" %}
+                    <span class="text-warning fw-bold">Processing...</span>
+                {% elif patient.status == "completed" %}
+                    <a href="{{ url_for('patient_details', patient_id=patient.patient_id) }}" 
+                       class="btn btn-success btn-sm">
+                        Completed - More Info
+                    </a>
+                {% else %}
+                    <span class="text-muted">Unknown Status</span>
+                {% endif %}
+            </td>
         </tr>
 
         <!-- Modal para cada paciente -->
@@ -266,6 +273,39 @@
             });
         });
     });
+    let completedPatients = new Set();  // Almacena los pacientes que ya han sido completados
+
+    function checkPatientStatus(patientId) {
+        patientId = Number(patientId);  // Convertir a número para evitar problemas con el Set
+
+        if (completedPatients.has(patientId)) {
+            return;  // No volver a comprobar si el paciente ya está en completed
+        }
+
+        fetch(`/check_patient_status/${patientId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "completed") {
+                    let statusCell = document.querySelector(`tr[data-patient-id="${patientId}"] td:last-child`);
+                    if (statusCell) {
+                        statusCell.innerHTML = `<a href="/patient_details/${patientId}" class="btn btn-success btn-sm">Completed - More Info</a>`;
+                    }
+                    completedPatients.add(patientId);  // Marcar paciente como completado para no consultarlo más
+                }
+            })
+            .catch(error => console.error('Error checking patient status:', error));
+    }
+
+    function checkAllPatients() {
+        document.querySelectorAll("tr[data-patient-id]").forEach(row => {
+            let patientId = row.getAttribute("data-patient-id");
+            checkPatientStatus(patientId);
+        });
+    }
+
+    // Ejecutar cada 5 segundos
+    setInterval(checkAllPatients, 15000);
+
 </script>
 
 {% endblock %}

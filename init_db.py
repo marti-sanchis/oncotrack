@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from models_proba import db, Variant, Gene, Drug, CancerType, DrugAssociation
+from models_proba import db, Variant, Gene, Drug, CancerType, DrugAssociation, MutationalSignature
 from config import Config
 import pandas as pd
 import numpy as np
@@ -52,6 +52,15 @@ load_data("tables/drug.tsv", Drug, {
 # Load cancer types table
 load_data("tables/cancer_type.tsv", CancerType, {
     "cancer_type": "cancer_type"
+})
+
+# Load cosmic mutational signatures
+load_data("tables/mutsignatures.tsv", MutationalSignature, {
+    "signature_id": "signature_id",
+    "description":"description",
+    "aetiology":"aetiology",
+    "comments":"comments",
+    "link":"link"
 })
 
 # Load comsic mutation file
