@@ -27,16 +27,61 @@ body {
     font-weight: bold;
 }
 
+/* Home Page */
+
+/* Section Styling */
+section {
+    padding: 0;
+    width: 100%;
+    text-align: center;
+}
+
+section h2 {
+    font-size: 40px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+section p {
+    font-size: 20px;
+    font-weight: 200;
+    margin-bottom: 20px;
+}
+
+/* Hero Section */
+.logo-container {
+    font-weight: bold;
+}
+
+.logo-img {
+    height: 50px;
+    vertical-align: middle;
+}
+
 /* --- Botones --- */
 .btn-success {
-    background-color: #009444; /* Color verde musgo de la paleta */
-    border: none; /* Color verde oscuro */
+    background-color: #009444;
+    border: none;
 }
 
 .btn-success:hover {
-    background-color: #007336; /* Color más oscuro al pasar el cursor */
+    background-color: #007336;
 }
 
+/* --- Introduction Section --- */
+.introduction {
+    background-color: #f4f8fb;
+    padding: 50px 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.introduction p {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 70px;
+}
 
 /* --- Tarjetas de Pacientes --- */
 .patient-card {
