@@ -2,18 +2,27 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
-<div class="row mb-5 mt-5">
-    <div class="text-center mt-5">
+
+<!-- Introduction Section -->
+<section class="introduction" id="intro">
+    <div class="container text-center py-5">
         <h1 class="display-4 logo-container">Welcome to 
             <img src="{{ url_for('static', filename='img/logo.png') }}" class="logo-img"> 
         </h1>
         <p class="lead">A platform for analyzing and tracking oncological data</p>
+        <div class="mt-4">
+            <a class="btn btn-success btn-lg" href="{{ url_for('login') }}" role="button">Login</a>
+            <a class="btn btn-success btn-lg" href="{{ url_for('signup') }}" role="button">Sign up</a>
+        </div>
     </div>
-</div>
-<div class="row mb-5">
-    <div class="text-center">
-        <a class="btn btn-success btn-lg me-5" href="{{ url_for('login') }}" role="button">Login</a>
-        <a class="btn btn-success btn-lg me-5" href="{{ url_for('signup') }}" role="button">Sign up</a>
+</section>
+
+<!-- About Us Section -->
+<section class="about-us bg-light" id="about">
+    <div class="container text-center py-5">
+        <h2>About Us</h2>
+        <p class="text-muted">We are dedicated to providing cutting-edge solutions for oncological research and data analysis. Our platform helps researchers, clinicians, and data scientists analyze cancer-related data with ease and efficiency.</p>
     </div>
-</div>
+</section>
+
 {% endblock %}
