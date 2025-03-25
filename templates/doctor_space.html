@@ -202,17 +202,23 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <h6>List of Drugs:</h6>
-                        <ul>
-                            {% for drug in drugs %}
-                                <li>{{ drug.name }}</li>  <!-- Mostrar los nombres de las drogas -->
-                            {% else %}
-                                <li>No drugs found.</li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <h6>Select Treatment for {{ patient.name }}:</h6>
+                            <form method="POST" action="/assign_treatment">
+                                <input type="hidden" name="patient_id" value="{{ patient.patient_id }}">
+                            
+                                <!-- Dropdown to Select Treatment -->
+                                <select class="form-select mb-3" name="treatment_id" required>
+                                    {% for drug in drugs %}
+                                    <option value="{{ drug.id }}">{{ drug.name }}</option>
+                                    {% else %}
+                                    <option disabled>No available treatments</option>
+                                    {% endfor %}
+                                </select>
+                            
+                                <!-- Submit Button -->
+                                <button type="submit" class="btn btn-success">Assign Treatment</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
