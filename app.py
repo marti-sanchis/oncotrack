@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, flash, redirect, url_for, send_file, jsonify
 from flask_login import login_user, login_required, LoginManager, current_user, logout_user
 from forms import LoginForm, SignUpForm
-from models_proba import db, User, Patient, Variant, Gene, CancerType, Drug, DrugAssociation, patient_has_variant
+from models_proba import db, User, Patient, Variant, Gene, CancerType, Drug, DrugAssociation, patient_has_variant, patient_has_drug
 from flask_bcrypt import Bcrypt
 from sqlalchemy import or_, and_
 from sqlalchemy.orm import sessionmaker
@@ -41,6 +41,69 @@ def process_vcf_async(app, file_path, patient_id):
             patient.status = "completed"
             db.session.commit()
 
+# Función para extraer la lista de tratamientos de cada paciente
+def get_filtered_treatments(patient):
+    """Filtra y devuelve la lista de tratamientos recomendados para un paciente"""
+    cancer_id = patient.cancer_id
+    variant_ids = [v.variant_id for v in patient.variants]  # Lista de variantes del paciente
+    gene_ids = [v.gene_id for v in db.session.query(Variant.gene_id).filter(Variant.variant_id.in_(variant_ids)).all()]
+
+    # Consulta a la base de datos para obtener los tratamientos filtrados
+    treatment_results = db.session.query(
+        Drug.name, 
+        DrugAssociation.association, 
+        DrugAssociation.subtype,
+        DrugAssociation.cancer_id,
+        DrugAssociation.variant_id,
+        DrugAssociation.gene_id
+    ).join(DrugAssociation).filter(
+        or_(
+            and_(
+                DrugAssociation.cancer_id == cancer_id,
+                DrugAssociation.association == "generic"
+            ),
+            and_(
+                DrugAssociation.cancer_id == cancer_id,
+                DrugAssociation.variant_id.in_(variant_ids),
+                DrugAssociation.association == "specific"
+            ),
+            and_(
+                DrugAssociation.cancer_id == cancer_id,
+                DrugAssociation.gene_id.in_(gene_ids),
+                DrugAssociation.association == "specific"
+            )
+        )
+    ).filter(DrugAssociation.association != "resistance").all()
+
+    # Diccionario para evitar duplicados y priorizar el mejor match_reason
+    treatments_dict = {}
+
+    for treatment in treatment_results:
+        drug_name, association, subtype, t_cancer_id, t_variant_id, t_gene_id = treatment
+
+        if association == "generic":
+            match_reason = "Cancer type"
+            name = ""
+        elif association == "specific":
+            if t_variant_id in variant_ids:
+                match_reason = "Variant"
+                name = t_variant_id
+            elif t_gene_id in gene_ids:
+                match_reason = "Gene"
+                gene_symbol = db.session.query(Gene.gene_symbol).filter(Gene.gene_id == t_gene_id).first()
+                name = gene_symbol[0] if gene_symbol else ""
+
+        # Evitar duplicados y priorizar el mejor match_reason
+        if drug_name in treatments_dict:
+            existing_reason = treatments_dict[drug_name][3]
+            priority_order = {"Cancer type": 1, "Gene": 2, "Variant": 3}
+            if priority_order.get(existing_reason, 0) < priority_order.get(match_reason, 0):
+                treatments_dict[drug_name] = (drug_name, association, subtype, match_reason, name)
+        else:
+            treatments_dict[drug_name] = (drug_name, association, subtype, match_reason, name)
+
+    # Convertir diccionario a lista
+    return list(treatments_dict.values())
 
 # Load user function
 @login_manager.user_loader
@@ -137,12 +200,22 @@ def doctor_space():
     # Obtener todos los usuarios con rol "Nurse"
     nurses = User.query.filter_by(role="nurse").all()
 
+    patients = Patient.query.all()  # Obtener todos los pacientes
+    patients_with_treatments = {}
+
+    for patient in patients:
+        treatments = get_filtered_treatments(patient)  # 🔹 Obtener tratamientos para cada paciente
+        patients_with_treatments[patient] = treatments
+
+    print(patients_with_treatments)
+
     return render_template(
         'doctor_space.html', 
         user=current_user, 
         patients=doctor_patients, 
         cancer_types=cancer_types,
-        nurses=nurses
+        nurses=nurses,
+        patients_with_treatments=patients_with_treatments
     )
 
 @app.route('/add_patient', methods=['GET', 'POST'])
@@ -239,6 +312,46 @@ def add_patient():
 
     return redirect(url_for('doctor_space', cancer_types=cancer_types, nurses=nurses))
 
+
+@app.route('/delete_patient/<int:patient_id>', methods=['POST'])
+@login_required
+def delete_patient(patient_id):
+    # Asegurarse de que el usuario es un doctor
+    if current_user.role != 'doctor':
+        flash('You do not have permission to delete a patient.', 'danger')
+        return redirect(url_for('doctor_space'))
+
+    # Buscar el paciente por ID
+    patient = Patient.query.get(patient_id)
+    if not patient:
+        flash('Patient not found.', 'danger')
+        return redirect(url_for('doctor_space'))
+
+    try:
+        # Eliminar las relaciones en las tablas intermedias
+        db.session.query(patient_has_variant).filter(patient_has_variant.c.patient_id == patient_id).delete()
+        try: 
+            db.session.query(patient_has_signature).filter(patient_has_signature.c.patient_id == patient_id).delete()
+        except:
+            print("continue")
+        try:
+            db.session.query(patient_has_drug).filter(patient_has_drug.c.patient_id == patient_id).delete()
+        except:
+            print("continue")
+
+        # Eliminar el paciente de la tabla Patient
+        db.session.delete(patient)
+        db.session.commit()
+
+        flash('Patient and all related data have been successfully deleted.', 'success')
+
+    except Exception as e:
+        db.session.rollback()
+        print(f'Error deleting patient: {e}', 'danger')
+
+    return redirect(url_for('doctor_space'))
+
+
 @app.route('/check_patient_status/<int:patient_id>')
 def check_patient_status(patient_id):
     patient = Patient.query.get(patient_id)
@@ -246,14 +359,36 @@ def check_patient_status(patient_id):
         return jsonify({"status": patient.status})
     return jsonify({"status": "not_found"}), 404
 
-@app.route('/choose_treatment/<int:patient_id>')
+
+@app.route('/assign_treatment', methods=['POST'])
 @login_required
-def choose_treatment(patient_id):
+def assign_treatment():
+    patient_id = request.form.get('patient_id')
+    treatment_name = request.form.get('treatment_id')  # Esto es el nombre del tratamiento
+
+    print(f"Form submitted to /assign_treatment")
+    print(f"Patient ID: {patient_id}, Treatment Name: {treatment_name}")  # Verifica estos valores
+
+    # Verificar que el paciente y el tratamiento existan
     patient = Patient.query.get_or_404(patient_id)
-    treatments = Drug.query.all()  # Fetch all drugs/treatments
-    
-    # Return the patient details and drug names in JSON format
-    return render_template('choose_treatment.html', patient=patient, treatments=treatments)
+    treatment = Drug.query.filter_by(name=treatment_name).first()  # Buscar por nombre del tratamiento
+
+    if not treatment:
+        flash('Treatment not found!', 'danger')
+        return redirect(url_for('doctor_space'))  # Redirigir si no se encuentra el tratamiento
+
+    previous_treatment = db.session.query(patient_has_drug).filter_by(patient_id=patient_id).first()
+    if previous_treatment:
+        db.session.delete(previous_treatment)
+        db.session.commit()
+
+    # Asociar el paciente con el tratamiento en la tabla relacional
+    patient_has_drug_entry = patient_has_drug.insert().values(patient_id=patient.patient_id, drug_id=treatment.drug_id)
+    db.session.execute(patient_has_drug_entry)
+    db.session.commit()
+
+    flash('Treatment assigned successfully!', 'success')
+    return redirect(url_for('doctor_space'))  # Redirigir a la página del doctor
 
 
 @app.route('/analysis_results/<int:patient_id>/sigProfiler/<path:filename>')
@@ -293,64 +428,7 @@ def patient_details(patient_id):
     print(f"Patient Variants: {variant_ids}")  # Lista de variant_id del paciente
     print(f"Patient Genes: {gene_ids}")  # Lista de gene_id del paciente
 
-    ### TREATMENTS
-    treatment_results = db.session.query(
-        Drug.name, 
-        DrugAssociation.association, 
-        DrugAssociation.subtype,
-        DrugAssociation.cancer_id,
-        DrugAssociation.variant_id,
-        DrugAssociation.gene_id
-    ).join(DrugAssociation).filter(
-        or_(
-            and_(
-                DrugAssociation.cancer_id == cancer_id,
-                DrugAssociation.association == "generic"
-            ),
-            and_(
-                DrugAssociation.cancer_id == cancer_id,
-                DrugAssociation.variant_id.in_(variant_ids),
-                DrugAssociation.association == "specific"
-            ),
-            and_(
-                DrugAssociation.cancer_id == cancer_id,
-                DrugAssociation.gene_id.in_(gene_ids),
-                DrugAssociation.association == "specific"
-            )
-        )
-    ).filter(DrugAssociation.association != "resistance").all()
-
-    # Diccionario para evitar duplicados y priorizar el mejor match_reason
-    treatments_dict = {}
-
-    for treatment in treatment_results:
-        drug_name, association, subtype, t_cancer_id, t_variant_id, t_gene_id = treatment
-
-        if association == "generic":
-            match_reason = "Cancer type"  # Por defecto, solo coincide por cáncer
-            name = ""
-
-        elif association == "specific":
-            if t_variant_id in variant_ids:
-                match_reason = "Variant"  # Mostramos el variant_id
-                name = t_variant_id
-            elif t_gene_id in gene_ids:
-                match_reason = "Gene"  # Mostramos el gene_id
-                gene_symbol = db.session.query(Gene.gene_symbol).filter(Gene.gene_id == t_gene_id).first()
-                name = gene_symbol[0]
-
-        # Evitar duplicados y dar prioridad a la mejor coincidencia
-        if drug_name in treatments_dict:
-            existing_reason = treatments_dict[drug_name][3]
-            priority_order = {"Cancer type": 1, "Gene": 2, "Variant": 3}
-            
-            if priority_order.get(existing_reason, 0) < priority_order.get(match_reason, 0):
-                treatments_dict[drug_name] = (drug_name, association, subtype, match_reason, name)
-        else:
-            treatments_dict[drug_name] = (drug_name, association, subtype, match_reason, name)
-
-    # Convertimos el diccionario en una lista de tratamientos únicos
-    treatments = list(treatments_dict.values())
+    treatments = get_filtered_treatments(patient)
 
     ### RESISTANCES
     resistances = db.session.query(

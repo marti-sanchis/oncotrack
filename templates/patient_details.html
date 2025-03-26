@@ -9,12 +9,12 @@
     <div class="row">
         <!-- Contenido principal -->
         <div class="col-md-9">
-            <!-- Summary -->
-            <section id="summary" class="mb-5">
-                <h2>Summary</h2>
+            <!-- Patient data -->
+            <section id="patient_data" class="mb-5">
+                <h2>Patient Data</h2>
                 <div class="card p-3">
-                    <p><strong>ID:</strong> {{ patient.patient_id }}</p>
                     <p><strong>Name:</strong> {{ patient.name }}</p>
+                    <p><strong>DNI:</strong> {{ patient.DNI }}</p>
                     <p><strong>Age:</strong> {{ patient.age }}</p>
                     <p><strong>Gender:</strong> {{ patient.gender }}</p>
                     <p><strong>Cancer Type:</strong> 
@@ -24,7 +24,24 @@
                             {% endif %}
                         {% endfor %}
                     </p>
-                    <p><strong>Treatment:</strong> {{ patient.treatment if patient.treatment else 'No treatment assigned' }}</p>
+                    <p><strong>Phone:</strong> {{ patient.phone if patient.phone else 'Not provided' }}</p>
+                    <p><strong>Email:</strong> {{ patient.email if patient.email else 'Not provided' }}</p>
+                    <p><strong>Nurse:</strong> 
+                        {% if patient.nurse %}
+                            {{ patient.nurse.name }} {{ patient.nurse.surname }}
+                        {% else %}
+                            -- No nurse assigned --
+                        {% endif %}
+                    </p>
+                    <p><strong>Treatment:</strong> 
+                        {% if patient.drugs %}
+                            {% for drug in patient.drugs %}
+                                {{ drug.name }}
+                            {% endfor %}
+                        {% else %}
+                            No treatment assigned
+                        {% endif %}
+                    </p>
                 </div>
             </section>
 
@@ -90,24 +107,24 @@
                 </div>
             </section>
             
-            <!-- Mutational Signature Analysis -->
+            <!-- Mutational Signature Analysis
             <section id="mutational-signature" class="mb-5">
                 <button class="collapsible"><h2>Mutational Signature Analysis</h2></button>
-                <div class="content">
+                <div class="content"> -->
                     <!-- Row para organizar los plots en columnas -->
-                        <!-- SBS96 Plot -->
+                        <!-- SBS96 Plot 
                         <div class="col-md-12">
                             <h3>SBS96 Signature Plot</h3>
                             <img src="{{ url_for('serve_analysis_file', patient_id=patient.patient_id, filename='SBS96_plot.png') }}" class="img-fluid" alt="SBS96 Plot">
-                        </div>
+                        </div> -->
             
-                        <!-- Signature Pie Chart -->
+                        <!-- Signature Pie Chart
                         <div class="col-md-4">
                             <h3>Signature Decomposition</h3>
                             <img src="{{ url_for('serve_analysis_file', patient_id=patient.patient_id, filename='signature_pie_chart.png') }}" class="img-fluid" alt="Signature Pie Chart">
                         </div>
                 </div>
-            </section>
+            </section> -->
 
             <!-- Treatments -->
             <section id="treatments" class="mb-5">
@@ -190,7 +207,6 @@
     </div>
 </div>
 
-<!-- Smooth Scrolling -->
 <!-- Smooth Scrolling -->
 <script>
     // Smooth scrolling for navigation links
