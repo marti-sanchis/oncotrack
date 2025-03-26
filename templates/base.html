@@ -11,6 +11,10 @@
     <!-- Include Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Include Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-kenU1KFdBIYjzNvEm+cfw6Cc5I5H6Y9Omg5mLyyNpXh2Bp4YmqpXZ6vCJLXwpT" crossorigin="anonymous"></script>
     <!-- Include custom CSS-->
     <link href="{{ url_for('static', filename='css/custom.css') }}" rel="stylesheet">
     <link rel="icon" type="image/x-icon" sizes="180x180" href="{{ url_for('static', filename='img/icon.ico') }}">
@@ -19,26 +23,45 @@
 
 <body>
     <!-- Barra de navegación -->
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container-fluid">
             <!-- Logo a la izquierda -->
             <a class="navbar-brand" href="{{ url_for('home') }}">
                 <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" class="navbar_img">
             </a>
+            
             <!-- Menú de navegación -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('home') }}">Home</a>
-                        <a href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('home') }}#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('home') }}#services">Our servives</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('home') }}#contact">Contact us</a>
+                    </li>
+                    <!-- Person Icon Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle"></i> <!-- Person Icon -->
+                        </a>                        
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <!-- Button to redirect to Login page -->
+                            <li><a class="dropdown-item" href="{{ url_for('login') }}"></a></li>
+                            <!-- Button to redirect to Sign Up page -->
+                            <li><a class="dropdown-item" href="{{ url_for('signup') }}"></a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
+
 
     <!-- Contenido principal -->
     <div class="container-md d-grid gap-5">
