@@ -377,12 +377,13 @@ def assign_treatment():
         flash('Treatment not found!', 'danger')
         return redirect(url_for('doctor_space'))  # Redirigir si no se encuentra el tratamiento
 
-    previous_treatment = db.session.query(patient_has_drug).filter_by(patient_id=patient_id).first()
-    if previous_treatment:
-        db.session.delete(previous_treatment)
-        db.session.commit()
+    # Eliminar cualquier tratamiento previo asignado a este paciente
+    db.session.execute(
+        patient_has_drug.delete().where(patient_has_drug.c.patient_id == patient_id)
+    )
+    db.session.commit()
 
-    # Asociar el paciente con el tratamiento en la tabla relacional
+    # Asociar el paciente con el nuevo tratamiento en la tabla relacional
     patient_has_drug_entry = patient_has_drug.insert().values(patient_id=patient.patient_id, drug_id=treatment.drug_id)
     db.session.execute(patient_has_drug_entry)
     db.session.commit()

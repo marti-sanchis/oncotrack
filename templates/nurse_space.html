@@ -33,7 +33,11 @@
                     {% endif %}
                 {% endfor %}
             </td>
-            <td></td>
+            <td>
+                {% if patient.drugs %}
+                    {{ patient.drugs[0].name }}
+                {% endif %}
+            </td>
         </tr>
 
         <!-- Modal para cada paciente -->
