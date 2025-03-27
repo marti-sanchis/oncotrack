@@ -47,7 +47,7 @@ body {
     position: absolute;
     top: 100%;
     right: 0;
-    z-index: 1000;
+    z-index: 1050; /* Ensures it appears above other elements */
 }
 
 .navbar .dropdown-menu a {
@@ -55,6 +55,16 @@ body {
     font-weight: normal;
 }
 
+/* Dropdown Item Styling */
+.dropdown-menu a {
+    color: #333; /* Default text color */
+    background-color: white; /* Background color of dropdown items */
+}
+
+.dropdown-menu a:hover {
+    color: #2C6E49; /* Color when hovering over dropdown items */
+    background-color: #D0E4D9; /* Background color on hover */
+}
 
 /* Home Page */
 

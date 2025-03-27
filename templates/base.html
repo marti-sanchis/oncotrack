@@ -13,8 +13,7 @@
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <!-- Include Bootstrap JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" 
-        integrity="sha384-kenU1KFdBIYjzNvEm+cfw6Cc5I5H6Y9Omg5mLyyNpXh2Bp4YmqpXZ6vCJLXwpT" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <!-- Include custom CSS-->
     <link href="{{ url_for('static', filename='css/custom.css') }}" rel="stylesheet">
     <link rel="icon" type="image/x-icon" sizes="180x180" href="{{ url_for('static', filename='img/icon.ico') }}">
@@ -47,18 +46,16 @@
                     </li>
                     <!-- Person Icon Dropdown -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-person-circle"></i> <!-- Person Icon -->
-                        </a>                        
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle"></i>
+                        </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                            <!-- Button to redirect to Login page -->
-                            <li><a class="dropdown-item" href="{{ url_for('login') }}"></a></li>
-                            <!-- Button to redirect to Sign Up page -->
-                            <li><a class="dropdown-item" href="{{ url_for('signup') }}"></a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('login') }}">Login</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('signup') }}">Sign Up</a></li>
                         </ul>
                     </li>
                 </ul>
-            </div>
+            </div> 
         </div>
     </nav>
 
@@ -86,6 +83,20 @@
                 row.style.display = "none";
             }
         });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Use a more robust selector for the dropdown
+        var userDropdown = document.querySelector('[data-bs-toggle="dropdown"]');
+        
+        if (userDropdown) {
+            console.log('Dropdown toggle found');
+            
+            // Optional: Add explicit dropdown initialization
+            var dropdownInstance = new bootstrap.Dropdown(userDropdown);
+        } else {
+            console.error('No dropdown toggle found. Check your HTML structure.');
+        }
     });
 </script>
 </body>
