@@ -158,7 +158,7 @@
                         </button>
                     {% endif %}
                 </td>
-                <td class="text-center">
+                <td class="status-cell text-center">
                     {% if patient.status == "processing" %}
                         <span class="text-warning fw-bold">Processing...</span>
                     {% elif patient.status == "completed" %}
@@ -293,35 +293,56 @@
     let completedPatients = new Set();  // Almacena los pacientes que ya han sido completados
 
     function checkPatientStatus(patientId) {
-        patientId = Number(patientId);  // Convertir a número para evitar problemas con el Set
+    patientId = Number(patientId); // Convertir a número para evitar problemas con el Set
 
-        if (completedPatients.has(patientId)) {
-            return;  // No volver a comprobar si el paciente ya está en completed
-        }
+    if (completedPatients.has(patientId)) {
+        return;  // No volver a comprobar si el paciente ya está en completed
+    }
 
-        fetch(`/check_patient_status/${patientId}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === "completed") {
-                    let statusCell = document.querySelector(`tr[data-patient-id="${patientId}"] td:last-child`);
-                    if (statusCell) {
-                        statusCell.innerHTML = `<a href="/patient_details/${patientId}" class="btn btn-success btn-sm">Completed - More Info</a>`;
-                    }
-                    completedPatients.add(patientId);  // Marcar paciente como completado para no consultarlo más
+    fetch(`/check_patient_status/${patientId}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "completed") {
+                let row = document.querySelector(`tr[data-patient-id="${patientId}"]`);
+                let statusCell = row.querySelector(".status-cell");
+
+                if (statusCell) {
+                    statusCell.innerHTML = `<a href="/patient_details/${patientId}" class="btn btn-success btn-sm">Completed - More Info</a>`;
                 }
-            })
-            .catch(error => console.error('Error checking patient status:', error));
-    }
 
-    function checkAllPatients() {
-        document.querySelectorAll("tr[data-patient-id]").forEach(row => {
+                // Marcar paciente como completado
+                completedPatients.add(patientId);
+
+                // Remover la clase processing-row para que no se vuelva a consultar
+                row.classList.remove("processing-row");
+            }
+        })
+        .catch(error => console.error('Error checking patient status:', error));
+}
+    // function checkAllPatients() {
+    //     document.querySelectorAll("tr[data-patient-id]").forEach(row => {
+    //         let patientId = row.getAttribute("data-patient-id");
+    //         checkPatientStatus(patientId);
+    //     });
+    // }
+
+    // // Ejecutar cada 5 segundos
+    // setInterval(checkAllPatients, 15000);
+
+    function checkAllProcessingPatients() {
+    document.querySelectorAll("tr[data-patient-id]").forEach(row => {
+        let statusCell = row.querySelector(".status-cell");
+        
+        if (statusCell && statusCell.textContent.trim() === "Processing...") {
             let patientId = row.getAttribute("data-patient-id");
-            checkPatientStatus(patientId);
-        });
-    }
+            checkPatientStatus(patientId, row, statusCell);
+        }
+    });
+}
 
-    // Ejecutar cada 5 segundos
-    setInterval(checkAllPatients, 15000);
+// Ejecutar la función cada 15 segundos
+setInterval(checkAllProcessingPatients, 15000);
+
 
 </script>
 

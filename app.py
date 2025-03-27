@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, flash, redirect, url_for, send_file, jsonify
 from flask_login import login_user, login_required, LoginManager, current_user, logout_user
 from forms import LoginForm, SignUpForm
-from models_proba import db, User, Patient, Variant, Gene, CancerType, Drug, DrugAssociation, patient_has_variant, patient_has_drug
+from models_proba import db, User, Patient, Variant, Gene, CancerType, Drug, DrugAssociation, patient_has_variant, patient_has_drug, patient_has_signature
 from flask_bcrypt import Bcrypt
 from sqlalchemy import or_, and_
 from sqlalchemy.orm import sessionmaker
