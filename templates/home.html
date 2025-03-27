@@ -5,7 +5,7 @@
 
 <!-- Introduction Section -->
 <section class="introduction" id="intro">
-    <div class="container text-center py-5">
+    <div class="container-fluid text-center py-5">
         <h1 class="display-4 logo-container">Welcome to 
             <img src="{{ url_for('static', filename='img/logo.png') }}" class="logo-img"> 
         </h1>
@@ -21,8 +21,10 @@
 <section class="about-us bg-light" id="about">
     <div class="container text-center py-5">
         <h2>About Us</h2>
-        <p class="text-muted">At OncoTrack, we are a dedicated team of healthcare professionals and bioinformaticians committed to improving cancer treatment through advanced genetic analysis. Our platform provides doctors and nurses with comprehensive tools to analyze patient genetic data, identify key mutations, and recommend personalized treatment options. By combining cutting-edge bioinformatics with user-friendly design, we streamline the decision-making process, ensuring patients receive the best possible care tailored to their genetic profile.
-        <p class="text-muted">Our mission is to make precision medicine accessible and actionable for healthcare professionals. OncoTrack bridges the gap between complex genomic data and clinical practice, empowering doctors to make informed treatment decisions while providing nurses with clear, actionable guidance on administering care. We aim to transform cancer care through innovation, enhancing the quality of life for patients worldwide.</p>
+        <p class="text-muted">We are four students of the Master's in Bioinformatics for Health Sciences at UPF. This application was developed as part of our Databases and Web Development course, where we aimed to integrate bioinformatics and healthcare to create a tool that supports healthcare professionals in cancer treatment decisions.</p>
+        <p class="text-muted">OncoTrack is a platform designed to assist doctors and nurses in analyzing genetic data and providing personalized cancer treatment recommendations. By integrating cutting-edge bioinformatics techniques with a user-friendly interface, the app helps medical professionals make informed decisions tailored to patients' genetic profiles. Our mission is to bridge the gap between genomic data and clinical practice, making precision medicine more accessible and actionable.</p>
+        <p class="text-muted">Below is the database model used to design and implement OncoTrack.</p>
+        <img src="static/img/model.png" alt="OncoTrack Database Model" class="img-fluid mt-4" />
     </div>
 </section>
 
@@ -89,5 +91,17 @@
         <p>Follow us on <a href="#">Twitter</a> | <a href="#">LinkedIn</a></p>
     </div>
 </section>
+
+<!--Footer-->
+<footer>
+    <div class="footer-content">
+        <span>Leire Asua, Marta Perez, Ivon Sanchez and Martí Sanchis</span>
+        <div class="social-links">
+            <a href="https://github.com/marti-sanchis/oncotrack" target="_blank" aria-label="GitHub">
+              <img src="static/img/github-icon.png" alt="GitHub">
+            </a>
+        </div>
+    </div>
+</footer>
 
 {% endblock %}

@@ -1,22 +1,20 @@
 /* --- Global Styles --- */
-body {
-    font-family: 'Open Sans', sans-serif;
+
+html, body {
+    font-family: 'Montserrat', serif;
     background-color: #f4f8fb;
     color: #333;
     margin: 0;
     padding: 0;
+    width: 100%;
+    box-sizing: border-box;
 }
-
-.left-align {
-    text-align: left;
-    margin-left: 0;
-}
-
 
 /* --- Navbar --- */
 .navbar {
     background-color: #D0E4D9;
     padding: 0px 60px;
+    width: 100vw;
     height: 65px; /* Ajusta el tamaño total de la navbar */
     min-height: 50px; /* Evita que sea demasiado alta */
     display: flex;
@@ -89,6 +87,7 @@ section p {
 }
 
 /* Hero Section */
+
 .logo-container {
     font-weight: bold;
 }
@@ -110,17 +109,56 @@ section p {
 
 /* --- Introduction Section --- */
 .introduction {
-    background-color: #f4f8fb;
-    padding: 50px 20px;
-    border-radius: 10px;
-    margin-bottom: 30px;
-    text-align: center;
+    position: relative;
+    background: url("../img/background.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    width: 100vw;
+    /* Flexbox for centering */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertical centering */
+    align-items: center; /* Horizontal centering */
 }
+
+.introduction::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5); /* White overlay with 70% opacity */
+    z-index: 1;
+}
+
+.introduction > * {
+    position: relative;
+    z-index: 2;
+}
+
 
 .introduction p {
     font-size: 1.5rem;
     color: #333;
     margin-bottom: 70px;
+    text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    background-color: #ffffff34;
+}
+
+/* --- About Us Section --- */
+.about-us {
+    background-color: #f4f8fb;
+    padding: 50px 0;
+    min-height: 100vh;
+    height: 160vh;
+}
+
+.about-us p {
+    margin-top: 40px;
+    margin-bottom: 20px;
+
 }
 
 /* --- Our Services Section --- */
@@ -130,7 +168,7 @@ section p {
 }
 
 .container {
-    max-width: 1200px; /* To ensure a max width */
+    width: 100%; /* To ensure a max width */
 }
 
 .service-card {
@@ -163,11 +201,50 @@ h4 {
     margin-bottom: 15px;
 }
 
+/* Footer */
+footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background: #000;
+    padding: 20px 0;
+    position: absolute;
+  }
+  
+  .footer-content {
+    display: flex;
+    justify-content: space-between; /* Positions text on the left and icons on the right */
+    align-items: center;
+    width: 40%;
+    padding: 0;
+  }
+  
+  footer span {
+    color: #fff;
+    font-size: 16px;
+    white-space: nowrap;
+  }
+  
+  .social-links a {
+    margin: 0 10px;
+  }
+  
+  .social-links img {
+    width: 40px;
+    height: 40px;
+    border-radius: 10%; /* Makes the icons circular */
+    transition: transform 0.3s ease;
+  }
+  
+  .social-links img:hover {
+    transform: scale(1.1); /* Slight zoom effect on hover */
+  }
+
 /* Flexbox to center the cards */
 .row {
     display: flex;
     justify-content: center;
-    gap: 30px; /* Adds space between columns */
+    margin: 0;
 }
 
 .col-md-4 {
@@ -184,9 +261,6 @@ h4 {
         max-width: 100%;
     }
 }
-
-
-
 
 /* --- Tarjetas de Pacientes --- */
 .patient-card {
@@ -254,8 +328,6 @@ input, select {
     width: auto; /* Mantiene la proporción */
 }
 
-
-
 /* -- Sing up -- */
 .form-signin {
     max-width: 500px; /* Ajusta el ancho máximo del formulario */
@@ -305,7 +377,7 @@ input, select {
 }
 
 .collapsible {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Montserrat', serif;
     background-color: #f4f8fb;
     color: #333;
     cursor: pointer;
