@@ -47,6 +47,7 @@ class Patient(db.Model):
     doctor_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False) 
     nurse_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     status = db.Column(db.String(20), default="queued")
+    archived = db.Column(db.Boolean, default=False)
     
     doctor = db.relationship('User', foreign_keys=[doctor_id])
     nurse = db.relationship('User', foreign_keys=[nurse_id])

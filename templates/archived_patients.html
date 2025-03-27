@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}{{ current_user.surname }}'s private space{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+	<h3>Archived Patients</h3>
+	<table class="table table-striped">
+	    <thead class="table-secondary">
+	        <tr>
+	            <th>ID</th>
+	            <th>Name</th>
+	            <th>Cancer Type</th>
+	            <th>Status</th>
+	            <th>Actions</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	        {% for patient in archived_patients %}
+	        <tr>
+	            <td>{{ patient.patient_id }}</td>
+	            <td>{{ patient.name }}</td>
+	            <td>
+                    {% for cancer in cancer_types %}
+                        {% if cancer.cancer_id == patient.cancer_id %}
+                            {{ cancer.cancer_type }}
+                        {% endif %}
+                    {% endfor %}
+                </td>
+	            <td>
+	                {% if patient.status == "processing" %}
+	                    <span class="text-warning">Processing...</span>
+	                {% elif patient.status == "completed" %}
+	                    <span class="text-success">Completed</span>
+	                {% else %}
+	                    <span class="text-muted">Unknown Status</span>
+	                {% endif %}
+	            </td>
+	            <td>
+	                <!-- Botón para desarchivar -->
+	                <form action="{{ url_for('unarchive_patient', patient_id=patient.patient_id) }}" method="POST" style="display:inline;">
+	                    <button type="submit" class="btn btn-info btn-sm">Unarchive</button>
+	                </form>
+	            </td>
+	        </tr>
+	        {% endfor %}
+	    </tbody>
+	</table>
+	<div class = "col-md-3">
+        <a href="{{ url_for('doctor_space') }}" class="btn btn-success left-align mb-2" onclick="">Go Back</a>
+    </div>
+</div>
+
+{% endblock %}

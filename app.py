@@ -113,6 +113,10 @@ def load_user(user_id):
 @app.route("/")
 def home():
     return render_template("home.html")
+def index():
+    # Obtener pacientes no archivados
+    patients = Patient.query.filter_by(archived=False).all()
+    return render_template('index.html', patients=patients)
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -194,16 +198,15 @@ def doctor_space():
         return redirect(url_for('home'))
 
     # Obtener todos los pacientes asignados al doctor actual
-    doctor_patients = Patient.query.filter_by(doctor_id=current_user.id).all()
+    doctor_patients = Patient.query.filter_by(doctor_id=current_user.id, archived=False).all()
     cancer_types = CancerType.query.all()
 
     # Obtener todos los usuarios con rol "Nurse"
     nurses = User.query.filter_by(role="nurse").all()
 
-    patients = Patient.query.all()  # Obtener todos los pacientes
     patients_with_treatments = {}
 
-    for patient in patients:
+    for patient in doctor_patients:
         treatments = get_filtered_treatments(patient)  # 🔹 Obtener tratamientos para cada paciente
         patients_with_treatments[patient] = treatments
 
@@ -321,35 +324,71 @@ def delete_patient(patient_id):
         flash('You do not have permission to delete a patient.', 'danger')
         return redirect(url_for('doctor_space'))
 
-    # Buscar el paciente por ID
     patient = Patient.query.get(patient_id)
     if not patient:
         flash('Patient not found.', 'danger')
         return redirect(url_for('doctor_space'))
 
-    try:
-        # Eliminar las relaciones en las tablas intermedias
-        db.session.query(patient_has_variant).filter(patient_has_variant.c.patient_id == patient_id).delete()
-        try: 
-            db.session.query(patient_has_signature).filter(patient_has_signature.c.patient_id == patient_id).delete()
-        except:
-            print("continue")
+    action = request.form.get('action')
+    if action == 'delete':
         try:
-            db.session.query(patient_has_drug).filter(patient_has_drug.c.patient_id == patient_id).delete()
-        except:
-            print("continue")
+            db.session.query(patient_has_variant).filter(patient_has_variant.c.patient_id == patient_id).delete()
+            try: 
+                db.session.query(patient_has_signature).filter(patient_has_signature.c.patient_id == patient_id).delete()
+            except:
+                print("continue")
+            try:
+                db.session.query(patient_has_drug).filter(patient_has_drug.c.patient_id == patient_id).delete()
+            except:
+                print("continue")
 
-        # Eliminar el paciente de la tabla Patient
-        db.session.delete(patient)
+            #Eliminar el paciente de la tabla Patient
+            db.session.delete(patient)
+            db.session.commit()
+
+            flash('Patient and all related data have been successfully deleted.', 'success')
+
+        except Exception as e:
+            db.session.rollback()
+            print(f'Error deleting patient: {e}', 'danger')
+
+    elif action == 'archive':
+        # Archivar al paciente (marcar como archivado)
+        patient.archived = True
         db.session.commit()
-
-        flash('Patient and all related data have been successfully deleted.', 'success')
-
-    except Exception as e:
-        db.session.rollback()
-        print(f'Error deleting patient: {e}', 'danger')
+        flash('Patient archived', 'info')
 
     return redirect(url_for('doctor_space'))
+
+
+@app.route('/archived_patients')
+def archived_patients():
+    # Obtener la lista de pacientes archivados
+    archived_patients = Patient.query.filter_by(archived=True).all()
+    cancer_types = CancerType.query.all()
+    return render_template('archived_patients.html', 
+        archived_patients=archived_patients,
+        cancer_types = cancer_types)
+
+
+@app.route('/unarchive_patient/<int:patient_id>', methods=['POST'])
+@login_required
+def unarchive_patient(patient_id):
+    if current_user.role != 'doctor':
+        return redirect(url_for('home'))
+
+    # Buscar al paciente
+    patient = Patient.query.get(patient_id)
+
+    if patient and patient.archived:  # Verificar si el paciente está archivado
+        patient.archived = False  # Cambiar su estado a no archivado
+        db.session.commit()  # Guardar los cambios en la base de datos
+
+        flash('Patient has been unarchived successfully.', 'success')
+    else:
+        flash('Patient not found or already unarchived.', 'danger')
+
+    return redirect(url_for('doctor_space'))  # Redirigir a la lista de pacientes del doctor
 
 
 @app.route('/check_patient_status/<int:patient_id>')
