@@ -404,6 +404,12 @@ input, select {
     padding: 5px 10px;
 }
 
+/* Button styling */
+.table td .btn-sm {
+    margin-right: 5px; /* Add some spacing between buttons */
+    display: flex; /* Ensures buttons align properly */
+}
+
 /* Efecto hover en las filas */
 .table-hover tbody tr:hover {
     background-color: #D0E4D9;
