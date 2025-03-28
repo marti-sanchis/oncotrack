@@ -5,6 +5,13 @@
 <form class="form-signin text-center" action="{{ url_for('login') }}" method="post">
     {{ form.hidden_tag() }}
       <h1 class="h3 mb-3 fw-normal">Please Log in</h1>
+      {% if user_not_found %}
+      <div class="alert alert-warning" role="alert">
+          <p>No user found with the email: <strong>{{ email }}</strong></p>
+          <p>Would you like to create an account?</p>
+          <a href="{{ url_for('signup') }}" class="btn btn-warning mt-2">Sign Up</a>
+      </div>
+      {% endif %}
       <div class="form-floating mb-1">
         {{ form.email(class_="form-control") }}
         <label for="email">Email address</label>

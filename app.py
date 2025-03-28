@@ -132,18 +132,24 @@ def signup():
         # Hash the password before saving it
         hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
 
-        # Guardamos el usuario en la base de datos
+        # Save the user in the database
         new_user = User(name=name, surname=surname, email=email, password=hashed_password, role=role)
         db.session.add(new_user)
         db.session.commit()
 
-        # Redirigir según el rol del usuario
+        # Log in the user immediately after signup
+        login_user(new_user)
+
+        # Redirect directly to the corresponding space based on role
         if role == 'doctor':
+            flash('Successfully signed up and logged in as a doctor!', 'success')
             return redirect(url_for('doctor_space'))
         elif role == 'nurse':
+            flash('Successfully signed up and logged in as a nurse!', 'success')
             return redirect(url_for('nurse_space'))
         else:
-            return redirect(url_for('index'))  # O cualquier otra página por defecto
+            flash('Successfully signed up!', 'success')
+            return redirect(url_for('index'))  # Default redirect if no specific role
 
     return render_template('auth/signup.html', form=form)
 
@@ -154,6 +160,13 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
+        # If user does not exist, flash a message and redirect to signup
+        if not user:
+           # Pass email to template to pre-fill signup form if desired
+            return render_template('auth/login.html', 
+                                   form=form, 
+                                   user_not_found=True, 
+                                   email=form.email.data)
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user)
             flash('Login successful!', 'success')
@@ -251,6 +264,9 @@ def add_patient():
     # Convertir age a entero y verificar que sea un número válido
     try:
         age = int(age)
+        if age <= 0:
+            flash("Age must be a positive number", "danger")
+            return redirect(url_for('doctor_space'))
     except ValueError:
         flash("Age must be a number", "danger")
         return redirect(url_for('doctor_space'))
