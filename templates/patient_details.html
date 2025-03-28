@@ -4,7 +4,7 @@
 
 {% block body %}
 <div class="container mt-4">
-    <h1 class="text-center">More Info</h1>
+    <h6 class="text-center">More Info</h6>
 
     <div class="row">
         <!-- Contenido principal -->
@@ -107,24 +107,24 @@
                 </div>
             </section>
             
-            <!-- Mutational Signature Analysis
+            <!-- Mutational Signature Analysis-->
             <section id="mutational-signature" class="mb-5">
                 <button class="collapsible"><h2>Mutational Signature Analysis</h2></button>
-                <div class="content"> -->
+                <div class="content">
                     <!-- Row para organizar los plots en columnas -->
-                        <!-- SBS96 Plot 
+                        <!-- SBS96 Plot -->
                         <div class="col-md-12">
-                            <h3>SBS96 Signature Plot</h3>
+                            <p>SBS96 Signature Plot</p>
                             <img src="{{ url_for('serve_analysis_file', patient_id=patient.patient_id, filename='SBS96_plot.png') }}" class="img-fluid" alt="SBS96 Plot">
-                        </div> -->
+                        </div>
             
-                        <!-- Signature Pie Chart
+                        <!-- Signature Pie Chart-->
                         <div class="col-md-4">
-                            <h3>Signature Decomposition</h3>
+                            <p>Signature Decomposition</p>
                             <img src="{{ url_for('serve_analysis_file', patient_id=patient.patient_id, filename='signature_pie_chart.png') }}" class="img-fluid" alt="Signature Pie Chart">
                         </div>
                 </div>
-            </section> -->
+            </section>
 
             <!-- Treatments -->
             <section id="treatments" class="mb-5">
@@ -194,8 +194,10 @@
             <div class="card p-3 position-sticky" style="top: 20px;">
                 <h5>Navigation</h5>
                 <ul class="nav flex-column">
-                    <li class="nav-item"><a class="nav-link" href="#summary">Summary</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#patient_data">Summary</a></li>
                     <li class="nav-item"><a class="nav-link" href="#variants">Variants</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#kegg-report">KEGG Enrichment</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#mutational-signature">Mutational Signature</a></li>
                     <li class="nav-item"><a class="nav-link" href="#treatments">Treatments</a></li>
                     <li class="nav-item"><a class="nav-link" href="#resistances">Resistances</a></li>
                 </ul>

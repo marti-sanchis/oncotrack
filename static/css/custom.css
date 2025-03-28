@@ -73,7 +73,7 @@ section {
     text-align: center;
 }
 
-section h2 {
+section h1 {
     font-size: 40px;
     font-weight: 600;
     margin-bottom: 20px;
@@ -245,6 +245,40 @@ footer {
     display: flex;
     justify-content: center;
     margin: 0;
+}
+
+.row h6 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    padding: 15px 0;
+    border-bottom: 3px solid #208949;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.row h2 {
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    position: relative;
+    display: inline-block;
+    padding: 12px 20px;
+    color: #2c3e50;
+    background-color: rgba(52, 219, 57, 0.1);
+    border: 2px solid rgba(48, 152, 59, 0.681);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.row h2:hover {
+    background-color: rgba(60, 219, 52, 0.15);
+    border-color: rgba(48, 152, 58, 0.908);
+    transform: translateY(-2px);
 }
 
 .col-md-4 {
