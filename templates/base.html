@@ -28,7 +28,13 @@
             <a class="navbar-brand" href="{{ url_for('home') }}">
                 <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" class="navbar_img">
             </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             
+            {% block navbar %}
             <!-- Menú de navegación -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
@@ -53,6 +59,7 @@
                     </li>
                 </ul>
             </div> 
+            {% endblock %}
         </div>
     </nav>
 
@@ -86,17 +93,11 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Use a more robust selector for the dropdown
-        var userDropdown = document.querySelector('[data-bs-toggle="dropdown"]');
-        
-        if (userDropdown) {
-            console.log('Dropdown toggle found');
-            
-            // Optional: Add explicit dropdown initialization
-            var dropdownInstance = new bootstrap.Dropdown(userDropdown);
-        } else {
-            console.error('No dropdown toggle found. Check your HTML structure.');
-        }
+        // Initialize all dropdowns on the page
+        var dropdownElementList = [].slice.call(document.querySelectorAll('[data-bs-toggle="dropdown"]'))
+        var dropdownList = dropdownElementList.map(function(dropdownToggleEl) {
+            return new bootstrap.Dropdown(dropdownToggleEl)
+        });
     });
 </script>
 
