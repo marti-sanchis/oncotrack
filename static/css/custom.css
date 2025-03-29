@@ -10,6 +10,11 @@ html, body {
     box-sizing: border-box;
 }
 
+h3 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 /* --- Navbar --- */
 .navbar {
     background-color: #D0E4D9;

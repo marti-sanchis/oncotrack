@@ -111,19 +111,79 @@
             <section id="mutational-signature" class="mb-5">
                 <button class="collapsible"><h2>Mutational Signature Analysis</h2></button>
                 <div class="content">
-                    <!-- Row para organizar los plots en columnas -->
-                        <!-- SBS96 Plot -->
-                        <div class="col-md-12">
-                            <p>SBS96 Signature Plot</p>
-                            <img src="{{ url_for('serve_analysis_file', patient_id=patient.patient_id, filename='SBS96_plot.png') }}" class="img-fluid" alt="SBS96 Plot">
+                    <!-- First Row: SBS96 Plot -->
+                    <div class="row mb-3">
+                        <div class="col-md-12 text-center">
+                            <h3>SBS96 Signature Plot</h3>
+                            <img src="{{ url_for('serve_analysis_file', patient_id=patient.patient_id, filename='SBS96_plot.png') }}" 
+                                class="img-fluid" alt="SBS96 Plot">
                         </div>
-            
-                        <!-- Signature Pie Chart-->
-                        <div class="col-md-4">
-                            <p>Signature Decomposition</p>
-                            <img src="{{ url_for('serve_analysis_file', patient_id=patient.patient_id, filename='signature_pie_chart.png') }}" class="img-fluid" alt="Signature Pie Chart">
+                    </div>
+
+                    <!-- Second Row: Signature Pie Chart -->
+                    <div class="row mb-3">
+                        <div class="col-md-5 text-center">
+                            <h3>Signature Decomposition</h3>
+                            <img src="{{ url_for('serve_analysis_file', patient_id=patient.patient_id, filename='signature_pie_chart.png') }}" 
+                                class="img-fluid" alt="Signature Pie Chart">
                         </div>
+                    </div>
+                    <!-- Second Row: SIgnatures info-->
+                    <div class="row-md-3">
+                        <h3>Detected Signatures Details</h3>
+                        <div class="list-group w-50 mx-auto">
+                            {% for sig in signature_details %}
+                            <button type="button" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" 
+                                    data-bs-toggle="modal" data-bs-target="#sbsModal{{ loop.index }}">
+                                {{ sig.signature_id }}
+                                <span class="badge bg-success rounded-pill">
+                                    <i class="fas fa-info-circle"></i> Details
+                                </span>
+                            </button>
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
+            
+                <!-- SBS Signature Modals -->
+                {% for sig in signature_details %}
+                <div class="modal fade" id="sbsModal{{ loop.index }}" tabindex="-1" aria-labelledby="sbsModalLabel{{ loop.index }}" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title w-100 text-center" id="sbsModalLabel{{ loop.index }}">{{ sig.signature_id }} Details</h3>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                {% if sig.aetiology %}
+                                <div class="mb-4">
+                                    <h5>Aetiology</h5>
+                                    <p>{{ sig.aetiology }}</p>
+                                </div>
+                                {% endif %}
+                                
+                                {% if sig.comments %}
+                                <div class="mb-4">
+                                    <h5>Description</h5>
+                                    <p>{{ sig.comments }}</p>
+                                </div>
+                                {% endif %}
+                                
+                                {% if sig.link %}
+                                <div class="mb-4">
+                                    <a href="{{ sig.link }}" target="_blank" class="btn btn-outline-success">
+                                        <i class="fas fa-external-link-alt"></i> Visit Reference
+                                    </a>
+                                </div>
+                                {% endif %}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
             </section>
 
             <!-- Treatments -->

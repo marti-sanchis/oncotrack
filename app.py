@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, flash, redirect, url_for, send_file, jsonify
 from flask_login import login_user, login_required, LoginManager, current_user, logout_user
 from forms import LoginForm, SignUpForm
-from models_proba import db, User, Patient, Variant, Gene, CancerType, Drug, DrugAssociation, patient_has_variant, patient_has_drug, patient_has_signature
+from models_proba import db, User, Patient, Variant, Gene, CancerType, Drug, DrugAssociation, patient_has_variant, patient_has_drug, patient_has_signature, MutationalSignature
 from flask_bcrypt import Bcrypt
 from sqlalchemy import or_, and_
 from sqlalchemy.orm import sessionmaker
@@ -541,7 +541,28 @@ def patient_details(patient_id):
     else:
         print(f"Enrichr txt output not found.")
 
-
+    # MUTATIONAL SIGNATURES
+    signatures = db.session.query(
+        MutationalSignature.signature_id,
+        MutationalSignature.aetiology,
+        MutationalSignature.comments,
+        MutationalSignature.link
+    ).join(
+        patient_has_signature,
+        MutationalSignature.signature_id == patient_has_signature.c.signature_id
+    ).filter(
+        patient_has_signature.c.patient_id == patient_id
+    ).all()
+    
+    # Convert to list of dictionaries for easier template access
+    signature_details = []
+    for sig in signatures:
+        signature_details.append({
+            'signature_id': sig.signature_id,
+            'aetiology': sig.aetiology,
+            'comments': sig.comments,
+            'link': sig.link,
+        })
 
     return render_template(
         'patient_details.html', 
@@ -551,7 +572,8 @@ def patient_details(patient_id):
         user_id=current_user.id, 
         cancer_types=cancer_types, 
         resistances=resistances,
-        table_data=table_data
+        table_data=table_data,
+        signature_details=signature_details
     )
 
 

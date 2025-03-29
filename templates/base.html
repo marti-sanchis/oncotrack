@@ -86,54 +86,17 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Dropdown Initialization
-        var dropdownToggles = document.querySelectorAll('[data-bs-toggle="dropdown"]');
-        dropdownToggles.forEach(function(userDropdown) {
-            if (userDropdown) {
-                console.log('Dropdown toggle found');
-                try {
-                    var dropdownInstance = new bootstrap.Dropdown(userDropdown);
-                } catch (error) {
-                    console.error('Error initializing dropdown:', error);
-                }
-            } else {
-                console.error('No dropdown toggle found. Check your HTML structure.');
-            }
-        });
-    
-        // Cross-Page Navigation
-        const navLinks = document.querySelectorAll('.nav-link');
+        // Use a more robust selector for the dropdown
+        var userDropdown = document.querySelector('[data-bs-toggle="dropdown"]');
         
-        navLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                // Check if current page is home
-                const isHomePage = window.location.pathname === '/';
-                const href = this.getAttribute('href');
-                
-                // If link includes a hash and is not on home page
-                if (!isHomePage && href.includes('#')) {
-                    e.preventDefault();
-                    
-                    // Redirect to home page with hash
-                    const targetSection = href.split('#')[1];
-                    window.location.href = `/${targetSection ? '#' + targetSection : ''}`;
-                }
-            });
-        });
-    
-        // Optional: Smooth scrolling for section links on home page
-        const homePageSectionLinks = document.querySelectorAll('a[href^="#"]');
-        homePageSectionLinks.forEach(anchor => {
-            anchor.addEventListener('click', function (event) {
-                event.preventDefault();
-                const targetElement = document.querySelector(this.getAttribute('href'));
-                if (targetElement) {
-                    targetElement.scrollIntoView({ 
-                        behavior: 'smooth' 
-                    });
-                }
-            });
-        });
+        if (userDropdown) {
+            console.log('Dropdown toggle found');
+            
+            // Optional: Add explicit dropdown initialization
+            var dropdownInstance = new bootstrap.Dropdown(userDropdown);
+        } else {
+            console.error('No dropdown toggle found. Check your HTML structure.');
+        }
     });
 </script>
 
