@@ -122,7 +122,7 @@
                 <th class="col-2">Cancer Type</th>
                 <th class="col-2">Treatment</th>
                 <th class="col-2">More Info</th>
-                <th class="col-2">Actions</th>
+                <th class="col-2 text-end actions-column">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -140,14 +140,16 @@
                 <td>
                     {% if patient.drugs %}
                         <!-- Si el paciente tiene tratamiento asignado, muestra el nombre del tratamiento -->
-                        {{ patient.drugs[0].name }}  <!-- Nombre del tratamiento -->
                         <!-- Botón de reload al lado del nombre del tratamiento -->
-                        <button class="btn btn-warning btn-sm ms-2" 
-                                data-bs-toggle="modal" 
-                                data-bs-target="#drugsModal{{ patient.patient_id }}"
-                                data-patient-id="{{ patient.patient_id }}">
-                            <i class="bi bi-arrow-clockwise"></i>  <!-- Ícono de recarga -->
-                        </button>
+                        <span class="d-inline-flex align-items-center">
+                            <button class="btn btn-warning btn-sm p-1 me-2"
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#drugsModal{{ patient.patient_id }}"
+                                    data-patient-id="{{ patient.patient_id }}">
+                                <i class="bi bi-arrow-clockwise"></i>  <!-- Ícono de recarga -->
+                            </button>
+                            {{ patient.drugs[0].name }}  <!-- Nombre del tratamiento -->
+                        </span>
                     {% else %}
                         <!-- Si no tiene tratamiento asignado, muestra el botón "Choose Treatment" -->
                         <button class="btn btn-secondary btn-sm choose-treatment-btn" 
@@ -163,7 +165,7 @@
                         <span class="text-warning fw-bold">Processing...</span>
                     {% elif patient.status == "completed" %}
                         <a href="{{ url_for('patient_details', patient_id=patient.patient_id) }}" 
-                           class="btn btn-success btn-sm">
+                           class="btn btn-more btn-sm">
                             Completed - More Info
                         </a>
                     {% else %}
@@ -172,7 +174,7 @@
                         </form>
                     {% endif %}
                 </td>
-                <td class="text-center">
+                <td class="align-right">
                     <!-- Botón para abrir el modal de eliminación -->
                     <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal{{ patient.patient_id }}">
                         Delete Patient

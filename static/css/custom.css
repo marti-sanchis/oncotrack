@@ -5,6 +5,7 @@ html, body {
     background-color: #f4f8fb;
     color: #333;
     padding: 0;
+    padding-top: 40px;
     width: 100%;
     min-width: 100vw;
     box-sizing: border-box;
@@ -16,16 +17,19 @@ h3 {
     margin-bottom: 20px;
 }
 
+strong {
+    font-weight: bold !important;
+}
+
 .container-fluid {
     padding-left: 0;
     padding-right: 0;
 }
 
-
 /* --- Navbar --- */
 .navbar {
     position: fixed;
-    background-color: #D0E4D9;
+    background-color: #62997a;
     padding: 0px 60px;
     width: 100%;
     min-width: 100vw;
@@ -48,6 +52,10 @@ h3 {
     color: white;
     text-decoration: none;
     font-weight: bold;
+}
+
+.navbar a:hover {
+    color: #72243d;
 }
 
 /* Person Icon Dropdown */
@@ -103,6 +111,7 @@ section p {
 
 .logo-container {
     font-weight: bold;
+    font-size: 80px;
 }
 
 .logo-img {
@@ -112,12 +121,58 @@ section p {
 
 /* --- Botones --- */
 .btn-success {
-    background-color: #009444;
+    background-color: #62997a;
     border: none;
 }
 
 .btn-success:hover {
-    background-color: #007336;
+    background-color: #476956;
+}
+
+.btn-sm.p-1 {
+    background: none;  /* Sin fondo */
+    border: none;      /* Sin borde */
+    padding: 0;        /* Elimina el espacio interno */
+    font-size: 1.2rem;
+    color: #f0c505;    /* Color del icono (cámbialo si quieres) */
+    cursor: pointer;
+}
+
+.btn-danger {
+    background-color: #f0c505;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #edb92e;
+}
+
+.btn-more {
+    background-color: #72243d;
+    color: white;
+    border: none;
+    display: flex;            /* Usa flexbox */
+    align-items: center;       /* Centra verticalmente */
+    justify-content: center;   /* Centra horizontalmente */
+    text-align: center;        /* Asegura el texto centrado */
+    padding: 8px 12px;         /* Ajusta el padding para evitar desajustes */
+    font-size: 14px; 
+}
+
+.btn-more:hover {
+    background-color: #3b0819;
+    color: white;
+}
+
+.btn-info {
+    background-color: #6b666d;
+    border: none;
+    color: white;
+}
+
+.btn-info:hover {
+    background-color: #413D42;
+    color: white;
 }
 
 /* --- Introduction Section --- */
@@ -317,13 +372,9 @@ footer {
     border-radius: 10px;
     padding: 15px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    margin-bottom: 15px;
+    margin: 20px;
 }
 
-.patient-card:hover {
-    transform: scale(1.02);
-    transition: 0.3s;
-}
 
 /* --- Modal --- */
 .modal-content {
@@ -361,9 +412,18 @@ input, select {
     border-top-right-radius: 0;
   }
 
+.form-signin input[type="text"]:focus,
+.form-signin input[type="password"]:focus,
+.form-select:focus,
+.form-control:focus {
+    outline: none; /* Elimina el contorno azul predeterminado */
+    box-shadow: 0 0 5px 2px #72243d; /* Cambia el color a verde */
+    border: 1px solid #72243d; /* Opcional: cambia también el borde */
+}
+
 /* -- Images -- */
 .logo-img {
-    height: 260px;
+    height: 300px;
     position: relative; 
     top: -10px;
     margin-top: -10px; /* Ajusta según necesites */
@@ -392,6 +452,7 @@ input, select {
 }
 
 
+
 /* -- Doctor space --*/
 /* Ajuste de la tabla */
 .table {
@@ -412,6 +473,15 @@ input, select {
 .table td, .table th {
     padding: 15px;
     text-align: left;
+}
+
+.table td.align-right {
+    display: flex;
+    justify-content: flex-end;
+}
+
+th.actions-column, td.actions-column {
+    padding-right: 50px;  /* Ajusta el valor según necesites */
 }
 
 /* Espaciado entre botones */

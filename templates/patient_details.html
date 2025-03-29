@@ -1,9 +1,5 @@
 {% extends 'base.html' %}
 
-{% block navbar %}
-<!-- Leave empty to hide the navbar, or put a simplified version here -->
-{% endblock %}
-
 {% block title %}More Info - {{ patient.name }}{% endblock %}
 
 {% block body %}
@@ -23,36 +19,45 @@
             <!-- Patient data -->
             <section id="patient_data" class="mb-5">
                 <h2>Patient Data</h2>
-                <div class="card p-3">
-                    <p><strong>Name:</strong> {{ patient.name }}</p>
-                    <p><strong>DNI:</strong> {{ patient.DNI }}</p>
-                    <p><strong>Age:</strong> {{ patient.age }}</p>
-                    <p><strong>Gender:</strong> {{ patient.gender }}</p>
-                    <p><strong>Cancer Type:</strong> 
-                        {% for cancer in cancer_types %}
-                            {% if cancer.cancer_id == patient.cancer_id %}
-                                {{ cancer.cancer_type }}
-                            {% endif %}
-                        {% endfor %}
-                    </p>
-                    <p><strong>Phone:</strong> {{ patient.phone if patient.phone else 'Not provided' }}</p>
-                    <p><strong>Email:</strong> {{ patient.email if patient.email else 'Not provided' }}</p>
-                    <p><strong>Nurse:</strong> 
-                        {% if patient.nurse %}
-                            {{ patient.nurse.name }} {{ patient.nurse.surname }}
-                        {% else %}
-                            -- No nurse assigned --
-                        {% endif %}
-                    </p>
-                    <p><strong>Treatment:</strong> 
-                        {% if patient.drugs %}
-                            {% for drug in patient.drugs %}
-                                {{ drug.name }}
-                            {% endfor %}
-                        {% else %}
-                            No treatment assigned
-                        {% endif %}
-                    </p>
+                <div class="patient-card p-3">
+                    <div class="row">
+                        <!-- Primera columna -->
+                        <div class="col-md-6 text-start">
+                            <p><strong>Name:</strong> {{ patient.name }}</p>
+                            <p><strong>DNI:</strong> {{ patient.DNI }}</p>
+                            <p><strong>Age:</strong> {{ patient.age }}</p>
+                            <p><strong>Gender:</strong> {{ patient.gender }}</p>
+                            <p><strong>Cancer Type:</strong> 
+                                {% for cancer in cancer_types %}
+                                    {% if cancer.cancer_id == patient.cancer_id %}
+                                        {{ cancer.cancer_type }}
+                                    {% endif %}
+                                {% endfor %}
+                            </p>
+                        </div>
+                        
+                        <!-- Segunda columna -->
+                        <div class="col-md-6 text-start">
+                            <p><strong>Phone:</strong> {{ patient.phone if patient.phone else 'Not provided' }}</p>
+                            <p><strong>Email:</strong> {{ patient.email if patient.email else 'Not provided' }}</p>
+                            <p><strong>Nurse:</strong> 
+                                {% if patient.nurse %}
+                                    {{ patient.nurse.name }} {{ patient.nurse.surname }}
+                                {% else %}
+                                    -- No nurse assigned --
+                                {% endif %}
+                            </p>
+                            <p><strong>Treatment:</strong> 
+                                {% if patient.drugs %}
+                                    {% for drug in patient.drugs %}
+                                        {{ drug.name }}
+                                    {% endfor %}
+                                {% else %}
+                                    No treatment assigned
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </section>
 
