@@ -586,7 +586,7 @@ def nurse_space():
     nurse = User.query.filter_by(id=current_user.id).first()
     if nurse:
         # Obtener los pacientes asignados a la enfermera
-        nurse_patients = Patient.query.filter_by(nurse_id=current_user.id).all()
+        nurse_patients = Patient.query.filter_by(nurse_id=current_user.id, archived=False).all()
     else:
         nurse_patients = []
 
