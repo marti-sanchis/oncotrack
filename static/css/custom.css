@@ -33,7 +33,7 @@ strong {
     padding: 0px 60px;
     width: 100%;
     min-width: 100vw;
-    height: 65px; /* Ajusta el tamaño total de la navbar */
+    height: 80px; /* Ajusta el tamaño total de la navbar */
     min-height: 50px; /* Evita que sea demasiado alta */
     display: flex;
     align-items: center; /* Align items vertically */
