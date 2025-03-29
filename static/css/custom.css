@@ -10,6 +10,7 @@ html, body {
     min-width: 100vw;
     box-sizing: border-box;
     overflow-x: hidden;
+    margin: 0;
 }
 
 h3 {
@@ -18,7 +19,7 @@ h3 {
 }
 
 h1 {
-    margin-top: 100px;
+    margin-top: 60px;
 }
 
 strong {
@@ -37,7 +38,7 @@ strong {
     padding: 0px 60px;
     width: 100%;
     min-width: 100vw;
-    height: 65px; /* Ajusta el tamaño total de la navbar */
+    height: 70px; /* Ajusta el tamaño total de la navbar */
     min-height: 50px; /* Evita que sea demasiado alta */
     display: flex;
     align-items: center; /* Align items vertically */
@@ -179,6 +180,13 @@ section p {
     color: white;
 }
 
+.btn-info:focus, 
+.btn-info:active {
+    background-color: #6b666d; /* Color de fondo cuando está en foco o activado */
+    box-shadow: none; /* Elimina el contorno azul (foco) */
+    border: none; /* Elimina el borde de enfoque */
+}
+
 /* --- Introduction Section --- */
 .introduction {
     position: relative;
@@ -189,7 +197,7 @@ section p {
     min-height: 100vh;
     width: 100%;
     min-width: 100vw;
-    margin-top: 0;
+    margin-top: -30px;;
     /* Flexbox for centering */
     display: flex;
     flex-direction: column;
@@ -220,6 +228,10 @@ section p {
     margin-bottom: 70px;
     text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
     background-color: #ffffff34;
+}
+
+.introduction .container-fluid {
+    padding-top: 0;
 }
 
 /* --- About Us Section --- */
@@ -281,39 +293,43 @@ footer {
     width: 100%;
     display: flex;
     justify-content: center;
-    background: #000;
+    background: #6b666d;
     padding: 20px 0;
     position: absolute;
-  }
+}
   
-  .footer-content {
+.footer-content {
     display: flex;
     justify-content: space-between; /* Positions text on the left and icons on the right */
     align-items: center;
     width: 40%;
     padding: 0;
-  }
+}
   
-  footer span {
+footer span {
     color: #fff;
     font-size: 16px;
     white-space: nowrap;
-  }
+}
   
-  .social-links a {
+.social-links a {
     margin: 0 10px;
-  }
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-decoration: none;
+    color: white; /* Color del icono */
+    font-size: 27px; /* Tamaño del icono */
+}
+
+.social-links a:hover {
+    transform: scale(1.1);
+}
   
-  .social-links img {
-    width: 40px;
-    height: 40px;
-    border-radius: 10%; /* Makes the icons circular */
-    transition: transform 0.3s ease;
-  }
-  
-  .social-links img:hover {
-    transform: scale(1.1); /* Slight zoom effect on hover */
-  }
 
 /* Flexbox to center the cards */
 .row {
@@ -335,7 +351,7 @@ footer {
 }
 
 .row h2 {
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 600;
     margin-bottom: 20px;
     position: relative;
@@ -421,8 +437,13 @@ input, select {
 .form-select:focus,
 .form-control:focus {
     outline: none; /* Elimina el contorno azul predeterminado */
-    box-shadow: 0 0 5px 2px #72243d; /* Cambia el color a verde */
+    box-shadow: 0 0 5px 2px #72243d;
     border: 1px solid #72243d; /* Opcional: cambia también el borde */
+}
+
+.form-check-input:checked {
+    background-color: #72243d; /* Color de fondo cuando está seleccionado */
+    border-color: #72243d;     /* Color del borde */
 }
 
 /* -- Images -- */
@@ -440,6 +461,13 @@ input, select {
     max-height: 100px; /* Evita que sea demasiado grande */
     width: auto; /* Mantiene la proporción */
 }
+
+.img-bordered {
+    border: 3px solid #2C6E49; /* Color verde oscuro, ajusta según necesites */
+    border-radius: 10px; /* Bordes redondeados opcionales */
+    padding: 5px; /* Espaciado opcional entre la imagen y el borde */
+}
+
 
 /* -- Sing up -- */
 .form-signin {
@@ -477,11 +505,6 @@ input, select {
 .table td, .table th {
     padding: 15px;
     text-align: left;
-}
-
-.table td.align-right {
-    display: flex;
-    justify-content: flex-end;
 }
 
 th.actions-column, td.actions-column {
@@ -524,13 +547,15 @@ th.actions-column, td.actions-column {
     color: #2C6E49
 }
 
+.content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
 
-
-.collapsible+.content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-        }
+.collapsible.active + .content {
+    max-height: none; /* Permite que el contenido se expanda por defecto */
+}
 
 .collapsible:after {
     content: '\02795';
@@ -544,4 +569,44 @@ th.actions-column, td.actions-column {
 .active:after {
     content: "\2796";
     /* Unicode character for "minus" sign (-) */
+}
+
+.fixed-sidebar-right {
+    position: fixed;
+    right: -2%; /* Fija al borde derecho */
+    top: 0;
+    bottom: 0;
+    width: 200px; /* Ajusta el ancho si es necesario */
+    max-height: 100vh; /* Para que no ocupe toda la pantalla */
+    overflow-y: auto; /* Permite hacer scroll dentro si es necesario */
+    background: #BF9AA6; /* Asegura que el fondo sea visible */
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    z-index: 1000; /* Para que quede por encima de otros elementos */
+    border: 3px solid #72243d; /* Borde de la barra de navegación */
+}
+
+.fixed-sidebar-right .card {
+    border: none;  /* Elimina el borde por defecto de la tarjeta */
+}
+
+.fixed-sidebar-right h5 {
+    font-size: 24px;  /* Aumenta el tamaño del título 'Navigation' */
+    margin-top: 90px;
+    margin-bottom: 35px;
+}
+
+.fixed-sidebar-right .nav-link {
+    font-size: 18px;  /* Aumenta el tamaño de la fuente de los enlaces */
+    color: white;
+    transition: transform 0.3s ease;
+}
+
+.fixed-sidebar-right .nav-link:hover {
+    transform: translateY(-2px);
+}
+
+.fixed-sidebar-right .nav-item {
+    margin-bottom: 30px;  /* Espacio entre los enlaces */
 }

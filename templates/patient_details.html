@@ -11,11 +11,12 @@
             </a>
         </div>
     </div>
-    <h6 class="text-center">More Info</h6>
+    
 
     <div class="row">
         <!-- Contenido principal -->
-        <div class="col-md-9">
+        <div class="col-md-10">
+            <h6 class="text-center">More Info</h6>
             <!-- Patient data -->
             <section id="patient_data" class="mb-5">
                 <h2>Patient Data</h2>
@@ -63,10 +64,10 @@
 
             <!-- Variants -->
             <section id="variants" class="mb-5">
-            <button class="collapsible">
+            <button class="collapsible active">
                 <h2>Variants</h2>
             </button>
-            <div class="content">
+            <div class="content" style="max-height: none;">
                 <table class="table table-striped">
                     <thead class="table-success">
                         <tr>
@@ -96,8 +97,10 @@
 
             <!-- KEGG Enrichment Report -->
             <section id="kegg-report" class="mb-5">
-                <button class="collapsible"><h2>KEGG Enrichment Report</h2></button>
-                <div class="content">
+                <button class="collapsible active">
+                    <h2>KEGG Enrichment Report</h2>
+                </button>
+                <div class="content" style="max-height: none;">
                     <table class="table table-striped">
                         <thead class="table-success">
                             <tr>
@@ -125,8 +128,10 @@
             
             <!-- Mutational Signature Analysis-->
             <section id="mutational-signature" class="mb-5">
-                <button class="collapsible"><h2>Mutational Signature Analysis</h2></button>
-                <div class="content">
+                <button class="collapsible active">
+                    <h2>Mutational Signature Analysis</h2>
+                </button>
+                <div class="content" style="max-height: none;">
                     <!-- First Row: SBS96 Plot -->
                     <div class="row mb-3">
                         <div class="col-md-12 text-center">
@@ -204,8 +209,10 @@
 
             <!-- Treatments -->
             <section id="treatments" class="mb-5">
-                <button class="collapsible"><h2>Treatments</h2></button>
-                <div class="content">
+                <button class="collapsible active">
+                    <h2>Treatments</h2>
+                </button>
+                <div class="content" style="max-height: none;">
                     <table class="table table-striped">
                         <thead class="table-success">
                             <tr>
@@ -241,8 +248,10 @@
 
             <!-- Resistances -->
             <section id="resistances" class="mb-5">
-                <button class="collapsible"><h2>Resistances</h2></button>
-                <div class="content">
+                <button class="collapsible active">
+                    <h2>Resistances</h2>
+                </button>
+                <div class="content" style="max-height: none;">
                     <table class="table table-striped">
                         <thead class="table-danger">
                             <tr>
@@ -266,10 +275,10 @@
         </div>
 
         <!-- Índice de navegación -->
-        <div class="col-md-3">
-            <div class="card p-3 position-sticky" style="top: 20px;">
-                <h5>Navigation</h5>
-                <ul class="nav flex-column">
+        <div class="col-md-2">
+            <div class="card p-3 fixed-sidebar-right">
+                <h5><strong>Navigation<strong></h5>
+                <ul class="nav flex-column mt-2">
                     <li class="nav-item"><a class="nav-link" href="#patient_data">Summary</a></li>
                     <li class="nav-item"><a class="nav-link" href="#variants">Variants</a></li>
                     <li class="nav-item"><a class="nav-link" href="#kegg-report">KEGG Enrichment</a></li>
@@ -315,7 +324,17 @@
         });
     }
 </script>
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".collapsible").forEach(button => {
+        if (button.classList.contains("active")) {
+            let content = button.nextElementSibling;
+            content.style.maxHeight = content.scrollHeight + "px";
+        }
+    });
+});
 
+</script>
 
 
 {% endblock %}

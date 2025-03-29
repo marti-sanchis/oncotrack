@@ -174,11 +174,13 @@
                         </form>
                     {% endif %}
                 </td>
-                <td class="align-right">
-                    <!-- Botón para abrir el modal de eliminación -->
-                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal{{ patient.patient_id }}">
-                        Delete Patient
-                    </button>
+                <td>
+                    <div class="d-flex justify-content-end">
+                        <!-- Botón para abrir el modal de eliminación -->
+                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal{{ patient.patient_id }}">
+                            Delete Patient
+                        </button>
+                    </div>
 
                     <!-- Modal de confirmación de eliminación -->
                     <div class="modal fade" id="deleteModal{{ patient.patient_id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
