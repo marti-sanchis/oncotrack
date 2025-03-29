@@ -6,6 +6,8 @@
     <h1 class="left-align">Welcome Doctor, {{ current_user.name }} {{ current_user.surname }}</h1>
     <h3 class="left-align">Patients:</h3>
 
+    <p>{{ patients|length }} patients assigned to you.</p>
+
     <div class="d-flex justify-content-between align-items-center mb-3">
         <button type="button" class="btn btn-success left-align mb-2" data-bs-toggle="modal" data-bs-target="#addPatientModal">
             Add Patient
