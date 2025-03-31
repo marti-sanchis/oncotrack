@@ -217,7 +217,15 @@
                     <h2>Treatments</h2>
                 </button>
                 <div class="content" style="max-height: none;">
-                    <table class="table table-striped">
+                    <!-- Filtro desplegable para la columna Match Reason -->
+                    <div class="mb-3">
+                        <select id="matchReasonFilter" class="form-control mt-2" style="width: auto; max-width: 300px; margin-top: 10px;" onchange="filterTable()">
+                            <option value="">Filter by Match Reason</option>
+                            <!-- Las opciones del filtro se agregan dinámicamente aquí -->
+                        </select>
+                    </div>
+                    
+                    <table class="table table-striped" id="treatmentTable">
                         <thead class="table-success">
                             <tr>
                                 <th>Drug</th>
@@ -233,7 +241,7 @@
                                 <td>{{ treatment[0] }}</td> <!-- Nombre del fármaco -->
                                 <td>{{ treatment[1] | capitalize }}</td> <!-- Asociación (efecto) -->
                                 <td>{{ treatment[2] if treatment[2] else 'N/A' }}</td> <!-- Subtipo o 'N/A' si es nulo -->
-                                <td>{{ treatment[3] }} {{ treatment[4] }}</td> <!-- Variant ID o Gene ID o '-' -->
+                                <td class="match-reason">{{ treatment[3] }} {{ treatment[4] }}</td>
                                 <td>
                                     <a href="https://www.drugs.com/mtm/{{ treatment[0] | replace(' ', '-')}}.html" 
                                        target="_blank" 
@@ -243,7 +251,7 @@
                                 </td>
                             </tr>
                             {% else %}
-                            <tr><td colspan="4" class="text-center">No treatments found</td></tr>
+                            <tr><td colspan="5" class="text-center">No treatments found</td></tr>
                             {% endfor %}
                         </tbody>
                     </table>
@@ -337,8 +345,58 @@
         }
     });
 });
-
 </script>
+<script>
+// Función para poblar el filtro desplegable con las opciones únicas de Match Reason
+function populateFilter() {
+    var table = document.getElementById("treatmentTable");
+    var rows = table.getElementsByTagName("tr");
+    var matchReasons = new Set();  // Usamos un Set para almacenar valores únicos
+    
+    // Recorremos las filas y agregamos las opciones únicas
+    for (var i = 1; i < rows.length; i++) { // Empezamos en 1 para evitar la cabecera
+        var matchReasonCell = rows[i].getElementsByClassName("match-reason")[0];
+        if (matchReasonCell) {
+            var matchReasonText = matchReasonCell.textContent || matchReasonCell.innerText;
+            matchReasons.add(matchReasonText);  // Agregamos la opción al Set
+        }
+    }
 
+    // Limpiamos las opciones existentes en el filtro
+    var select = document.getElementById("matchReasonFilter");
+    select.innerHTML = '<option value="">Filter by Match Reason</option>'; // Opción por defecto
+
+    // Agregamos las nuevas opciones al desplegable
+    matchReasons.forEach(function(reason) {
+        var option = document.createElement("option");
+        option.value = reason;
+        option.textContent = reason;
+        select.appendChild(option);
+    });
+}
+
+// Función para filtrar la tabla según el valor seleccionado en el desplegable
+function filterTable() {
+    var select = document.getElementById("matchReasonFilter");
+    var filter = select.value.toLowerCase();
+    var table = document.getElementById("treatmentTable");
+    var rows = table.getElementsByTagName("tr");
+
+    for (var i = 1; i < rows.length; i++) { // Empezamos en 1 para evitar la cabecera
+        var matchReasonCell = rows[i].getElementsByClassName("match-reason")[0];
+        if (matchReasonCell) {
+            var matchReasonText = matchReasonCell.textContent || matchReasonCell.innerText;
+            if (matchReasonText.toLowerCase().indexOf(filter) > -1 || filter === "") {
+                rows[i].style.display = "";
+            } else {
+                rows[i].style.display = "none";
+            }
+        }
+    }
+}
+
+// Inicializamos el filtro cuando se carga la página
+window.onload = populateFilter;
+</script>
 
 {% endblock %}
