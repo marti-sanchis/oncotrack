@@ -14,8 +14,6 @@ from threading import Thread
 app = Flask(__name__)
 app.config.from_object(Config)
 db.init_app(app)
-
-# ✅ 2. Initialize Bcrypt AFTER defining app
 bcrypt = Bcrypt(app)
 
 
@@ -223,7 +221,6 @@ def doctor_space():
         treatments = get_filtered_treatments(patient)  # 🔹 Obtener tratamientos para cada paciente
         patients_with_treatments[patient] = treatments
 
-    print(patients_with_treatments)
 
     return render_template(
         'doctor_space.html', 
@@ -237,7 +234,6 @@ def doctor_space():
 @app.route('/add_patient', methods=['GET', 'POST'])
 @login_required
 def add_patient():
-    print(request.form)
     if current_user.role != 'doctor':
         return redirect(url_for('home'))
 
@@ -273,7 +269,6 @@ def add_patient():
 
     # Convertir "female" -> "F", "male" -> "M", "other" -> "Other"
     gender = request.form.get("gender", "Other").strip()
-    print(f"Valor de 'gender' antes de la inserción: {gender}")
 
     # Verificar si el tipo de cáncer existe
     cancer_type = CancerType.query.get(cancer_type_id)
@@ -313,21 +308,16 @@ def add_patient():
     try:
         db.session.add(new_patient)
         db.session.commit()
-        print(f"App en add_patient: {app}")
-        print(f"File path: {file_path}")
-        print(f"Patient ID: {new_patient.patient_id}")  # Verifica que existe
 
         # Process VCF
-        print("App en add_patient:", app)
         thread = Thread(target=process_vcf_async, args=(app, file_path, new_patient.patient_id))
         thread.start()
         
         flash("Patient added successfully!", "success")
-        print("Paciente añadido correctamente")
+
     except Exception as e:
         db.session.rollback()  # En caso de error, hacer rollback
         flash(f"Error adding patient: {e}", "danger")
-        print("Error al añadir paciente:", str(e))
 
     return redirect(url_for('doctor_space', cancer_types=cancer_types, nurses=nurses))
 
@@ -366,7 +356,6 @@ def delete_patient(patient_id):
 
         except Exception as e:
             db.session.rollback()
-            print(f'Error deleting patient: {e}', 'danger')
 
     elif action == 'archive':
         # Archivar al paciente (marcar como archivado)
@@ -420,9 +409,6 @@ def check_patient_status(patient_id):
 def assign_treatment():
     patient_id = request.form.get('patient_id')
     treatment_name = request.form.get('treatment_id')  # Esto es el nombre del tratamiento
-
-    print(f"Form submitted to /assign_treatment")
-    print(f"Patient ID: {patient_id}, Treatment Name: {treatment_name}")  # Verifica estos valores
 
     # Verificar que el paciente y el tratamiento existan
     patient = Patient.query.get_or_404(patient_id)
@@ -481,9 +467,6 @@ def patient_details(patient_id):
     variant_ids = [variant.variant_id for variant in variants]
     gene_ids = [variant.gene_id for variant in variants]
 
-    print(f"Patient Variants: {variant_ids}")  # Lista de variant_id del paciente
-    print(f"Patient Genes: {gene_ids}")  # Lista de gene_id del paciente
-
     treatments = get_filtered_treatments(patient)
 
     ### RESISTANCES
@@ -523,7 +506,6 @@ def patient_details(patient_id):
                     resistance_data[drug_name] = (drug_name, match_reason, f"{resistance_data[drug_name][2]}, {name}")
         else:
             resistance_data[drug_name] = (drug_name, match_reason, name)
-            print(f"===> {resistance_data[drug_name]}")
 
         resistances = list(resistance_data.values())
 
